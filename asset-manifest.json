@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.0f61f14e.css",
-    "main.js": "/static/js/main.39f4cb58.js",
+    "main.js": "/static/js/main.0251af32.js",
     "static/js/453.ed3810f9.chunk.js": "/static/js/453.ed3810f9.chunk.js",
     "static/media/logo.png": "/static/media/logo.dc616a1629197e883d8a.png",
     "static/media/red fiery dragon.png": "/static/media/red fiery dragon.1645cdd2c6d196feb1cd.png",
@@ -12,11 +12,11 @@
     "static/media/user.png": "/static/media/user.f6ac30c0af1cea65bb62.png",
     "index.html": "/index.html",
     "main.0f61f14e.css.map": "/static/css/main.0f61f14e.css.map",
-    "main.39f4cb58.js.map": "/static/js/main.39f4cb58.js.map",
+    "main.0251af32.js.map": "/static/js/main.0251af32.js.map",
     "453.ed3810f9.chunk.js.map": "/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0f61f14e.css",
-    "static/js/main.39f4cb58.js"
+    "static/js/main.0251af32.js"
   ]
 }
