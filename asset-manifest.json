@@ -1,26 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.0d76463e.css",
-    "main.js": "/static/js/main.2614d2b6.js",
+    "main.css": "/static/css/main.1c2ca76d.css",
+    "main.js": "/static/js/main.c6e51059.js",
     "static/js/453.ed3810f9.chunk.js": "/static/js/453.ed3810f9.chunk.js",
-    "static/media/cat.png": "/static/media/cat.a8d8a403fb96ea85cb09.png",
+    "static/media/7-Flowers.jpg": "/static/media/7-Flowers.87b3a8d0f538ac9e5ca1.jpg",
+    "static/media/1-Barcelona.jpg": "/static/media/1-Barcelona.5a0e5351d81b6dfb7d50.jpg",
+    "static/media/4-Bali Sunset.jpg": "/static/media/4-Bali Sunset.e392510148ce9200b890.jpg",
+    "static/media/5-Bali Sunset 2.jpg": "/static/media/5-Bali Sunset 2.53e9707d50464fb918a3.jpg",
+    "static/media/6-Boulder.jpg": "/static/media/6-Boulder.765e5544bc299dbf0d72.jpg",
+    "static/media/ocean waves.png": "/static/media/ocean waves.87610224906135ed0c05.png",
     "static/media/logo.png": "/static/media/logo.dc616a1629197e883d8a.png",
-    "static/media/red fiery dragon.png": "/static/media/red fiery dragon.1645cdd2c6d196feb1cd.png",
+    "static/media/crystals 1.png": "/static/media/crystals 1.d1d48a8deb2d7f9d985c.png",
     "static/media/user.png": "/static/media/user.51af27cd3b96a95c414f.png",
     "static/media/work-3.png": "/static/media/work-3.de1df78bf5ca74ec3063.png",
     "static/media/work-2.png": "/static/media/work-2.bec1e37f4ae39c7df92d.png",
+    "static/media/3-Reflections.jpg": "/static/media/3-Reflections.75c725caf3b7c358353d.jpg",
+    "static/media/2-The Gambia.jpg": "/static/media/2-The Gambia.df3e703bcb974e2bb20d.jpg",
     "static/media/Ethan Deal - Resume.pdf": "/static/media/Ethan Deal - Resume.6f854528f406d3da4814.pdf",
     "static/media/work-1.png": "/static/media/work-1.08a20a97b18aeff40cea.png",
     "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
     "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
     "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/index.html",
-    "main.0d76463e.css.map": "/static/css/main.0d76463e.css.map",
-    "main.2614d2b6.js.map": "/static/js/main.2614d2b6.js.map",
+    "main.1c2ca76d.css.map": "/static/css/main.1c2ca76d.css.map",
+    "main.c6e51059.js.map": "/static/js/main.c6e51059.js.map",
     "453.ed3810f9.chunk.js.map": "/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d76463e.css",
-    "static/js/main.2614d2b6.js"
+    "static/css/main.1c2ca76d.css",
+    "static/js/main.c6e51059.js"
   ]
 }
