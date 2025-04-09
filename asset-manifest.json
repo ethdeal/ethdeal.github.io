@@ -1,22 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.0f61f14e.css",
-    "main.js": "/static/js/main.0251af32.js",
+    "main.css": "/static/css/main.0d76463e.css",
+    "main.js": "/static/js/main.2614d2b6.js",
     "static/js/453.ed3810f9.chunk.js": "/static/js/453.ed3810f9.chunk.js",
+    "static/media/cat.png": "/static/media/cat.a8d8a403fb96ea85cb09.png",
     "static/media/logo.png": "/static/media/logo.dc616a1629197e883d8a.png",
     "static/media/red fiery dragon.png": "/static/media/red fiery dragon.1645cdd2c6d196feb1cd.png",
+    "static/media/user.png": "/static/media/user.51af27cd3b96a95c414f.png",
     "static/media/work-3.png": "/static/media/work-3.de1df78bf5ca74ec3063.png",
     "static/media/work-2.png": "/static/media/work-2.bec1e37f4ae39c7df92d.png",
     "static/media/Ethan Deal - Resume.pdf": "/static/media/Ethan Deal - Resume.6f854528f406d3da4814.pdf",
     "static/media/work-1.png": "/static/media/work-1.08a20a97b18aeff40cea.png",
-    "static/media/user.png": "/static/media/user.f6ac30c0af1cea65bb62.png",
+    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/index.html",
-    "main.0f61f14e.css.map": "/static/css/main.0f61f14e.css.map",
-    "main.0251af32.js.map": "/static/js/main.0251af32.js.map",
+    "main.0d76463e.css.map": "/static/css/main.0d76463e.css.map",
+    "main.2614d2b6.js.map": "/static/js/main.2614d2b6.js.map",
     "453.ed3810f9.chunk.js.map": "/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f61f14e.css",
-    "static/js/main.0251af32.js"
+    "static/css/main.0d76463e.css",
+    "static/js/main.2614d2b6.js"
   ]
 }
