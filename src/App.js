@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+// main components
+import Navbar from './components/Navbar';
+import Header from './components/Header';
+import About from './components/About';
+import Projects from './components/Projects';
+import Services from './components/Services';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import Photography from './components/Photography';
+
+// styles
+import './App.css'; // global style
+
+// other components
+import FontAwesomeKitLoader from './Effects/FontAwesomeKitLoader';
+import { ParallaxProvider } from "react-scroll-parallax";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <FontAwesomeKitLoader />
+      
+      <Navbar />
+      <ParallaxProvider>
+        <Header />  
+      </ParallaxProvider>
+      <ParallaxProvider>
+        <About />
+      </ParallaxProvider>
+      <Projects />
+      <Photography /> {/* hi */}
+      <Services />
+      <Contact />
+      <Footer />
+      {/* Add other components here */}
+    </>
   );
 }
 

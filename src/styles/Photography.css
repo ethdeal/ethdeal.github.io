@@ -1,0 +1,139 @@
+#photography{
+    padding: 50px 0 0;
+    background-color: #04090c;
+    
+}
+
+/* .sub-title {
+text-align: center;
+font-size: 2.5rem;
+margin-bottom: 2rem;
+color: #333;
+} */
+
+
+.carousel-container {
+    padding: 50px 0 100px;
+    /* overflow: visible !important; NEW */
+    position: relative;
+    margin-left: -5rem;
+    margin-right: -5rem;
+}
+
+.carousel-item {
+    padding: 0 10px;
+}
+
+/* Edge fade effect */
+.carousel-container::before,
+.carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    z-index: 2;
+    pointer-events: none;
+}
+.carousel-container::before {
+    left: 0;
+    background: linear-gradient(to right, #080808, transparent);
+}
+.carousel-container::after {
+    right: 0;
+    background: linear-gradient(to left, #080808, transparent);
+}
+
+/* carousel photos */
+.photo-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 400px; /* SIZE */
+
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+/* caption */
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1;
+}
+
+.photo-overlay h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* Custom dots styling */
+.custom-dot-list-style {
+    margin-top: 20px;
+}
+
+.custom-dot-list-style button {
+    border: none;
+    background: #ccc;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.custom-dot-list-style .react-multi-carousel-dot--active button {
+    background: #333;
+}
+
+/* Arrow buttons */
+.react-multi-carousel-arrow {
+    background: rgba(255, 255, 255, 0.7) !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+}
+
+.react-multi-carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+}
+
+.react-multi-carousel-arrow::before {
+    color: #333 !important;
+    font-size: 20px !important;
+}
+
+@media (max-width: 768px) {
+.photo-item {
+    height: 200px;
+}
+
+/* .sub-title {
+    font-size: 2rem;
+} */
+}

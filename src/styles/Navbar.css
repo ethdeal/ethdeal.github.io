@@ -1,0 +1,92 @@
+/* ----------------NAVBAR---------------- */
+#navbar{
+    width: 100%;
+    background-color: rgb(4, 9, 12, 0.7);
+    padding: 0px 10%;
+    position: fixed;
+    z-index: 10;
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    mix-blend-mode: none;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.logo{
+    width: 140px;
+    height: 65px;
+    object-fit: cover;
+    z-index: 1000;
+}
+
+/* links */
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    font-weight: 400;
+}
+
+/* transition */
+nav ul li a::after{
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+nav ul li a:hover::after{
+    width: 100%;
+}
+
+
+/* small screens */
+nav .fa-solid{
+    display: none;
+}
+
+@media only screen and (max-width: 810px){
+    /* nav menu */
+    nav .fa-solid{
+        display: block;
+        font-size: 25px;
+    }
+    nav ul{
+        background-color: rgb(4, 9, 12, 0.7);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        right: -200px;
+        width: 200px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 25px;
+    }
+    nav ul .fa-solid{
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+    }
+}
