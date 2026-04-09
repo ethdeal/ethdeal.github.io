@@ -34,10 +34,10 @@
   z-index: var(--z-nav);
   display: flex;
   justify-content: center;
-  padding: 0.85rem var(--page-gutter-mobile);
+  padding: 0.55rem var(--page-gutter-mobile);
   border-bottom: 1px solid rgba(22, 25, 31, 0.08);
-  background: rgba(248, 248, 248, 0.8);
-  backdrop-filter: blur(18px);
+  background: rgba(248, 248, 248, 0.6);
+  backdrop-filter: blur(10px);
 }
 
 .mobileMain {
