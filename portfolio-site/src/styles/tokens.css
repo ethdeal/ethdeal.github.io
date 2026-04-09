@@ -1,0 +1,69 @@
+:root {
+  --color-bg: #f8f8f8;
+  --color-text: #16191f;
+  --color-text-muted: #5c6470;
+  --color-text-subtle: #848c97;
+  --color-line: rgba(22, 25, 31, 0.1);
+  --color-surface: rgba(255, 255, 255, 0.52);
+  --color-surface-strong: rgba(255, 255, 255, 0.72);
+  --color-surface-border: rgba(22, 25, 31, 0.08);
+  --color-accent: #e85d5d;
+  --color-accent-strong: #cb4b4b;
+  --color-accent-soft: rgba(232, 93, 93, 0.12);
+  --color-highlight: #f6b85c;
+
+  --font-body: 'Ubuntu', 'Segoe UI', sans-serif;
+  --font-display: 'Avaleigh', 'Iowan Old Style', 'Times New Roman', serif;
+
+  --font-size-body: clamp(0.92rem, 0.88rem + 0.14vw, 0.98rem);
+  --font-size-body-sm: clamp(0.8rem, 0.78rem + 0.1vw, 0.86rem);
+  --font-size-nav: 0.88rem;
+  --font-size-label: 0.7rem;
+  --font-size-tag: 0.79rem;
+  --font-size-hero-display: clamp(7rem, 13vw, 13.6rem);
+  --font-size-hero-eyebrow: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  --font-size-sidebar-display: clamp(3.15rem, 4.4vw, 5.35rem);
+  --font-size-section-title: clamp(2.65rem, 4.4vw, 3.95rem);
+  --font-size-card-title: clamp(1.2rem, 1.45vw, 1.46rem);
+  --font-size-hero-intro: clamp(0.98rem, 1vw, 1.08rem);
+  --line-height-body-sm: 1.5;
+  --line-height-hero-eyebrow: 1.35;
+
+  --radius-lg: 1.3rem;
+  --radius-xl: 1.75rem;
+  --radius-pill: 999px;
+
+  --shadow-soft:
+    0 16px 36px rgba(22, 25, 31, 0.08),
+    0 5px 10px rgba(22, 25, 31, 0.04);
+  --shadow-glass:
+    0 20px 50px rgba(22, 25, 31, 0.1),
+    0 8px 18px rgba(22, 25, 31, 0.05);
+
+  --glass-blur: 18px;
+  --motion-fast: 180ms;
+  --motion-medium: 280ms;
+
+  --page-gutter-desktop: clamp(2.1rem, 3vw, 4.2rem);
+  --page-gutter-mobile: clamp(0.9rem, 3.6vw, 1.2rem);
+  --sidebar-padding-block: clamp(2.1rem, 2.8vw, 3.25rem);
+  --sidebar-padding-inline: clamp(2rem, 2.7vw, 3rem);
+  --sidebar-text-inset: clamp(0.45rem, 0.7vw, 0.75rem);
+  --sidebar-width: clamp(20rem, 31vw, 34rem);
+  --sidebar-content-gap: clamp(3.25rem, 4.8vw, 6rem);
+  --sidebar-name-gap: clamp(1.1rem, 3.8vw, 5rem);
+  --sidebar-stack-gap: clamp(2.4rem, 3.8vw, 4rem);
+  --hero-stage-height: 132svh; /* 182 original */
+  --hero-content-overlap: clamp(-12rem, -20svh, 44rem); /* modify to change content offset */
+  --section-space: clamp(6.5rem, 10vh, 8.75rem);
+  --section-heading-space: clamp(2.75rem, 4vw, 3.75rem);
+  --entry-gap: clamp(1.75rem, 2.2vw, 2.5rem);
+  --card-padding: clamp(1.85rem, 2.2vw, 2.45rem);
+  --card-padding-mobile: 1.35rem;
+  --content-max-width: 47rem; /* 43rem */
+  --summary-measure: 34rem; /* 34 rem */
+
+  --z-sidebar: 10;
+  --z-nav: 20;
+  --z-hero: 30;
+}

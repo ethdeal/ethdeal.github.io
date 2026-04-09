@@ -1,0 +1,37 @@
+.header {
+  display: grid;
+  gap: 0.95rem;
+  margin-bottom: clamp(1.9rem, 2.8vw, 2.5rem);
+  padding-inline: var(--card-padding);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-label);
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: var(--font-size-section-title);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
+
+.description {
+  max-width: var(--content-max-width); /* 34rem */
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body);
+  line-height: 1.62;
+}
+
+@media (max-width: 959px) {
+  .header {
+    padding-inline: var(--card-padding-mobile);
+  }
+}

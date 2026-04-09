@@ -1,0 +1,33 @@
+[
+  {
+    "project": "RAG Fact-Checking Extension",
+    "date": "July 2025 - March 2026",
+    "summary": "Created a fact-checking Chrome extension to verify highlighted claims using retrieval-augmented generation. Evaluated several retrieval architectures to measure latency, context leakage, and misinformation induction.",
+    "tags": [
+      "React",
+      "Node.js",
+      "Express",
+      "RAG",
+      "LangChain",
+      "HuggingFace",
+      "ChromaDB",
+      "Chrome"
+    ],
+    "link": "https://github.com/ethdeal/AI-Fact-Checker",
+    "imageKey": "rag-fact-checking",
+    "imageAlt": "Screenshot for the RAG Fact-Checking Extension project."
+  },
+  {
+    "project": "FlightOps Database Design",
+    "date": "Oct 2024 - Jan 2025",
+    "summary": "Designed a relational database to support large-scale analysis of flight routes, assignments, and crew data. Built a real-time data pipeline and compiled datasets covering 10,000+ airports, 7,000 aircraft, and 600 airlines.",
+    "tags": [
+      "Python",
+      "MySQL",
+      "Playwright"
+    ],
+    "link": "https://github.com/MicCorn/Airline-Database",
+    "imageKey": "flightops-database",
+    "imageAlt": "Relational diagram for the FlightOps Database Design project."
+  }
+]

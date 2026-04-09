@@ -1,0 +1,13 @@
+<svg width="720" height="480" viewBox="0 0 720 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="480" rx="40" fill="#EDEBFF"/>
+  <rect x="42" y="42" width="636" height="396" rx="32" fill="#F9F8FF"/>
+  <circle cx="578" cy="132" r="72" fill="#E85D5D" fill-opacity="0.16"/>
+  <path d="M130 130H400" stroke="#16191F" stroke-width="10" stroke-linecap="round"/>
+  <path d="M130 176H348" stroke="#16191F" stroke-width="10" stroke-linecap="round" stroke-opacity="0.24"/>
+  <path d="M130 222H306" stroke="#16191F" stroke-width="10" stroke-linecap="round" stroke-opacity="0.24"/>
+  <rect x="122" y="284" width="476" height="92" rx="26" fill="#16191F"/>
+  <path d="M166 330H340" stroke="#F8F8F8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M384 330H556" stroke="#F8F8F8" stroke-width="10" stroke-linecap="round" stroke-opacity="0.42"/>
+  <path d="M478 120C512 120 548 154 548 188C548 248 482 272 442 310C402 272 336 248 336 188C336 154 372 120 406 120C420 120 432 126 442 138C452 126 464 120 478 120Z" fill="#F6B85C" fill-opacity="0.75"/>
+  <text x="160" y="362" fill="#F8F8F8" font-family="sans-serif" font-size="24" font-weight="700">FLIGHTOPS</text>
+</svg>

@@ -1,0 +1,35 @@
+/*
+  To enable self-hosted fonts:
+  1. Drop the files listed in src/assets/fonts/README.md into src/assets/fonts/.
+  2. Uncomment the declarations below and adjust the filenames if needed.
+*/
+  @font-face {
+    font-family: 'Avaleigh';
+    src:
+      url('../assets/fonts/AvaleighBold.woff2') format('woff2'),
+      url('../assets/fonts/AvaleighBold.woff') format('woff');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('../assets/fonts/Ubuntu-Regular.woff2') format('woff2'),
+      url('../assets/fonts/Ubuntu-Regular.woff') format('woff');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('../assets/fonts/Ubuntu-Medium.woff2') format('woff2'),
+      url('../assets/fonts/Ubuntu-Medium.woff') format('woff');
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+  }
+

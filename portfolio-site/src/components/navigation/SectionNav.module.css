@@ -1,0 +1,121 @@
+.nav {
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-nav);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition:
+    color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--color-text);
+  background: var(--color-surface-strong);
+  box-shadow: var(--shadow-glass);
+}
+
+.current {
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.hero {
+  width: auto;
+}
+
+.sidebar {
+  padding-inline-start: var(--sidebar-text-inset);
+}
+
+.sidebar .list {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.sidebar .link {
+  justify-content: flex-start;
+  gap: 1rem;
+  min-height: auto;
+  padding: 0.2rem 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sidebar .link::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.58;
+  flex-shrink: 0;
+  transition:
+    width var(--motion-medium) ease,
+    opacity var(--motion-fast) ease;
+}
+
+.sidebar .link:hover,
+.sidebar .link:focus-visible,
+.sidebar .current {
+  color: var(--color-accent-strong);
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.sidebar .link:hover::before,
+.sidebar .link:focus-visible::before,
+.sidebar .current::before {
+  width: 4.25rem;
+  opacity: 1;
+}
+
+.mobile .list {
+  justify-content: center;
+  gap: 0.1rem;
+}
+
+.mobile .link {
+  min-height: 2.35rem;
+  padding: 0.55rem 0.9rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 959px) {
+  .list {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+}

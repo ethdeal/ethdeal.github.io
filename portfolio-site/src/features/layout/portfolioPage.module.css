@@ -1,0 +1,59 @@
+.page {
+  min-height: 100svh;
+}
+
+.desktopMain {
+  position: relative;
+  margin-left: var(--sidebar-width);
+  padding: 0 var(--page-gutter-desktop) 0 var(--sidebar-content-gap);
+}
+
+.aboutStage {
+  min-height: var(--hero-stage-height);
+  scroll-margin-top: 0;
+}
+
+.desktopContentTrigger {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(var(--hero-content-overlap) * -1);
+}
+
+.desktopContent {
+  position: relative;
+}
+
+.desktopHeroFallback {
+  width: min(100%, var(--content-max-width));
+  margin: 0 auto;
+}
+
+.mobileNavBar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  justify-content: center;
+  padding: 0.85rem var(--page-gutter-mobile);
+  border-bottom: 1px solid rgba(22, 25, 31, 0.08);
+  background: rgba(248, 248, 248, 0.8);
+  backdrop-filter: blur(18px);
+}
+
+.mobileMain {
+  padding: 0 var(--page-gutter-mobile) 5rem;
+}
+
+@media (max-width: 1100px) {
+  .desktopMain {
+    padding-right: clamp(1.5rem, 2vw, 2rem);
+    padding-left: clamp(1.75rem, 3vw, 3rem);
+  }
+}
+
+@media (max-width: 959px) {
+  .desktopMain {
+    margin-left: 0;
+    padding-inline: var(--page-gutter-mobile);
+  }
+}

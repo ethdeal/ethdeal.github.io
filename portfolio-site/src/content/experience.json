@@ -1,0 +1,45 @@
+[
+  {
+    "company": "BRIYA",
+    "role": "Fullstack Developer / IT Intern",
+    "date": "July - Aug 2025, May - Aug 2024",
+    "summary": "Built and deployed a classroom booking system serving five campuses and 100+ faculty. Configured secure backend infrastructure maintaining zero downtime since launch. Also configured and restored 1,000+ Chromebooks for student device distribution.",
+    "tags": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Nginx",
+      "SSL",
+      "Linode"
+    ],
+    "link": "https://www.briya.org/"
+  },
+  {
+    "company": "DUKE UNIVERSITY",
+    "role": "Data Automation Engineer",
+    "date": "May - July 2025",
+    "summary": "Engineered a data processing pipeline to automate mail-list segmentation for 10,000+ users.  Developed a desktop application to consolidate Qualtrics survey data..",
+    "tags": [
+      "Python",
+      "Pandas",
+      "PyQt",
+      "Qualtrics"
+    ],
+    "link": "https://arts.duke.edu/"
+  },
+  {
+    "company": "VINTORY",
+    "role": "Graphic Designer and Prompt Engineer",
+    "date": "May - Sep 2023",
+    "summary": "Assembled a Midjourney prompt library and spearheaded the adoption of AI-assisted design workflows. Created 30+ custom postcards and branded 100+ templates and landing pages.",
+    "tags": [
+      "Midjourney",
+      "ChatGPT",
+      "Prompt Engineering",
+      "Adobe Creative Suite",
+      "Hubspot"
+    ],
+    "link": "https://www.vintory.com/"
+  }
+]

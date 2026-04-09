@@ -1,0 +1,15 @@
+<svg width="720" height="480" viewBox="0 0 720 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="480" rx="40" fill="#F2E2D9"/>
+  <rect x="42" y="42" width="636" height="396" rx="32" fill="#FBF6F2"/>
+  <circle cx="168" cy="138" r="70" fill="#E85D5D" fill-opacity="0.18"/>
+  <circle cx="560" cy="346" r="106" fill="#F6B85C" fill-opacity="0.25"/>
+  <path d="M126 138H328" stroke="#16191F" stroke-width="10" stroke-linecap="round"/>
+  <path d="M126 188H420" stroke="#16191F" stroke-width="10" stroke-linecap="round" stroke-opacity="0.26"/>
+  <path d="M126 232H360" stroke="#16191F" stroke-width="10" stroke-linecap="round" stroke-opacity="0.26"/>
+  <rect x="436" y="116" width="176" height="204" rx="28" fill="#16191F"/>
+  <path d="M482 176H568" stroke="#F8F8F8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M482 224H548" stroke="#F8F8F8" stroke-width="10" stroke-linecap="round" stroke-opacity="0.52"/>
+  <path d="M482 270H534" stroke="#F8F8F8" stroke-width="10" stroke-linecap="round" stroke-opacity="0.52"/>
+  <rect x="126" y="320" width="174" height="56" rx="28" fill="#16191F"/>
+  <text x="156" y="356" fill="#F8F8F8" font-family="sans-serif" font-size="22" font-weight="700">RAG CHECK</text>
+</svg>

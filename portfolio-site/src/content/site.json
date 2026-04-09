@@ -1,0 +1,54 @@
+{
+  "name": "ETHAN DEAL",
+  "eyebrow": "Hi, I'm",
+  "heroIntro": "Nice to meet you!",
+  "heroParagraphs": [
+    "I'm currently a senior at Duke Kunshan University studying Computation and Design.",
+    "In my free time, I like to play sports (Ultimate Frisbee and Soccer), music (Piano and Guitar), and eat (food).",
+    "This is my portfolio website. While you're here, take a look at some of my work experience and personal projects. This site is a work in progress, so check back later for updates!"
+
+  ],
+  "sidebarSubtitle": "Student, developer, designer",
+  "sidebarDescription": "I'm not sure what to put here. This is a sidebar. It's not done yet. Yabba dabba doo!",
+  "navItems": [
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "Experience",
+      "href": "#experience"
+    },
+    {
+      "label": "Projects",
+      "href": "#projects"
+    }
+  ],
+  "socialLinks": [
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/ethdeal",
+      "icon": "linkedin"
+    },
+    {
+      "label": "Resume",
+      "href": "/Ethan Deal - 2026 Resume.pdf",
+      "icon": "resume"
+    },
+    {
+      "label": "GitHub",
+      "href": "https://github.com/ethdeal",
+      "icon": "github"
+    },
+    {
+      "label": "Instagram",
+      "href": "https://www.instagram.com/idkcantthinkofaname",
+      "icon": "instagram"
+    },
+    {
+      "label": "Email",
+      "href": "mailto:ecd31@duke.edu",
+      "icon": "email"
+    }
+  ]
+}
