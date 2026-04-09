@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import { siteContent } from '../content/data'
 
 const mockState = vi.hoisted(() => ({
   scrollProgress: 0.2,
@@ -256,7 +257,7 @@ describe('desktop animated page', () => {
         }
 
         if (
-          this.textContent?.includes('Fullstack Dev') &&
+          this.textContent?.includes(siteContent.sidebarSubtitle) &&
           this.textContent?.includes('About')
         ) {
           return rect({ top: 460, left: 48, width: 280, height: 320 })
@@ -279,7 +280,7 @@ describe('desktop animated page', () => {
     render(<App />)
 
     const sidebarSupporting =
-      screen.getByText('Fullstack Dev').closest('header')?.parentElement ?? null
+      screen.getByText(siteContent.sidebarSubtitle).closest('header')?.parentElement ?? null
     const desktopContent = document.getElementById('experience')?.parentElement
 
     expect(sidebarSupporting).not.toBeNull()
@@ -288,9 +289,7 @@ describe('desktop animated page', () => {
       'translate3d(0px, 940px, 0px) scale(1)',
     )
     expect(sidebarSupporting?.style.opacity).toBe('')
-    expect(desktopContent?.style.transform).toBe(
-      'translate3d(0px, 0px, 0px) scale(1)',
-    )
+    expect(desktopContent?.style.transform).toBe('')
     expect(desktopContent?.style.opacity).toBe('')
   })
 })

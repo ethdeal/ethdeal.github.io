@@ -30,6 +30,15 @@ export function useActiveSection(ids: string[]) {
       }
 
       const anchorTop = window.innerHeight * VIEWPORT_ANCHOR
+      const lastElement = elements.at(-1)
+
+      if (lastElement && lastElement.getBoundingClientRect().bottom <= anchorTop) {
+        setActiveSection((currentSection) =>
+          currentSection === '' ? currentSection : '',
+        )
+        return
+      }
+
       let nextActiveSection = elements[0].id
 
       elements.forEach((element) => {

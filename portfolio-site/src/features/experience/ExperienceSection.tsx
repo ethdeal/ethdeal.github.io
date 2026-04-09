@@ -22,7 +22,7 @@ export function ExperienceSection({ items }: ExperienceSectionProps) {
         eyebrow="Experience"
         title="Some of my recent work experience."
         titleId="experience-title"
-        description="Check out some of my roles, ranging from Graphic Design to Fullstack Development."
+        // description="Check out some of my roles, ranging from Graphic Design to Fullstack Development."
       />
 
       <div className={styles.list}>

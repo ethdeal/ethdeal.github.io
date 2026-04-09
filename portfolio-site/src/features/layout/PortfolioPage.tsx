@@ -1,10 +1,10 @@
 import { useRef } from 'react'
+import { ContentFootnote } from '../../components/ui/ContentFootnote'
 import { experienceItems, projectCards, sectionIds, siteContent } from '../../content/data'
 import { SectionNav } from '../../components/navigation/SectionNav'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useHeroScrollTimeline } from '../../hooks/useHeroScrollTimeline'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
-import { useOneTimeViewportReveal } from '../../hooks/useOneTimeViewportReveal'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { DESKTOP_BREAKPOINT } from '../../lib/theme'
 import { ExperienceSection } from '../experience/ExperienceSection'
@@ -28,8 +28,6 @@ export function PortfolioPage() {
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
   const sidebarTitleAnchorRef = useRef<HTMLParagraphElement>(null)
   const sidebarBodyRef = useRef<HTMLDivElement>(null)
-  const desktopContentTriggerRef = useRef<HTMLDivElement>(null)
-  const desktopContentRef = useRef<HTMLDivElement>(null)
 
   const activeSection = useActiveSection(sectionIds)
 
@@ -44,12 +42,6 @@ export function PortfolioPage() {
     heroTitleRef,
     sidebarTitleAnchorRef,
     sidebarBodyRef,
-  })
-
-  useOneTimeViewportReveal({
-    enabled: shouldAnimateHero,
-    targetRef: desktopContentRef,
-    triggerRef: desktopContentTriggerRef,
   })
 
   if (!isDesktop) {
@@ -75,6 +67,7 @@ export function PortfolioPage() {
           />
           <ExperienceSection items={experienceItems} />
           <ProjectsSection items={projectCards} />
+          <ContentFootnote />
         </main>
       </div>
     )
@@ -114,13 +107,12 @@ export function PortfolioPage() {
           />
         )}
 
-        <div
-          ref={desktopContentTriggerRef}
-          className={styles.desktopContentTrigger}
-        >
-          <div ref={desktopContentRef} className={styles.desktopContent}>
+        <div className={styles.desktopContentTrigger}>
+          <div className={styles.desktopContent}>
+            {/* CONTENT COMPONENTS HERE ============================================= */}
             <ExperienceSection items={experienceItems} />
             <ProjectsSection items={projectCards} />
+            <ContentFootnote />
           </div>
         </div>
       </main>

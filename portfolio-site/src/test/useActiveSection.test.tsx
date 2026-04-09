@@ -113,6 +113,19 @@ describe('useActiveSection', () => {
     expect(screen.getByTestId('active-section')).toHaveTextContent('projects')
   })
 
+  it('clears the active section once the viewport anchor passes the final section', () => {
+    render(<ActiveSectionHarness />)
+
+    act(() => {
+      mockState.positions.about = -1540
+      mockState.positions.experience = -980
+      mockState.positions.projects = 60
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    expect(screen.getByTestId('active-section')).toHaveTextContent('')
+  })
+
   it('re-resolves section elements after a layout swap and resize', () => {
     function LayoutSwapHarness({ mobile }: { mobile: boolean }) {
       const activeSection = useActiveSection(['about', 'experience', 'projects'])

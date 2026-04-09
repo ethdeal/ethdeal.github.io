@@ -20,9 +20,9 @@ export function ProjectsSection({ items }: ProjectsSectionProps) {
     >
       <SectionHeading
         eyebrow="Projects"
-        title="A few projects that I've worked on."
+        title="A few of my technical projects."
         titleId="projects-title"
-        description="This section includes some of my technical projects."
+        // description="This section includes some of my technical projects."
       />
 
       <div className={styles.list}>

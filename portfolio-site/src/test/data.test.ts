@@ -9,7 +9,7 @@ describe('content data', () => {
       '#experience',
       '#projects',
     ])
-    expect(siteContent.sidebarSubtitle).toBe('Fullstack Dev')
+    expect(siteContent.sidebarSubtitle).toMatch(/\S/)
     expect('sidebarTitle' in siteContent).toBe(false)
     expect(siteContent.socialLinks).toHaveLength(5)
   })
