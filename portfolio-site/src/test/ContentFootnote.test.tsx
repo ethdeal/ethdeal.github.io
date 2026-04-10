@@ -11,7 +11,7 @@ describe('ContentFootnote', () => {
         (_, element) =>
           element?.tagName === 'P' &&
           element?.textContent ===
-          'Designed in my head and built with React and Vite, animations with GSAP. Inspired by Brittany Chiang.',
+          'Designed in my head and built with React and Vite, animations with GSAP. Layout inspired by Brittany Chiang.',
       ),
     ).toBeInTheDocument()
 

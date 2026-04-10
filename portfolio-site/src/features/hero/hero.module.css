@@ -113,6 +113,84 @@
   margin: 0;
 }
 
+.scrollCue {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(0.1rem, 1.5vw, 2rem);
+  z-index: 3;
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.8rem;
+  padding: 0.45rem 0.8rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-subtle);
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -0.35rem);
+  transition:
+    color var(--motion-fast) ease,
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+.scrollCue:hover,
+.scrollCue:focus-visible {
+  color: var(--color-text);
+}
+
+.scrollCueHidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -0.35rem);
+}
+
+.scrollCueVisible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  transition:
+    color var(--motion-fast) ease,
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0s linear 0s;
+}
+
+.scrollCueFading {
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+  transform: translate(-50%, 0.55rem);
+}
+
+.scrollCueArrow {
+  width: 0.82rem;
+  height: 0.82rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(0) rotate(45deg);
+  transition: transform var(--motion-fast) ease;
+}
+
+.scrollCue:hover .scrollCueArrow,
+.scrollCue:focus-visible .scrollCueArrow {
+  transform: translateY(0.16rem) rotate(45deg);
+}
+
+.scrollCueLabel {
+  color: currentColor;
+  font-size: var(--font-size-label);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
 .staticHero {
   display: grid;
   gap: 2rem;

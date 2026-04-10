@@ -292,4 +292,12 @@ describe('desktop animated page', () => {
     expect(desktopContent?.style.transform).toBe('')
     expect(desktopContent?.style.opacity).toBe('')
   })
+
+  it('does not show the scroll cue immediately on desktop load', () => {
+    render(<App />)
+
+    expect(
+      screen.queryByRole('button', { name: 'Scroll to experience' }),
+    ).not.toBeInTheDocument()
+  })
 })

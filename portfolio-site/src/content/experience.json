@@ -19,7 +19,7 @@
     "company": "DUKE UNIVERSITY",
     "role": "Data Automation Engineer",
     "date": "May - July 2025",
-    "summary": "Engineered a data processing pipeline to automate mail-list segmentation for 10,000+ users.  Developed a desktop application to consolidate Qualtrics survey data..",
+    "summary": "Engineered a data processing pipeline to automate mail-list segmentation for 10,000+ users.  Developed a desktop application to consolidate Qualtrics survey data.",
     "tags": [
       "Python",
       "Pandas",

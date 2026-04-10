@@ -132,6 +132,7 @@ export function PortfolioPage() {
           heroMetaRef={heroMetaRef}
           heroCopyRef={heroCopyRef}
           heroTitleRef={heroTitleRef}
+          stageRef={aboutStageRef}
         />
       ) : null}
     </div>

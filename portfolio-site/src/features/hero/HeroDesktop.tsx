@@ -2,7 +2,10 @@ import type { RefObject } from 'react'
 import type { NavItem, SocialLink } from '../../content/types'
 import { SectionNav } from '../../components/navigation/SectionNav'
 import { SocialLinks } from '../../components/ui/SocialLinks'
+import { HeroScrollCue } from './HeroScrollCue'
 import styles from './hero.module.css'
+
+const HERO_SCROLL_CUE_ENABLED = false
 
 interface HeroDesktopProps {
   activeSection: string
@@ -18,6 +21,7 @@ interface HeroDesktopProps {
   heroMetaRef: RefObject<HTMLDivElement | null>
   heroCopyRef: RefObject<HTMLDivElement | null>
   heroTitleRef: RefObject<HTMLHeadingElement | null>
+  stageRef: RefObject<HTMLElement | null>
 }
 
 export function HeroDesktop({
@@ -34,6 +38,7 @@ export function HeroDesktop({
   heroMetaRef,
   heroCopyRef,
   heroTitleRef,
+  stageRef,
 }: HeroDesktopProps) {
   return (
     <div ref={overlayRef} className={styles.overlay}>
@@ -73,6 +78,8 @@ export function HeroDesktop({
           </div>
         </div>
       </div>
+
+      {HERO_SCROLL_CUE_ENABLED ? <HeroScrollCue stageRef={stageRef} /> : null}
     </div>
   )
 }

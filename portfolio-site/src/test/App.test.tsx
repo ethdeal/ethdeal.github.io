@@ -135,6 +135,9 @@ describe('App', () => {
     expect(
       screen.getByRole('link', { name: 'Brittany Chiang' }),
     ).toHaveAttribute('href', 'https://brittanychiang.com/')
+    expect(
+      screen.queryByRole('button', { name: 'Scroll to experience' }),
+    ).not.toBeInTheDocument()
   })
 
   it('marks the about link as the current section by default', () => {
@@ -160,6 +163,9 @@ describe('App', () => {
       'aria-current',
       'page',
     )
+    expect(
+      screen.queryByRole('button', { name: 'Scroll to experience' }),
+    ).not.toBeInTheDocument()
   })
 
   it('clears the primary nav active state once scrolling passes the final section', () => {

@@ -1,5 +1,6 @@
 import type { MouseEvent } from 'react'
 import type { NavItem } from '../../content/types'
+import { scrollToHashTarget } from '../../lib/scrollToHashTarget'
 import styles from './SectionNav.module.css'
 
 interface SectionNavProps {
@@ -7,30 +8,6 @@ interface SectionNavProps {
   activeSection: string
   ariaLabel: string
   variant: 'hero' | 'sidebar' | 'mobile'
-}
-
-function getDocumentOffsetTop(element: HTMLElement) {
-  let top = 0
-  let current: HTMLElement | null = element
-
-  while (current) {
-    top += current.offsetTop
-    current =
-      current.offsetParent instanceof HTMLElement ? current.offsetParent : null
-  }
-
-  return top
-}
-
-function getScrollMarginTop(element: HTMLElement) {
-  const scrollMarginTop = window.getComputedStyle(element).scrollMarginTop
-  const parsed = Number.parseFloat(scrollMarginTop)
-
-  return Number.isFinite(parsed) ? parsed : 0
-}
-
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
 export function SectionNav({
@@ -58,17 +35,7 @@ export function SectionNav({
     }
 
     event.preventDefault()
-
-    const top = Math.max(
-      getDocumentOffsetTop(target) - getScrollMarginTop(target),
-      0,
-    )
-
-    window.history.pushState(null, '', href)
-    window.scrollTo({
-      top,
-      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-    })
+    scrollToHashTarget(href)
   }
 
   return (
