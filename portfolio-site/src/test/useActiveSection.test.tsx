@@ -7,6 +7,7 @@ const mockState = vi.hoisted(() => ({
     about: 0,
     experience: 560,
     projects: 1120,
+    design: 1680,
   },
 }))
 
@@ -41,7 +42,12 @@ function bindRect(
 }
 
 function ActiveSectionHarness() {
-  const activeSection = useActiveSection(['about', 'experience', 'projects'])
+  const activeSection = useActiveSection([
+    'about',
+    'experience',
+    'projects',
+    'design',
+  ])
 
   return (
     <>
@@ -60,6 +66,11 @@ function ActiveSectionHarness() {
         ref={(node) => bindRect(node, 'projects')}
         style={{ scrollMarginTop: '96px' }}
       />
+      <section
+        id="design"
+        ref={(node) => bindRect(node, 'design')}
+        style={{ scrollMarginTop: '96px' }}
+      />
       <output data-testid="active-section">{activeSection}</output>
     </>
   )
@@ -70,6 +81,7 @@ describe('useActiveSection', () => {
     mockState.positions.about = 0
     mockState.positions.experience = 560
     mockState.positions.projects = 1120
+    mockState.positions.design = 1680
 
     Object.defineProperty(window, 'innerHeight', {
       configurable: true,
@@ -107,10 +119,21 @@ describe('useActiveSection', () => {
       mockState.positions.about = -1180
       mockState.positions.experience = -120
       mockState.positions.projects = 360
+      mockState.positions.design = 920
       window.dispatchEvent(new Event('scroll'))
     })
 
     expect(screen.getByTestId('active-section')).toHaveTextContent('projects')
+
+    act(() => {
+      mockState.positions.about = -1660
+      mockState.positions.experience = -720
+      mockState.positions.projects = -140
+      mockState.positions.design = 300
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    expect(screen.getByTestId('active-section')).toHaveTextContent('design')
   })
 
   it('clears the active section once the viewport anchor passes the final section', () => {
@@ -119,7 +142,8 @@ describe('useActiveSection', () => {
     act(() => {
       mockState.positions.about = -1540
       mockState.positions.experience = -980
-      mockState.positions.projects = 60
+      mockState.positions.projects = -420
+      mockState.positions.design = 60
       window.dispatchEvent(new Event('scroll'))
     })
 
@@ -128,7 +152,12 @@ describe('useActiveSection', () => {
 
   it('re-resolves section elements after a layout swap and resize', () => {
     function LayoutSwapHarness({ mobile }: { mobile: boolean }) {
-      const activeSection = useActiveSection(['about', 'experience', 'projects'])
+      const activeSection = useActiveSection([
+        'about',
+        'experience',
+        'projects',
+        'design',
+      ])
 
       if (mobile) {
         return (
@@ -149,6 +178,12 @@ describe('useActiveSection', () => {
               key="mobile-projects"
               id="projects"
               ref={(node) => bindRect(node, 'projects')}
+              style={{ scrollMarginTop: '96px' }}
+            />
+            <section
+              key="mobile-design"
+              id="design"
+              ref={(node) => bindRect(node, 'design')}
               style={{ scrollMarginTop: '96px' }}
             />
             <output data-testid="active-section">{activeSection}</output>
@@ -176,6 +211,12 @@ describe('useActiveSection', () => {
             ref={(node) => bindRect(node, 'projects')}
             style={{ scrollMarginTop: '96px' }}
           />
+          <section
+            key="desktop-design"
+            id="design"
+            ref={(node) => bindRect(node, 'design')}
+            style={{ scrollMarginTop: '96px' }}
+          />
           <output data-testid="active-section">{activeSection}</output>
         </>
       )
@@ -189,6 +230,7 @@ describe('useActiveSection', () => {
       mockState.positions.about = -980
       mockState.positions.experience = 140
       mockState.positions.projects = 860
+      mockState.positions.design = 1420
       rerender(<LayoutSwapHarness mobile />)
       window.dispatchEvent(new Event('resize'))
     })

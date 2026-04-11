@@ -1,12 +1,19 @@
 import { useRef } from 'react'
 import { ContentFootnote } from '../../components/ui/ContentFootnote'
-import { experienceItems, projectCards, sectionIds, siteContent } from '../../content/data'
+import {
+  designCards,
+  experienceItems,
+  projectCards,
+  sectionIds,
+  siteContent,
+} from '../../content/data'
 import { SectionNav } from '../../components/navigation/SectionNav'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useHeroScrollTimeline } from '../../hooks/useHeroScrollTimeline'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { DESKTOP_BREAKPOINT } from '../../lib/theme'
+import { DesignSection } from '../design/DesignSection'
 import { ExperienceSection } from '../experience/ExperienceSection'
 import { HeroDesktop } from '../hero/HeroDesktop'
 import { HeroStatic } from '../hero/HeroStatic'
@@ -67,6 +74,7 @@ export function PortfolioPage() {
           />
           <ExperienceSection items={experienceItems} />
           <ProjectsSection items={projectCards} />
+          <DesignSection items={designCards} />
           <ContentFootnote />
         </main>
       </div>
@@ -112,6 +120,7 @@ export function PortfolioPage() {
             {/* CONTENT COMPONENTS HERE ============================================= */}
             <ExperienceSection items={experienceItems} />
             <ProjectsSection items={projectCards} />
+            <DesignSection items={designCards} />
             <ContentFootnote />
           </div>
         </div>

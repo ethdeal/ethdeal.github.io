@@ -1,0 +1,20 @@
+[
+  {
+    "title": "TEDx DKU",
+    "date": "Feb 2024 - March 2026",
+    "summary": "Led a six-person design team across three conferences to create branded advertisements and merchandise. Designed 10 speaker presentations and used generative AI to revise and consolidate final decks.",
+    "tags": ["Tomorrow United", "Sparks", "Disorders of Magnitude"],
+    "link": "https://www.tedxdku.com/",
+    "imageKey": "tedx-dku",
+    "imageAlt": "TEDx DKU promotional work."
+  },
+  {
+    "title": "DKU Ultimate Instagram",
+    "date": "May 2025 - Present",
+    "summary": "Created and managed the team Instagram account, producing posters, reels, and photo recaps.",
+    "tags": ["Team Captain"],
+    "link": "https://www.instagram.com/dku_ultimate/",
+    "imageKey": "dku-ultimate-instagram",
+    "imageAlt": "DKU Ultimate gameday poster."
+  }
+]

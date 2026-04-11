@@ -36,6 +36,16 @@ export interface ExperienceItem {
   link: string
 }
 
+export interface ShowcaseContentItem {
+  title: string
+  date: string
+  summary: string
+  tags: string[]
+  link?: string
+  imageKey: string
+  imageAlt: string
+}
+
 export interface ProjectItem {
   project: string
   date: string
@@ -46,13 +56,17 @@ export interface ProjectItem {
   imageAlt: string
 }
 
-export interface ProjectImageAsset {
+export type DesignItem = ShowcaseContentItem
+
+export interface ShowcaseImageAsset {
   src: string
   width: number
   height: number
   alt: string
+  renderMode?: 'default' | 'cutout'
 }
 
-export interface ProjectCard extends Omit<ProjectItem, 'imageKey'> {
-  image: ProjectImageAsset
+export interface ShowcaseCard
+  extends Omit<ShowcaseContentItem, 'imageKey' | 'imageAlt'> {
+  image: ShowcaseImageAsset
 }

@@ -8,6 +8,7 @@ const mockState = {
     about: 0,
     experience: 680,
     projects: 1320,
+    design: 1960,
   },
 }
 
@@ -40,6 +41,7 @@ describe('App', () => {
     mockState.positions.about = 0
     mockState.positions.experience = 680
     mockState.positions.projects = 1320
+    mockState.positions.design = 1960
 
     Object.defineProperty(window, 'innerHeight', {
       configurable: true,
@@ -96,6 +98,20 @@ describe('App', () => {
           }
         }
 
+        if (this.id === 'design') {
+          return {
+            top: mockState.positions.design,
+            left: 0,
+            width: 100,
+            height: 520,
+            right: 100,
+            bottom: mockState.positions.design + 520,
+            x: 0,
+            y: mockState.positions.design,
+            toJSON: () => '',
+          }
+        }
+
         return {
           top: 0,
           left: 0,
@@ -123,6 +139,7 @@ describe('App', () => {
     ).toBeInTheDocument()
     expect(screen.getByText('BRIYA')).toBeInTheDocument()
     expect(screen.getByText('RAG Fact-Checking Extension')).toBeInTheDocument()
+    expect(screen.getByText('TEDx DKU')).toBeInTheDocument()
     expect(
       screen.getByRole('link', { name: 'Visit BRIYA' }),
     ).toBeInTheDocument()
@@ -132,9 +149,16 @@ describe('App', () => {
     expect(
       screen.getByRole('navigation', { name: 'Primary navigation' }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Design' })).toBeInTheDocument()
     expect(
       screen.getByRole('link', { name: 'Brittany Chiang' }),
     ).toHaveAttribute('href', 'https://brittanychiang.com/')
+    expect(
+      screen.getByRole('link', { name: 'View TEDx DKU' }),
+    ).toHaveAttribute('href', 'https://www.tedxdku.com/')
+    expect(
+      screen.getByRole('link', { name: 'View DKU Ultimate Instagram' }),
+    ).toHaveAttribute('href', 'https://www.instagram.com/dku_ultimate/')
     expect(
       screen.queryByRole('button', { name: 'Scroll to experience' }),
     ).not.toBeInTheDocument()
@@ -174,7 +198,8 @@ describe('App', () => {
     act(() => {
       mockState.positions.about = -1700
       mockState.positions.experience = -1020
-      mockState.positions.projects = -240
+      mockState.positions.projects = -860
+      mockState.positions.design = -240
       window.dispatchEvent(new Event('scroll'))
     })
 
