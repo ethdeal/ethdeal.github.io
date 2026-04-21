@@ -1,5 +1,26 @@
 [
   {
+    "project": "Ember Intelligence",
+    "date": "Feb 2026 - Present",
+    "summary": "Built an enterprise knowledge platform that lets teams query and synthesize fragmented company data through a custom web interface. Developed agentic retrieval workflows and custom ingestion pipelines to improve document retrieval.",
+    "tags": [
+      "Python",
+      "LangGraph",
+      "RAG",
+      "Qdrant",
+      "Cohere",
+      "Unstructured",
+      "Google Cloud",
+      "FastAPI",
+      "Svelte",
+      "Vite",
+      "Docker"
+    ],
+    "link": "",
+    "imageKey": "ember-intelligence",
+    "imageAlt": "Screenshot of the Ember Intelligence enterprise knowledge platform."
+  },
+  {
     "project": "RAG Fact-Checking Extension",
     "date": "July 2025 - March 2026",
     "summary": "Created a fact-checking Chrome extension to verify highlighted claims using retrieval-augmented generation. Evaluated several retrieval architectures to measure latency, context leakage, and misinformation induction.",

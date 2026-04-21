@@ -1,10 +1,17 @@
 import tedxPreview from '../assets/design/Habanero_mockup.webp'
 import dkuUltimatePreview from '../assets/design/DKU_Cup.webp'
+import emberPreview from '../assets/projects/Ember_Screenshot.webp'
 import flightOpsPreview from '../assets/projects/Relational_Diagram.webp'
 import ragPreview from '../assets/projects/AI-Fact-Checker.webp'
 import type { ShowcaseImageAsset } from '../content/types'
 
 export const showcaseImageRegistry: Record<string, ShowcaseImageAsset> = {
+  'ember-intelligence': {
+    src: emberPreview,
+    width: 2880,
+    height: 1536,
+    alt: 'Screenshot of the Ember Intelligence enterprise knowledge platform.',
+  },
   'flightops-database': {
     src: flightOpsPreview,
     width: 1058,
