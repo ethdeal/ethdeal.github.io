@@ -37,6 +37,8 @@ export function PortfolioPage() {
   const sidebarBodyRef = useRef<HTMLDivElement>(null)
 
   const activeSection = useActiveSection(sectionIds)
+  const resumeHref =
+    siteContent.socialLinks.find(({ icon }) => icon === 'resume')?.href ?? ''
 
   useHeroScrollTimeline({
     enabled: shouldAnimateHero,
@@ -72,7 +74,7 @@ export function PortfolioPage() {
             paragraphs={siteContent.heroParagraphs}
             socialLinks={siteContent.socialLinks}
           />
-          <ExperienceSection items={experienceItems} />
+          <ExperienceSection items={experienceItems} resumeHref={resumeHref} />
           <ProjectsSection items={projectCards} />
           <DesignSection items={designCards} />
           <ContentFootnote />
@@ -118,7 +120,7 @@ export function PortfolioPage() {
         <div className={styles.desktopContentTrigger}>
           <div className={styles.desktopContent}>
             {/* CONTENT COMPONENTS HERE ============================================= */}
-            <ExperienceSection items={experienceItems} />
+            <ExperienceSection items={experienceItems} resumeHref={resumeHref} />
             <ProjectsSection items={projectCards} />
             <DesignSection items={designCards} />
             <ContentFootnote />

@@ -7,9 +7,10 @@ import styles from './experience.module.css'
 
 interface ExperienceSectionProps {
   items: ExperienceItem[]
+  resumeHref: string
 }
 
-export function ExperienceSection({ items }: ExperienceSectionProps) {
+export function ExperienceSection({ items, resumeHref }: ExperienceSectionProps) {
   const [activeCompany, setActiveCompany] = useState<string | null>(null)
 
   return (
@@ -76,6 +77,18 @@ export function ExperienceSection({ items }: ExperienceSectionProps) {
             </article>
           )
         })}
+      </div>
+
+      <div className={styles.resumeRow}>
+        <a
+          href={resumeHref}
+          target="_blank"
+          rel="noreferrer"
+          className={[styles.link, styles.resumeLink].join(' ')}
+        >
+          View Full Resume
+          <ExternalLinkIcon className={styles.linkIcon} />
+        </a>
       </div>
     </section>
   )
