@@ -2,23 +2,27 @@
   {
     "project": "Ember Intelligence",
     "date": "Feb 2026 - Present",
-    "summary": "Built an enterprise knowledge platform that lets teams query and synthesize fragmented company data through a custom web interface. Developed agentic retrieval workflows and custom ingestion pipelines to improve document retrieval.",
+    "summary": "Built a B2B knowledge platform that connects AI assistants to fragmented company data through an MCP server. Developed provider-agnostic ingestion pipelines and incremental sync architecture to improve document retrieval.",
     "tags": [
       "Python",
-      "LangGraph",
+      "TypeScript",
+      "FastAPI",
+      "Next.js",
+      "MCP",
       "RAG",
       "Qdrant",
       "Cohere",
       "Unstructured",
+      "Nango",
+      "LiteLLM",
       "Google Cloud",
-      "FastAPI",
-      "Svelte",
-      "Vite",
+      "Entra ID",
+      "LangGraph",
       "Docker"
     ],
     "link": "https://www.unlockember.com/",
     "imageKey": "ember-intelligence",
-    "imageAlt": "Screenshot of the Ember Intelligence enterprise knowledge platform."
+    "imageAlt": "Screenshot of the Ember Intelligence website."
   },
   {
     "project": "RAG Fact-Checking Extension",
