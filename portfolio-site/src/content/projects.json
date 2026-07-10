@@ -1,29 +1,5 @@
 [
   {
-    "project": "Ember Intelligence",
-    "date": "Feb 2026 - Present",
-    "summary": "Built a knowledge retrieval platform that connects AI assistants to fragmented company data through an MCP server. Piloted across multiple organizations, supporting 50+ users.",
-    "tags": [
-      "Python",
-      "TypeScript",
-      "FastAPI",
-      "Next.js",
-      "MCP",
-      "RAG",
-      "PostgreSQL",
-      "Supabase",
-      "Qdrant",
-      "Cohere",
-      "Nango",
-      "Google Cloud",
-      "LangGraph",
-      "Docker"
-    ],
-    "link": "https://www.unlockember.com/",
-    "imageKey": "ember-intelligence",
-    "imageAlt": "Screenshot of the Ember Intelligence website."
-  },
-  {
     "project": "RAG Fact-Checking Extension",
     "date": "July 2025 - March 2026",
     "summary": "Created a fact-checking Chrome extension to verify highlighted claims using retrieval-augmented generation. Evaluated several retrieval architectures to measure latency, context leakage, and misinformation induction.",

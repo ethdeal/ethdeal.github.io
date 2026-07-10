@@ -1,7 +1,30 @@
 [
   {
+    "company": "Ember Intelligence",
+    "role": "Founding Full Stack Engineer",
+    "date": "Feb 2026 - Present",
+    "summary": "Co-founded a platform that connects AI assistants to fragmented company data and workflows through custom tools and secure integrations. Piloted across multiple organizations, supporting 50+ users.",
+    "tags": [
+      "Python",
+      "TypeScript",
+      "FastAPI",
+      "Next.js",
+      "MCP",
+      "RAG",
+      "PostgreSQL",
+      "Supabase",
+      "Qdrant",
+      "Cohere",
+      "Nango",
+      "Google Cloud",
+      "LangGraph",
+      "Docker"
+    ],
+    "link": "https://www.unlockember.com/"
+  },
+  {
     "company": "BRIYA",
-    "role": "Fullstack Developer / IT Specialist",
+    "role": "Full Stack Engineer / IT Specialist",
     "date": "July - Aug 2025, May - Aug 2024",
     "summary": "Built and deployed a classroom booking system serving five campuses and 100+ faculty. Configured secure backend infrastructure maintaining zero downtime since launch. Also configured and restored 1,000+ Chromebooks for student device distribution.",
     "tags": [
