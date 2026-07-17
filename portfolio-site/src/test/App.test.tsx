@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { act, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import App from '../App'
+import styles from '../App.module.css'
+import waterBackground from '../assets/water-background.svg?no-inline'
 import { siteContent } from '../content/data'
 
 const mockState = {
@@ -162,6 +164,30 @@ describe('App', () => {
     expect(
       screen.queryByRole('button', { name: 'Scroll to experience' }),
     ).not.toBeInTheDocument()
+  })
+
+  it('keeps portfolio content above a decorative water canvas', () => {
+    const { container } = render(<App />)
+
+    expect(waterBackground).not.toMatch(/^data:/)
+    expect(container.querySelector('canvas')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    )
+    expect(
+      screen.getByRole('link', { name: 'View Full Resume' }),
+    ).toBeInTheDocument()
+  })
+
+  it('hides the procedural fallback until the texture is ready', () => {
+    const { container } = render(<App />)
+    const canvas = container.querySelector('canvas')
+    const water = canvas?.parentElement
+    const underlay = container.querySelector('img.' + styles.underlay)
+
+    expect(water).toHaveClass(styles.waterPending)
+    fireEvent.load(underlay!)
+    expect(water).not.toHaveClass(styles.waterPending)
   })
 
   it('marks the about link as the current section by default', () => {

@@ -9,10 +9,6 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 78% 22%, rgba(246, 184, 92, 0.15), transparent 22%),
-    radial-gradient(circle at 18% 18%, rgba(232, 93, 93, 0.14), transparent 28%),
-    var(--color-bg);
 }
 
 .topBar {
