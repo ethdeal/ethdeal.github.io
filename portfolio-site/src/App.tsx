@@ -1,45 +1,20 @@
-import { useEffect, useState } from 'react'
 import { WaterDistortion } from '@rippleflow/water-distortion'
-import waterBackground from './assets/water-background.svg?no-inline'
+import waterBackground from './assets/water-background.svg'
 import { PortfolioPage } from './features/layout/PortfolioPage'
 import styles from './App.module.css'
 
 function App() {
-  const [textureImage, setTextureImage] = useState<HTMLImageElement>()
-  const [isWaterReady, setIsWaterReady] = useState(false)
-
-  useEffect(() => {
-    if (!textureImage) {
-      return undefined
-    }
-
-    let revealFrame = 0
-    const uploadFrame = window.requestAnimationFrame(() => {
-      revealFrame = window.requestAnimationFrame(() => {
-        setIsWaterReady(true)
-      })
-    })
-
-    return () => {
-      window.cancelAnimationFrame(uploadFrame)
-      window.cancelAnimationFrame(revealFrame)
-    }
-  }, [textureImage])
-
   return (
     <WaterDistortion
-      className={[styles.water, isWaterReady ? '' : styles.waterPending]
-        .filter(Boolean)
-        .join(' ')}
+      className={styles.water}
       mode="texture"
-      texture={textureImage}
+      texture={waterBackground}
       underlay={
         <img
           aria-hidden="true"
           alt=""
           className={styles.underlay}
           src={waterBackground}
-          onLoad={(event) => setTextureImage(event.currentTarget)}
         />
       }
       wakeStrength={0.3}

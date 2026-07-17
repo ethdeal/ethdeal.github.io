@@ -13,10 +13,6 @@
   transform: none !important;
 }
 
-.waterPending > canvas {
-  visibility: hidden;
-}
-
 .underlay {
   width: 100%;
   height: 100%;
