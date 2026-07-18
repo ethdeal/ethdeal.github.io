@@ -20,18 +20,10 @@ describe('content data', () => {
     expect(siteContent.socialLinks).toHaveLength(5)
   })
 
-  it('supports project entries with or without a bundled image asset', () => {
+  it('maps every project entry to a bundled image asset', () => {
     expect(projectCards).toHaveLength(3)
-    expect(
-      projectCards.find((project) => project.title === 'RippleFlow Water Distortion')
-        ?.image,
-    ).toBeUndefined()
 
     for (const project of projectCards) {
-      if (project.title === 'RippleFlow Water Distortion') {
-        continue
-      }
-
       if (!project.image) {
         throw new Error(`Expected ${project.title} to have an image`)
       }

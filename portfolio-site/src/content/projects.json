@@ -9,7 +9,9 @@
       "WebGL",
       "npm"
     ],
-    "link": "https://github.com/ethdeal/ripple-flow"
+    "link": "https://github.com/ethdeal/ripple-flow",
+    "imageKey": "rippleflow-water-distortion",
+    "imageAlt": "Preview of the RippleFlow water distortion effect."
   },
   {
     "project": "RAG Fact-Checking Extension",
