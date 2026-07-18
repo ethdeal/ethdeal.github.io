@@ -40,8 +40,8 @@ export const showcaseImageRegistry: Record<string, ShowcaseImageAsset> = {
   },
   'dku-ultimate-instagram': {
     src: dkuUltimatePreview,
-    width: 3000,
-    height: 4000,
+    width: 900,
+    height: 1200,
     alt: 'DKU Ultimate gameday poster.',
   },
 }
