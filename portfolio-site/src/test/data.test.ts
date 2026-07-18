@@ -20,10 +20,22 @@ describe('content data', () => {
     expect(siteContent.socialLinks).toHaveLength(5)
   })
 
-  it('maps every project entry to a bundled image asset', () => {
+  it('supports project entries with or without a bundled image asset', () => {
     expect(projectCards).toHaveLength(3)
+    expect(
+      projectCards.find((project) => project.title === 'RippleFlow Water Distortion')
+        ?.image,
+    ).toBeUndefined()
 
     for (const project of projectCards) {
+      if (project.title === 'RippleFlow Water Distortion') {
+        continue
+      }
+
+      if (!project.image) {
+        throw new Error(`Expected ${project.title} to have an image`)
+      }
+
       expect(project.image.src).toBeTruthy()
       expect(project.image.width).toBeGreaterThan(0)
       expect(project.image.height).toBeGreaterThan(0)
@@ -35,6 +47,10 @@ describe('content data', () => {
     expect(designCards).toHaveLength(2)
 
     for (const design of designCards) {
+      if (!design.image) {
+        throw new Error(`Expected ${design.title} to have an image`)
+      }
+
       expect(design.image.src).toBeTruthy()
       expect(design.image.width).toBeGreaterThan(0)
       expect(design.image.height).toBeGreaterThan(0)

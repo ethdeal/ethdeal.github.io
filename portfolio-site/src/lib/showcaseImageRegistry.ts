@@ -3,7 +3,6 @@ import dkuUltimatePreview from '../assets/design/DKU_Cup.webp'
 import emberPreview from '../assets/projects/unlockember.webp'
 import flightOpsPreview from '../assets/projects/Relational_Diagram.webp'
 import ragPreview from '../assets/projects/AI-Fact-Checker.webp'
-import rippleFlowPreview from '../assets/projects/rippleflow-water-distortion.svg'
 import type { ShowcaseImageAsset } from '../content/types'
 
 export const showcaseImageRegistry: Record<string, ShowcaseImageAsset> = {
@@ -24,12 +23,6 @@ export const showcaseImageRegistry: Record<string, ShowcaseImageAsset> = {
     width: 605,
     height: 1005,
     alt: 'RAG Fact-Checking Extension UI.',
-  },
-  'rippleflow-water-distortion': {
-    src: rippleFlowPreview,
-    width: 720,
-    height: 480,
-    alt: 'Illustration of the RippleFlow water distortion package.',
   },
   'tedx-dku': {
     src: tedxPreview,

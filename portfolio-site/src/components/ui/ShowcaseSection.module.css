@@ -27,6 +27,10 @@
     box-shadow var(--motion-fast) ease;
 }
 
+.withoutMedia {
+  grid-template-columns: 1fr;
+}
+
 .active {
   background: var(--color-surface);
   border-color: var(--color-surface-border);
