@@ -1,5 +1,19 @@
 [
   {
+    "project": "RippleFlow Water Distortion",
+    "date": "July 2026",
+    "summary": "Published an npm package for adding water distortion to React interfaces. Built a WebGL heightfield simulation that models continuous pointer wakes instead of stamping circular ripples at intervals, with real-time refraction and lighting.",
+    "tags": [
+      "React",
+      "TypeScript",
+      "WebGL",
+      "npm"
+    ],
+    "link": "https://github.com/ethdeal/ripple-flow",
+    "imageKey": "rippleflow-water-distortion",
+    "imageAlt": "Illustration of the RippleFlow water distortion package."
+  },
+  {
     "project": "RAG Fact-Checking Extension",
     "date": "July 2025 - March 2026",
     "summary": "Created a fact-checking Chrome extension to verify highlighted claims using retrieval-augmented generation. Evaluated several retrieval architectures to measure latency, context leakage, and misinformation induction.",

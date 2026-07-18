@@ -21,7 +21,7 @@ describe('content data', () => {
   })
 
   it('maps every project entry to a bundled image asset', () => {
-    expect(projectCards).toHaveLength(2)
+    expect(projectCards).toHaveLength(3)
 
     for (const project of projectCards) {
       expect(project.image.src).toBeTruthy()
