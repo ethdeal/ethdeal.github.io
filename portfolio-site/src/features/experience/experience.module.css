@@ -99,7 +99,6 @@
 
 .summary {
   margin: 0;
-  max-width: var(--summary-measure);
   color: var(--color-text-muted);
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
@@ -168,10 +167,6 @@
 
   .axis {
     display: none;
-  }
-
-  .summary {
-    max-width: none;
   }
 
   .resumeRow {

@@ -64,8 +64,6 @@
   --showcase-media-min-height-desktop: 11rem;
   --showcase-media-max-height-stacked: clamp(12rem, 32vw, 16rem);
   --content-max-width: 47rem; /* 43rem */
-  --summary-measure: 34rem; /* 34 rem */
-
   --z-sidebar: 10;
   --z-nav: 20;
   --z-hero: 30;

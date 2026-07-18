@@ -96,7 +96,6 @@
 
 .summary {
   margin: 0;
-  max-width: var(--summary-measure);
   color: var(--color-text-muted);
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
@@ -149,10 +148,6 @@
     width: auto;
     max-width: 100%;
     justify-self: start;
-  }
-
-  .summary {
-    max-width: none;
   }
 
   .image {
