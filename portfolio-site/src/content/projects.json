@@ -1,6 +1,6 @@
 [
   {
-    "project": "RippleFlow Water Distortion",
+    "project": "RippleFlow",
     "date": "July 2026",
     "summary": "Published an npm package for adding water distortion to React interfaces. Built a WebGL heightfield simulation that models continuous pointer wakes instead of stamping circular ripples at intervals.",
     "tags": [
