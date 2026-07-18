@@ -1,5 +1,6 @@
 .water {
   min-height: 100svh;
+  overflow: visible !important;
 }
 
 .water > div:first-child,
