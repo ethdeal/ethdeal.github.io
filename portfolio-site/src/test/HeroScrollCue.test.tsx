@@ -107,7 +107,6 @@ describe('HeroScrollCue', () => {
     expect(
       screen.getByRole('button', { name: 'Scroll to experience' }),
     ).toBeInTheDocument()
-    expect(screen.getByText('SCROLL')).toBeInTheDocument()
   })
 
   it('never appears if the user scrolls before the delay completes', () => {

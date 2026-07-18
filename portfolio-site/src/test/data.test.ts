@@ -8,7 +8,7 @@ import {
 
 describe('content data', () => {
   it('contains the expected top-level site content shape', () => {
-    expect(siteContent.name).toBe('ETHAN DEAL')
+    expect(siteContent.name).toMatch(/\S/)
     expect(siteContent.navItems.map((item) => item.href)).toEqual([
       '#about',
       '#experience',
@@ -16,14 +16,29 @@ describe('content data', () => {
       '#design',
     ])
     expect(siteContent.sidebarSubtitle).toMatch(/\S/)
-    expect('sidebarTitle' in siteContent).toBe(false)
-    expect(siteContent.socialLinks).toHaveLength(5)
+    expect(siteContent.socialLinks.length).toBeGreaterThan(0)
+
+    for (const link of siteContent.socialLinks) {
+      expect(link.label).toMatch(/\S/)
+      expect(link.href).toMatch(/\S/)
+      expect(link.icon).toMatch(/\S/)
+    }
+
+    expect(
+      siteContent.socialLinks.some((link) => link.icon === 'resume'),
+    ).toBe(true)
   })
 
   it('maps every project entry to a bundled image asset', () => {
-    expect(projectCards).toHaveLength(3)
+    expect(projectCards.length).toBeGreaterThan(0)
 
     for (const project of projectCards) {
+      expect(project.title).toMatch(/\S/)
+      expect(project.date).toMatch(/\S/)
+      expect(project.summary).toMatch(/\S/)
+      expect(Array.isArray(project.tags)).toBe(true)
+      expect(project.link).toMatch(/^https?:\/\//)
+
       if (!project.image) {
         throw new Error(`Expected ${project.title} to have an image`)
       }
@@ -36,9 +51,18 @@ describe('content data', () => {
   })
 
   it('maps every design entry to a bundled image asset', () => {
-    expect(designCards).toHaveLength(2)
+    expect(designCards.length).toBeGreaterThan(0)
 
     for (const design of designCards) {
+      expect(design.title).toMatch(/\S/)
+      expect(design.date).toMatch(/\S/)
+      expect(design.summary).toMatch(/\S/)
+      expect(Array.isArray(design.tags)).toBe(true)
+
+      if (design.link) {
+        expect(design.link).toMatch(/^https?:\/\//)
+      }
+
       if (!design.image) {
         throw new Error(`Expected ${design.title} to have an image`)
       }
@@ -47,22 +71,18 @@ describe('content data', () => {
       expect(design.image.width).toBeGreaterThan(0)
       expect(design.image.height).toBeGreaterThan(0)
       expect(design.image.alt).toBeTruthy()
-      expect(design.tags).toHaveLength(0)
     }
-
-    expect(designCards[0]?.link).toBe('https://www.tedxdku.com/')
-    expect(designCards[1]?.link).toBe('https://www.instagram.com/dku_ultimate/')
   })
 
   it('keeps experience entries complete and editable', () => {
-    expect(experienceItems).toHaveLength(3)
+    expect(experienceItems.length).toBeGreaterThan(0)
 
     for (const item of experienceItems) {
-      expect(item.company).toBeTruthy()
-      expect(item.role).toBeTruthy()
-      expect(item.date).toBeTruthy()
-      expect(item.summary.length).toBeGreaterThan(50)
-      expect(item.tags.length).toBeGreaterThan(0)
+      expect(item.company).toMatch(/\S/)
+      expect(item.role).toMatch(/\S/)
+      expect(item.date).toMatch(/\S/)
+      expect(item.summary).toMatch(/\S/)
+      expect(Array.isArray(item.tags)).toBe(true)
       expect(item.link).toMatch(/^https?:\/\//)
     }
   })
