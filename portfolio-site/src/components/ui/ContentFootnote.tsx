@@ -4,8 +4,8 @@ export function ContentFootnote() {
   return (
     <footer className={styles.footnote} aria-label="Site footnote">
       <p className={styles.copy}>
-        Designed in my head and built with React and Vite. Animations with
-        GSAP and{' '} 
+        Designed in my head and built with React. Scroll animations with
+        GSAP and water with{' '} 
         <a
           href="https://github.com/ethdeal/ripple-flow"
           target="_blank"
