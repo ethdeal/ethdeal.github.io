@@ -15,7 +15,7 @@
   grid-template-columns: minmax(7.2rem, 8.4rem) 1.5rem minmax(0, 1fr);
   align-items: start;
   gap: 1.15rem;
-  padding: clamp(1.45rem, 1.9vw, 1.9rem);
+  padding: var(--card-padding);
   border: 1px solid transparent;
   border-radius: var(--radius-xl);
   transition:
@@ -139,7 +139,7 @@
   grid-template-columns: minmax(7.2rem, 8.4rem) 1.5rem minmax(0, 1fr);
   gap: 1.15rem;
   margin-top: clamp(1.2rem, 1.7vw, 1.6rem);
-  padding: 0 clamp(1.45rem, 1.9vw, 1.9rem);
+  padding: 0 var(--card-padding);
 }
 
 .resumeLink {
@@ -162,7 +162,7 @@
   .entry {
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 1.1rem;
+    padding: var(--card-padding-mobile);
   }
 
   .axis {
@@ -171,7 +171,7 @@
 
   .resumeRow {
     grid-template-columns: 1fr;
-    padding: 0 1.1rem;
+    padding: 0 var(--card-padding-mobile);
   }
 
   .resumeLink {

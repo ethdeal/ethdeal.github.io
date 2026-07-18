@@ -58,8 +58,8 @@
   --section-space: clamp(6.5rem, 10vh, 8.75rem);
   --section-heading-space: clamp(2.75rem, 4vw, 3.75rem);
   --entry-gap: clamp(1.75rem, 2.2vw, 2.5rem);
-  --card-padding: clamp(1.85rem, 2.2vw, 2.45rem);
-  --card-padding-mobile: 1.35rem;
+  --card-padding: clamp(1.45rem, 1.9vw, 1.9rem);
+  --card-padding-mobile: 1.1rem;
   --showcase-media-max-width: 14.5rem;
   --showcase-media-min-height-desktop: 11rem;
   --showcase-media-max-height-stacked: clamp(12rem, 32vw, 16rem);

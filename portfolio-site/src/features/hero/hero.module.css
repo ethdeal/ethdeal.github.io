@@ -243,9 +243,11 @@
   .staticHero {
     min-height: auto;
     padding-top: 7.25rem;
+    padding-inline: var(--card-padding-mobile);
   }
 
   .staticTitle {
+    letter-spacing: -0.04em;
     white-space: normal;
   }
 }
