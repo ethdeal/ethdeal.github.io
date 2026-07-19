@@ -48,10 +48,10 @@
   --page-gutter-mobile: clamp(0.9rem, 3.6vw, 1.2rem);
   --sidebar-padding-block: clamp(2.1rem, 2.8vw, 3.25rem);
   --sidebar-padding-inline: clamp(2rem, 2.7vw, 3rem);
-  --sidebar-text-inset: clamp(0.45rem, 0.7vw, 0.75rem);
+  --sidebar-text-inset: clamp(0.45rem, 0.5vw, 0.75rem); /* clamp(0.45rem, 0.7vw, 0.75rem); */
   --sidebar-width: clamp(20rem, 31vw, 34rem);
   --sidebar-content-gap: clamp(3.25rem, 4.8vw, 6rem);
-  --sidebar-name-gap: clamp(1.1rem, 3.8vw, 5rem);
+  --sidebar-name-gap: clamp(1.1rem, 2.6vw, 5rem); /* 1.1rem, 3.8vw, 5rem */
   --sidebar-stack-gap: clamp(2.4rem, 3.8vw, 4rem);
   --hero-stage-height: 132svh; /* 182 original */
   --hero-content-overlap: clamp(-12rem, -20svh, 44rem); /* modify to change content offset */
