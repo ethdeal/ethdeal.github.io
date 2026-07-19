@@ -16,7 +16,7 @@
   grid-template-columns: minmax(0, var(--showcase-media-width)) minmax(0, 1fr);
   align-items: start;
   gap: 1.65rem;
-  padding: clamp(1.45rem, 1.9vw, 1.9rem);
+  padding: var(--card-padding);
   border: 1px solid transparent;
   border-radius: var(--radius-xl);
   transition:
@@ -25,6 +25,10 @@
     background-color var(--motion-fast) ease,
     border-color var(--motion-fast) ease,
     box-shadow var(--motion-fast) ease;
+}
+
+.withoutMedia {
+  grid-template-columns: 1fr;
 }
 
 .active {
@@ -92,7 +96,6 @@
 
 .summary {
   margin: 0;
-  max-width: var(--summary-measure);
   color: var(--color-text-muted);
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
@@ -137,7 +140,7 @@
   .entry {
     grid-template-columns: 1fr;
     /* gap: 1rem; */
-    padding: 1.1rem;
+    padding: var(--card-padding-mobile);
   }
 
   .mediaLink,
@@ -145,10 +148,6 @@
     width: auto;
     max-width: 100%;
     justify-self: start;
-  }
-
-  .summary {
-    max-width: none;
   }
 
   .image {

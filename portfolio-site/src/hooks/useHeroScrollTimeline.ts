@@ -30,11 +30,14 @@ const HERO_EXIT_TWEENS = {
     y: -156, // -56
     duration: 0.16,
   },
-  backdrop: {
-    start: 0.1,
-    autoAlpha: 0,
-    duration: 0.12,
-  },
+} as const
+
+// Inverse of the former backdrop fade so incoming content keeps the same reveal curve.
+const CONTENT_REVEAL_TWEEN = {
+  start: 0.1,
+  opacity: 1,
+  duration: 0.12,
+  ease: 'none',
 } as const
 
 interface UseHeroScrollTimelineOptions {
@@ -48,6 +51,7 @@ interface UseHeroScrollTimelineOptions {
   heroTitleRef: RefObject<HTMLHeadingElement | null>
   sidebarTitleAnchorRef: RefObject<HTMLParagraphElement | null>
   sidebarBodyRef: RefObject<HTMLDivElement | null>
+  desktopContentRef: RefObject<HTMLDivElement | null>
 }
 
 export function useHeroScrollTimeline({
@@ -61,6 +65,7 @@ export function useHeroScrollTimeline({
   heroTitleRef,
   sidebarTitleAnchorRef,
   sidebarBodyRef,
+  desktopContentRef,
 }: UseHeroScrollTimelineOptions) {
   useLayoutEffect(() => {
     const stage = stageRef.current
@@ -72,6 +77,7 @@ export function useHeroScrollTimeline({
     const heroTitle = heroTitleRef.current
     const sidebarTitleAnchor = sidebarTitleAnchorRef.current
     const sidebarBody = sidebarBodyRef.current
+    const desktopContent = desktopContentRef.current
 
     if (
       !stage ||
@@ -82,7 +88,8 @@ export function useHeroScrollTimeline({
       !heroCopy ||
       !heroTitle ||
       !sidebarTitleAnchor ||
-      !sidebarBody
+      !sidebarBody ||
+      !desktopContent
     ) {
       return undefined
     }
@@ -90,7 +97,8 @@ export function useHeroScrollTimeline({
     if (!enabled) {
       gsap.set(overlay, { autoAlpha: 0 })
       gsap.set(backdrop, { autoAlpha: 0 })
-      gsap.set(sidebarBody, { y: 0 })
+      gsap.set(sidebarBody, { opacity: 1, y: 0 })
+      gsap.set(desktopContent, { opacity: 1 })
       return undefined
     }
 
@@ -123,9 +131,11 @@ export function useHeroScrollTimeline({
           force3D: true,
         })
         gsap.set(sidebarBody, {
+          opacity: 0,
           y: 0,
           force3D: true,
         })
+        gsap.set(desktopContent, { opacity: 0 })
       }
 
       const scheduleRefresh = () => {
@@ -189,7 +199,12 @@ export function useHeroScrollTimeline({
         addExitTween(topNav, HERO_EXIT_TWEENS.topNav)
         addExitTween(heroMeta, HERO_EXIT_TWEENS.heroMeta)
         addExitTween(heroCopy, HERO_EXIT_TWEENS.heroCopy)
-        addExitTween(backdrop, HERO_EXIT_TWEENS.backdrop)
+
+        const { start: contentRevealStart, ...contentRevealVars } =
+          CONTENT_REVEAL_TWEEN
+
+        timeline.to(sidebarBody, contentRevealVars, contentRevealStart)
+        timeline.to(desktopContent, contentRevealVars, contentRevealStart)
 
         timeline
           .fromTo(
@@ -256,5 +271,6 @@ export function useHeroScrollTimeline({
     heroTitleRef,
     sidebarTitleAnchorRef,
     sidebarBodyRef,
+    desktopContentRef,
   ])
 }

@@ -56,6 +56,10 @@ function applyGsapVars(target: unknown, vars: Record<string, unknown>) {
     target.style.visibility = vars.autoAlpha === 0 ? 'hidden' : 'visible'
   }
 
+  if (typeof vars.opacity === 'number') {
+    target.style.opacity = String(vars.opacity)
+  }
+
   if (typeof vars.x === 'number') {
     state.x = vars.x
   }
@@ -225,6 +229,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
   const sidebarTitleAnchorRef = useRef<HTMLParagraphElement>(null)
   const sidebarBodyRef = useRef<HTMLDivElement>(null)
+  const desktopContentRef = useRef<HTMLDivElement>(null)
 
   useHeroScrollTimeline({
     enabled,
@@ -237,6 +242,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
     heroTitleRef,
     sidebarTitleAnchorRef,
     sidebarBodyRef,
+    desktopContentRef,
   })
 
   return (
@@ -282,6 +288,9 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
         }}
       >
         Sidebar body
+      </div>
+      <div data-testid="desktop-content" ref={desktopContentRef}>
+        Desktop content
       </div>
       <div data-testid="content-reveal">Unrelated content</div>
     </>
@@ -348,5 +357,39 @@ describe('useHeroScrollTimeline', () => {
     expect(screen.getByTestId('sidebar-body').style.transform).not.toBe(
       'translate3d(0px, 940px, 0px) scale(1)',
     )
+  })
+
+  it('uses the former backdrop curve to reveal the sidebar and desktop content', () => {
+    render(<HeroTimelineHarness />)
+
+    const revealTargets = [
+      screen.getByTestId('sidebar-body'),
+      screen.getByTestId('desktop-content'),
+    ]
+
+    for (const target of revealTargets) {
+      expect(
+        mockState.setCalls.some(
+          (call) => call.target === target && call.vars.opacity === 0,
+        ),
+      ).toBe(true)
+
+      const revealTween = mockState.timelineCalls.find(
+        (call) =>
+          call.method === 'to' &&
+          call.target === target &&
+          call.vars.opacity === 1,
+      )
+
+      expect(revealTween).toBeDefined()
+
+      if (revealTween?.method !== 'to') {
+        continue
+      }
+
+      expect(revealTween.position).toBe(0.1)
+      expect(revealTween.vars.duration).toBe(0.12)
+      expect(revealTween.vars.ease).toBe('none')
+    }
   })
 })

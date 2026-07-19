@@ -34,7 +34,7 @@ interface ShowcaseCardItemProps {
 }
 
 function getAspectRatio(image: ShowcaseCard['image']) {
-  if (image.width > 0 && image.height > 0) {
+  if (image && image.width > 0 && image.height > 0) {
     return image.width / image.height
   }
 
@@ -100,10 +100,11 @@ function ShowcaseCardItem({
   onActivate,
   onDeactivate,
 }: ShowcaseCardItemProps) {
+  const image = item.image
   const contentRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
   const [contentHeight, setContentHeight] = useState(0)
-  const [aspectRatio, setAspectRatio] = useState(() => getAspectRatio(item.image))
+  const [aspectRatio, setAspectRatio] = useState(() => getAspectRatio(image))
 
   useLayoutEffect(() => {
     const syncContentHeight = () => {
@@ -191,28 +192,29 @@ function ShowcaseCardItem({
   } as CSSProperties
   const imageClassName = [
     styles.image,
-    item.image.renderMode === 'cutout' ? styles.imageCutout : '',
+    image?.renderMode === 'cutout' ? styles.imageCutout : '',
   ]
     .filter(Boolean)
     .join(' ')
-  const media = (
+  const media = image ? (
     <img
       ref={imageRef}
-      src={item.image.src}
-      alt={item.image.alt}
-      width={item.image.width}
-      height={item.image.height}
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
       loading="lazy"
       decoding="async"
       className={imageClassName}
       onLoad={handleImageLoad}
     />
-  )
+  ) : null
 
   return (
     <article
       className={[
         styles.entry,
+        image ? '' : styles.withoutMedia,
         isActive ? styles.active : '',
         isDimmed ? styles.dimmed : '',
       ].join(' ')}
@@ -226,7 +228,7 @@ function ShowcaseCardItem({
         }
       }}
     >
-      {item.link ? (
+      {media && item.link ? (
         <a
           href={item.link}
           target="_blank"
@@ -236,9 +238,9 @@ function ShowcaseCardItem({
         >
           {media}
         </a>
-      ) : (
+      ) : media ? (
         <div className={styles.mediaFrame}>{media}</div>
-      )}
+      ) : null}
 
       <div ref={contentRef} className={styles.content}>
         <div className={styles.topRow}>

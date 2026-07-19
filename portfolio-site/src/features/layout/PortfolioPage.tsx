@@ -35,6 +35,7 @@ export function PortfolioPage() {
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
   const sidebarTitleAnchorRef = useRef<HTMLParagraphElement>(null)
   const sidebarBodyRef = useRef<HTMLDivElement>(null)
+  const desktopContentRef = useRef<HTMLDivElement>(null)
 
   const activeSection = useActiveSection(sectionIds)
   const resumeHref =
@@ -51,6 +52,7 @@ export function PortfolioPage() {
     heroTitleRef,
     sidebarTitleAnchorRef,
     sidebarBodyRef,
+    desktopContentRef,
   })
 
   if (!isDesktop) {
@@ -118,7 +120,7 @@ export function PortfolioPage() {
         )}
 
         <div className={styles.desktopContentTrigger}>
-          <div className={styles.desktopContent}>
+          <div ref={desktopContentRef} className={styles.desktopContent}>
             {/* CONTENT COMPONENTS HERE ============================================= */}
             <ExperienceSection items={experienceItems} resumeHref={resumeHref} />
             <ProjectsSection items={projectCards} />

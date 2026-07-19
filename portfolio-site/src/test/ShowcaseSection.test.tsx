@@ -191,4 +191,34 @@ describe('ShowcaseSection', () => {
       ).toBeGreaterThan(100)
     })
   })
+
+  it('renders a showcase entry without an image', () => {
+    render(
+      <ShowcaseSection
+        sectionId="showcase"
+        titleId="showcase-title"
+        eyebrow="Showcase"
+        title="Optional image"
+        items={[
+          {
+            title: 'No image example',
+            date: '2026',
+            summary: 'An entry without an image.',
+            tags: [],
+            link: 'https://example.com/no-image',
+          },
+        ]}
+      />,
+    )
+
+    expect(
+      screen.getByRole('heading', { name: 'No image example', level: 3 }),
+    ).toBeInTheDocument()
+    expect(
+      screen.queryByRole('link', { name: 'Open No image example' }),
+    ).not.toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: 'View No image example' }),
+    ).toHaveAttribute('href', 'https://example.com/no-image')
+  })
 })
