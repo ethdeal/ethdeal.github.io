@@ -40,6 +40,10 @@ function applyGsapVars(target: unknown, vars: Record<string, unknown>) {
     target.style.visibility = vars.autoAlpha === 0 ? 'hidden' : 'visible'
   }
 
+  if (typeof vars.opacity === 'number') {
+    target.style.opacity = String(vars.opacity)
+  }
+
   if (typeof vars.x === 'number') {
     state.x = vars.x
   }
@@ -288,9 +292,9 @@ describe('desktop animated page', () => {
     expect(sidebarSupporting?.style.transform).not.toBe(
       'translate3d(0px, 940px, 0px) scale(1)',
     )
-    expect(sidebarSupporting?.style.opacity).toBe('')
+    expect(sidebarSupporting?.style.opacity).toBe('1')
     expect(desktopContent?.style.transform).toBe('')
-    expect(desktopContent?.style.opacity).toBe('')
+    expect(desktopContent?.style.opacity).toBe('1')
   })
 
   it('does not show the scroll cue immediately on desktop load', () => {
