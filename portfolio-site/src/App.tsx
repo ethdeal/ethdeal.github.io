@@ -17,6 +17,7 @@ function App() {
           src={waterBackground}
         />
       }
+      interactionMode={"both"}
       wakeStrength={0.3}
       waveSpeed={.6}
       ridgeStrength={.6}
