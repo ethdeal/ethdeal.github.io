@@ -40,6 +40,17 @@ function mockMatchMedia({
   }))
 }
 
+function dispatchKeyDown(init: KeyboardEventInit) {
+  const event = new KeyboardEvent('keydown', {
+    bubbles: true,
+    cancelable: true,
+    ...init,
+  })
+
+  window.dispatchEvent(event)
+  return event
+}
+
 describe('App', () => {
   beforeEach(() => {
     mockMatchMedia()
@@ -247,5 +258,66 @@ describe('App', () => {
         .getByRole('navigation', { name: 'Primary navigation' })
         .querySelector('[aria-current="page"]'),
     ).toBeNull()
+  })
+
+  it.each([
+    ['Ctrl+P', { ctrlKey: true }],
+    ['Command+P', { metaKey: true }],
+  ])('opens the configured resume for %s', (_label, modifiers) => {
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null)
+    const resumeHref = siteContent.socialLinks.find(
+      ({ icon }) => icon === 'resume',
+    )?.href
+
+    render(<App />)
+
+    const event = dispatchKeyDown({ key: 'p', ...modifiers })
+
+    expect(event.defaultPrevented).toBe(true)
+    expect(openSpy).toHaveBeenCalledOnce()
+    expect(openSpy).toHaveBeenCalledWith(
+      resumeHref,
+      '_blank',
+      'noopener,noreferrer',
+    )
+  })
+
+  it.each([
+    ['plain P', { key: 'p' }],
+    ['another Ctrl shortcut', { key: 'x', ctrlKey: true }],
+    ['Ctrl+Shift+P', { key: 'p', ctrlKey: true, shiftKey: true }],
+    ['Command+Alt+P', { key: 'p', metaKey: true, altKey: true }],
+    ['Ctrl+Command+P', { key: 'p', ctrlKey: true, metaKey: true }],
+  ])('leaves %s unchanged', (_label, init) => {
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null)
+
+    render(<App />)
+
+    const event = dispatchKeyDown(init)
+
+    expect(event.defaultPrevented).toBe(false)
+    expect(openSpy).not.toHaveBeenCalled()
+  })
+
+  it('prevents repeat openings and removes the shortcut on unmount', () => {
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null)
+    const { unmount } = render(<App />)
+
+    dispatchKeyDown({ key: 'p', ctrlKey: true })
+    const repeatEvent = dispatchKeyDown({
+      key: 'p',
+      ctrlKey: true,
+      repeat: true,
+    })
+
+    expect(repeatEvent.defaultPrevented).toBe(true)
+    expect(openSpy).toHaveBeenCalledOnce()
+
+    unmount()
+
+    const unmountedEvent = dispatchKeyDown({ key: 'p', ctrlKey: true })
+
+    expect(unmountedEvent.defaultPrevented).toBe(false)
+    expect(openSpy).toHaveBeenCalledOnce()
   })
 })
