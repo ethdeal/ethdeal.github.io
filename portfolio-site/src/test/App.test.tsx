@@ -145,16 +145,23 @@ describe('App', () => {
     expect(screen.queryByText("Hi, I'm")).not.toBeInTheDocument()
 
     for (const item of experienceItems) {
-      expect(screen.getByText(item.company)).toBeInTheDocument()
+      const company = screen.getByText(item.company)
+
+      expect(company).toBeInTheDocument()
+      expect(company.closest('article')).toHaveAttribute('data-hover-dim-card')
       expect(
         screen.getByRole('link', { name: `Visit ${item.company}` }),
       ).toHaveAttribute('href', item.link)
     }
 
     for (const item of [...projectCards, ...designCards]) {
-      expect(
-        screen.getByRole('heading', { name: item.title, level: 3 }),
-      ).toBeInTheDocument()
+      const heading = screen.getByRole('heading', {
+        name: item.title,
+        level: 3,
+      })
+
+      expect(heading).toBeInTheDocument()
+      expect(heading.closest('article')).toHaveAttribute('data-hover-dim-card')
 
       if (item.link) {
         expect(

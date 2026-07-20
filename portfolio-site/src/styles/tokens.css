@@ -40,7 +40,7 @@
     0 10px 20px rgba(22, 25, 31, 0.05),
     0 8px 18px rgba(22, 25, 31, 0.02);
 
-  --glass-blur: 18px;
+  --glass-blur: 8px;
   --motion-fast: 180ms;
   --motion-medium: 280ms;
 

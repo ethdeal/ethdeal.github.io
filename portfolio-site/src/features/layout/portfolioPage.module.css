@@ -2,6 +2,11 @@
   min-height: 100svh;
 }
 
+.page:has([data-hover-dim-card]:hover)
+  [data-hover-dim-card]:not(:hover) {
+  opacity: 0.5;
+}
+
 .desktopMain {
   position: relative;
   margin-left: var(--sidebar-width);
