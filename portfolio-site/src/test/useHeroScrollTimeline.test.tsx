@@ -224,7 +224,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
   const overlayRef = useRef<HTMLDivElement>(null)
   const backdropRef = useRef<HTMLDivElement>(null)
   const topNavRef = useRef<HTMLElement>(null)
-  const heroMetaRef = useRef<HTMLDivElement>(null)
+  const heroSocialsRef = useRef<HTMLDivElement>(null)
   const heroCopyRef = useRef<HTMLDivElement>(null)
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
   const sidebarTitleAnchorRef = useRef<HTMLParagraphElement>(null)
@@ -237,7 +237,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
     overlayRef,
     backdropRef,
     topNavRef,
-    heroMetaRef,
+    heroSocialsRef,
     heroCopyRef,
     heroTitleRef,
     sidebarTitleAnchorRef,
@@ -251,7 +251,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
       <div data-testid="overlay" ref={overlayRef} />
       <div data-testid="backdrop" ref={backdropRef} />
       <header data-testid="top-nav" ref={topNavRef} />
-      <div data-testid="hero-meta" ref={heroMetaRef} />
+      <div data-testid="hero-socials" ref={heroSocialsRef} />
       <div data-testid="hero-copy" ref={heroCopyRef} />
       <h1
         data-testid="hero-title"
@@ -391,5 +391,49 @@ describe('useHeroScrollTimeline', () => {
       expect(revealTween.vars.duration).toBe(0.12)
       expect(revealTween.vars.ease).toBe('none')
     }
+  })
+
+  it('moves the hero socials faster without changing their fade timing', () => {
+    render(<HeroTimelineHarness />)
+
+    const heroSocials = screen.getByTestId('hero-socials')
+    const heroCopy = screen.getByTestId('hero-copy')
+    const socialFadeTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroSocials &&
+        call.vars.autoAlpha === 0,
+    )
+    const socialMoveTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroSocials &&
+        typeof call.vars.y === 'number',
+    )
+    const heroCopyTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroCopy &&
+        typeof call.vars.y === 'number',
+    )
+
+    expect(socialFadeTween).toEqual({
+      method: 'to',
+      target: heroSocials,
+      position: 0.04,
+      vars: { autoAlpha: 0, duration: 0.14 },
+    })
+    expect(socialMoveTween).toEqual({
+      method: 'to',
+      target: heroSocials,
+      position: 0.04,
+      vars: { y: -216, duration: 0.14 },
+    })
+    expect(heroCopyTween).toEqual({
+      method: 'to',
+      target: heroCopy,
+      position: 0.04,
+      vars: { autoAlpha: 0, y: -156, duration: 0.16 },
+    })
   })
 })

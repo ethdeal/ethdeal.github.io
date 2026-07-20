@@ -18,7 +18,6 @@ export interface SocialLink {
 
 export interface SiteContent {
   name: string
-  eyebrow: string
   heroIntro: string
   heroParagraphs: string[]
   sidebarSubtitle: string

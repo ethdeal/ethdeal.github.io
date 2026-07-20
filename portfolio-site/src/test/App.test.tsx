@@ -142,6 +142,7 @@ describe('App', () => {
     expect(
       screen.getByRole('heading', { name: siteContent.name, level: 1 }),
     ).toBeInTheDocument()
+    expect(screen.queryByText("Hi, I'm")).not.toBeInTheDocument()
 
     for (const item of experienceItems) {
       expect(screen.getByText(item.company)).toBeInTheDocument()

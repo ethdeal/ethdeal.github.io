@@ -16,11 +16,15 @@ const HERO_EXIT_TWEENS = {
     y: -18,
     duration: 0.05,
   },
-  // Tune these values to change how quickly the hero eyebrow/socials clear out.
-  heroMeta: {
+  heroSocialsFade: {
     start: 0.04, // 0.02
     autoAlpha: 0,
-    y: -156, // -40
+    duration: 0.14,
+  },
+  // Keep the fade above unchanged while the greater travel speeds up the icons.
+  heroSocialsMove: {
+    start: 0.04,
+    y: -216,
     duration: 0.14,
   },
   // Tune these values to change how quickly the intro/body copy gets out of the way.
@@ -46,7 +50,7 @@ interface UseHeroScrollTimelineOptions {
   overlayRef: RefObject<HTMLDivElement | null>
   backdropRef: RefObject<HTMLDivElement | null>
   topNavRef: RefObject<HTMLElement | null>
-  heroMetaRef: RefObject<HTMLDivElement | null>
+  heroSocialsRef: RefObject<HTMLDivElement | null>
   heroCopyRef: RefObject<HTMLDivElement | null>
   heroTitleRef: RefObject<HTMLHeadingElement | null>
   sidebarTitleAnchorRef: RefObject<HTMLParagraphElement | null>
@@ -60,7 +64,7 @@ export function useHeroScrollTimeline({
   overlayRef,
   backdropRef,
   topNavRef,
-  heroMetaRef,
+  heroSocialsRef,
   heroCopyRef,
   heroTitleRef,
   sidebarTitleAnchorRef,
@@ -72,7 +76,7 @@ export function useHeroScrollTimeline({
     const overlay = overlayRef.current
     const backdrop = backdropRef.current
     const topNav = topNavRef.current
-    const heroMeta = heroMetaRef.current
+    const heroSocials = heroSocialsRef.current
     const heroCopy = heroCopyRef.current
     const heroTitle = heroTitleRef.current
     const sidebarTitleAnchor = sidebarTitleAnchorRef.current
@@ -84,7 +88,7 @@ export function useHeroScrollTimeline({
       !overlay ||
       !backdrop ||
       !topNav ||
-      !heroMeta ||
+      !heroSocials ||
       !heroCopy ||
       !heroTitle ||
       !sidebarTitleAnchor ||
@@ -121,7 +125,7 @@ export function useHeroScrollTimeline({
         gsap.set(overlay, { autoAlpha: 1 })
         gsap.set(backdrop, { autoAlpha: 1 })
         gsap.set(topNav, { autoAlpha: 1, y: 0 })
-        gsap.set(heroMeta, { autoAlpha: 1, y: 0 })
+        gsap.set(heroSocials, { autoAlpha: 1, y: 0 })
         gsap.set(heroCopy, { autoAlpha: 1, y: 0 })
         gsap.set(heroTitle, {
           x: 0,
@@ -197,7 +201,8 @@ export function useHeroScrollTimeline({
         }
 
         addExitTween(topNav, HERO_EXIT_TWEENS.topNav)
-        addExitTween(heroMeta, HERO_EXIT_TWEENS.heroMeta)
+        addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsFade)
+        addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsMove)
         addExitTween(heroCopy, HERO_EXIT_TWEENS.heroCopy)
 
         const { start: contentRevealStart, ...contentRevealVars } =
@@ -266,7 +271,7 @@ export function useHeroScrollTimeline({
     overlayRef,
     backdropRef,
     topNavRef,
-    heroMetaRef,
+    heroSocialsRef,
     heroCopyRef,
     heroTitleRef,
     sidebarTitleAnchorRef,

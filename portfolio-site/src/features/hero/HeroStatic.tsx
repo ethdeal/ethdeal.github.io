@@ -5,7 +5,6 @@ import styles from './hero.module.css'
 interface HeroStaticProps {
   sectionId: string
   className?: string
-  eyebrow: string
   intro: string
   name: string
   paragraphs: string[]
@@ -15,7 +14,6 @@ interface HeroStaticProps {
 export function HeroStatic({
   sectionId,
   className = '',
-  eyebrow,
   intro,
   name,
   paragraphs,
@@ -29,7 +27,6 @@ export function HeroStatic({
     >
       <div className={styles.staticMeta}>
         <SocialLinks links={socialLinks} variant="static" />
-        <p className={styles.heroEyebrow}>{eyebrow}</p>
       </div>
 
       <div className={styles.staticBody}>

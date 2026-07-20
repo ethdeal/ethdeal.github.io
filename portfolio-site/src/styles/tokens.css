@@ -21,7 +21,7 @@
   --font-size-label: 0.7rem;
   --font-size-tag: 0.79rem;
   --font-size-hero-display: clamp(7rem, 13vw, 13.6rem);
-  --font-size-hero-eyebrow: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  /* --font-size-hero-eyebrow: clamp(1rem, 1.26rem + 0.2vw, 2.12rem); */
   --font-size-sidebar-display: clamp(3.15rem, 4.4vw, 5.35rem);
   --font-size-section-title: clamp(2.65rem, 3.8vw, 3.95rem);
   --font-size-card-title: clamp(1.2rem, 1.45vw, 1.46rem);

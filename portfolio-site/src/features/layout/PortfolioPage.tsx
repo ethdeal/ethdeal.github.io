@@ -30,7 +30,7 @@ export function PortfolioPage() {
   const heroOverlayRef = useRef<HTMLDivElement>(null)
   const heroBackdropRef = useRef<HTMLDivElement>(null)
   const heroTopNavRef = useRef<HTMLElement>(null)
-  const heroMetaRef = useRef<HTMLDivElement>(null)
+  const heroSocialsRef = useRef<HTMLDivElement>(null)
   const heroCopyRef = useRef<HTMLDivElement>(null)
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
   const sidebarTitleAnchorRef = useRef<HTMLParagraphElement>(null)
@@ -47,7 +47,7 @@ export function PortfolioPage() {
     overlayRef: heroOverlayRef,
     backdropRef: heroBackdropRef,
     topNavRef: heroTopNavRef,
-    heroMetaRef,
+    heroSocialsRef,
     heroCopyRef,
     heroTitleRef,
     sidebarTitleAnchorRef,
@@ -70,7 +70,6 @@ export function PortfolioPage() {
         <main className={styles.mobileMain}>
           <HeroStatic
             sectionId="about"
-            eyebrow={siteContent.eyebrow}
             intro={siteContent.heroIntro}
             name={siteContent.name}
             paragraphs={siteContent.heroParagraphs}
@@ -111,7 +110,6 @@ export function PortfolioPage() {
           <HeroStatic
             sectionId="about"
             className={styles.desktopHeroFallback}
-            eyebrow={siteContent.eyebrow}
             intro={siteContent.heroIntro}
             name={siteContent.name}
             paragraphs={siteContent.heroParagraphs}
@@ -134,7 +132,6 @@ export function PortfolioPage() {
         <HeroDesktop
           activeSection={activeSection}
           intro={siteContent.heroIntro}
-          eyebrow={siteContent.eyebrow}
           name={siteContent.name}
           navItems={siteContent.navItems}
           paragraphs={siteContent.heroParagraphs}
@@ -142,7 +139,7 @@ export function PortfolioPage() {
           overlayRef={heroOverlayRef}
           backdropRef={heroBackdropRef}
           topNavRef={heroTopNavRef}
-          heroMetaRef={heroMetaRef}
+          heroSocialsRef={heroSocialsRef}
           heroCopyRef={heroCopyRef}
           heroTitleRef={heroTitleRef}
           stageRef={aboutStageRef}

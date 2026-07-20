@@ -45,18 +45,20 @@
   gap: 1.15rem;
   max-width: 24rem;
   pointer-events: auto;
+  padding-inline-start: var(--sidebar-text-inset);
 }
 
-.heroEyebrow {
+/* .heroEyebrow {
   margin: 0;
   padding-inline-start: var(--sidebar-text-inset);
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
   font-family: var(--font-body);
   font-size: var(--font-size-hero-eyebrow);
   font-weight: 500;
+  font-style: italic;
   line-height: var(--line-height-hero-eyebrow);
-  letter-spacing: 0.04em;
-}
+  letter-spacing: 0.14em;
+} */
 
 .heroBody {
   display: grid;
@@ -68,7 +70,7 @@
 .titleColumn {
   display: grid;
   align-content: end;
-  gap: 1.5rem;
+  gap: 1.5rem; /* 1.5rem */
 }
 
 .titleSlot {
@@ -198,6 +200,7 @@
 .staticMeta {
   display: grid;
   gap: 1.15rem;
+  padding-inline-start: var(--sidebar-text-inset);
 }
 
 .staticBody {
