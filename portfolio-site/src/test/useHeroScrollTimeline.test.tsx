@@ -338,6 +338,10 @@ describe('useHeroScrollTimeline', () => {
     ).toBeCloseTo(
       sidebarMoveTween.position + Number(sidebarMoveTween.toVars.duration),
     )
+    expect(heroTitleTween.position).toBe(0)
+    expect(heroTitleTween.vars.duration).toBe(0.3)
+    expect(sidebarMoveTween.position).toBe(0.03)
+    expect(sidebarMoveTween.toVars.duration).toBe(0.27)
     expect(
       mockState.setCalls.some((call) => call.target === unrelatedContent),
     ).toBe(false)
@@ -387,13 +391,13 @@ describe('useHeroScrollTimeline', () => {
         continue
       }
 
-      expect(revealTween.position).toBe(0.1)
+      expect(revealTween.position).toBe(0.06)
       expect(revealTween.vars.duration).toBe(0.12)
       expect(revealTween.vars.ease).toBe('none')
     }
   })
 
-  it('moves the hero socials faster without changing their fade timing', () => {
+  it('starts the hero exits immediately without changing their durations', () => {
     render(<HeroTimelineHarness />)
 
     const heroSocials = screen.getByTestId('hero-socials')
@@ -420,19 +424,19 @@ describe('useHeroScrollTimeline', () => {
     expect(socialFadeTween).toEqual({
       method: 'to',
       target: heroSocials,
-      position: 0.04,
+      position: 0,
       vars: { autoAlpha: 0, duration: 0.14 },
     })
     expect(socialMoveTween).toEqual({
       method: 'to',
       target: heroSocials,
-      position: 0.04,
+      position: 0,
       vars: { y: -216, duration: 0.14 },
     })
     expect(heroCopyTween).toEqual({
       method: 'to',
       target: heroCopy,
-      position: 0.04,
+      position: 0,
       vars: { autoAlpha: 0, y: -156, duration: 0.16 },
     })
   })

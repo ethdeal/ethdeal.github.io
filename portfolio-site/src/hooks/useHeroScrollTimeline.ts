@@ -2,34 +2,34 @@ import { useLayoutEffect } from 'react'
 import type { RefObject } from 'react'
 import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsap'
 
-const HERO_TITLE_START = 0.04
-const HERO_TITLE_DURATION = 0.3
-const HERO_TITLE_END = HERO_TITLE_START + HERO_TITLE_DURATION
-const SIDEBAR_BODY_MOVE_START = 0.07
+const HERO_TITLE_START = 0.00
+const HERO_TITLE_DURATION = 0.30
+const HERO_TITLE_END = HERO_TITLE_START + HERO_TITLE_DURATION // Literally only used for sidebar body movement timing
+const SIDEBAR_BODY_MOVE_START = 0.03
 // Keep the sidebar body locked to the title handoff end so both settle together.
 const SIDEBAR_BODY_MOVE_DURATION = HERO_TITLE_END - SIDEBAR_BODY_MOVE_START
 
 const HERO_EXIT_TWEENS = {
   topNav: {
-    start: 0.15,
+    start: 0.11,
     autoAlpha: 0,
     y: -18,
     duration: 0.05,
   },
   heroSocialsFade: {
-    start: 0.04, // 0.02
+    start: 0.00, // 0.04
     autoAlpha: 0,
     duration: 0.14,
   },
   // Keep the fade above unchanged while the greater travel speeds up the icons.
   heroSocialsMove: {
-    start: 0.04,
+    start: 0.00,
     y: -216,
     duration: 0.14,
   },
   // Tune these values to change how quickly the intro/body copy gets out of the way.
   heroCopy: {
-    start: 0.04, // 0.05
+    start: 0.00, // 0.04
     autoAlpha: 0,
     y: -156, // -56
     duration: 0.16,
@@ -38,7 +38,7 @@ const HERO_EXIT_TWEENS = {
 
 // Inverse of the former backdrop fade so incoming content keeps the same reveal curve.
 const CONTENT_REVEAL_TWEEN = {
-  start: 0.1,
+  start: 0.06,
   opacity: 1,
   duration: 0.12,
   ease: 'none',
