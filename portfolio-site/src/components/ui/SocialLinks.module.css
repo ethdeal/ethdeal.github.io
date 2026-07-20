@@ -18,8 +18,8 @@
   width: 2.8rem;
   height: 2.8rem;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(22, 25, 31, 0.08);
+  background: transparent;
+  border: none;
   color: var(--color-text);
   box-shadow: var(--shadow-soft);
   text-decoration: none;
@@ -27,7 +27,6 @@
   transition:
     transform var(--motion-fast) ease,
     background-color var(--motion-fast) ease,
-    box-shadow var(--motion-fast) ease,
     color var(--motion-fast) ease;
 }
 
@@ -35,7 +34,6 @@
 .link:focus-visible {
   color: var(--color-accent-strong);
   background: rgba(255, 255, 255, 0.8);
-  box-shadow: var(--shadow-glass);
   transform: translateY(-0.125rem);
 }
 
@@ -48,7 +46,6 @@
 .sidebar .link {
   width: 2.55rem;
   height: 2.55rem;
-  box-shadow: none;
 }
 
 .static .link {
