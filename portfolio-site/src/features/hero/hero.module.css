@@ -93,7 +93,7 @@
   display: grid;
   gap: 0.9rem;
   max-width: 24rem;
-  padding-bottom: 1.4rem;
+  padding-bottom: .6rem;
   color: var(--color-text-muted);
   font-size: var(--font-size-body);
   line-height: 1.58;
