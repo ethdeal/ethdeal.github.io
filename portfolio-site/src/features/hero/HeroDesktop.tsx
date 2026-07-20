@@ -11,7 +11,6 @@ const HERO_SCROLL_CUE_ENABLED = false
 interface HeroDesktopProps {
   activeSection: string
   intro: string
-  eyebrow: string
   name: string
   navItems: NavItem[]
   paragraphs: string[]
@@ -19,7 +18,7 @@ interface HeroDesktopProps {
   overlayRef: RefObject<HTMLDivElement | null>
   backdropRef: RefObject<HTMLDivElement | null>
   topNavRef: RefObject<HTMLElement | null>
-  heroMetaRef: RefObject<HTMLDivElement | null>
+  heroSocialsRef: RefObject<HTMLDivElement | null>
   heroCopyRef: RefObject<HTMLDivElement | null>
   heroTitleRef: RefObject<HTMLHeadingElement | null>
   stageRef: RefObject<HTMLElement | null>
@@ -28,7 +27,6 @@ interface HeroDesktopProps {
 export function HeroDesktop({
   activeSection,
   intro,
-  eyebrow,
   name,
   navItems,
   paragraphs,
@@ -36,7 +34,7 @@ export function HeroDesktop({
   overlayRef,
   backdropRef,
   topNavRef,
-  heroMetaRef,
+  heroSocialsRef,
   heroCopyRef,
   heroTitleRef,
   stageRef,
@@ -58,9 +56,8 @@ export function HeroDesktop({
         <div className={styles.heroStack}>
           <div className={styles.heroBody}>
             <div className={styles.titleColumn}>
-              <div ref={heroMetaRef} className={styles.heroMeta}>
+              <div ref={heroSocialsRef} className={styles.heroMeta}>
                 <SocialLinks links={socialLinks} variant="hero" />
-                <p className={styles.heroEyebrow}>{eyebrow}</p>
               </div>
 
               <div className={styles.titleSlot}>

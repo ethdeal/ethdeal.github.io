@@ -18,7 +18,6 @@ export interface SocialLink {
 
 export interface SiteContent {
   name: string
-  eyebrow: string
   heroIntro: string
   heroParagraphs: string[]
   sidebarSubtitle: string
@@ -42,8 +41,8 @@ export interface ShowcaseContentItem {
   summary: string
   tags: string[]
   link?: string
-  imageKey: string
-  imageAlt: string
+  imageKey?: string
+  imageAlt?: string
 }
 
 export interface ProjectItem {
@@ -52,8 +51,8 @@ export interface ProjectItem {
   summary: string
   tags: string[]
   link: string
-  imageKey: string
-  imageAlt: string
+  imageKey?: string
+  imageAlt?: string
 }
 
 export type DesignItem = ShowcaseContentItem
@@ -68,5 +67,5 @@ export interface ShowcaseImageAsset {
 
 export interface ShowcaseCard
   extends Omit<ShowcaseContentItem, 'imageKey' | 'imageAlt'> {
-  image: ShowcaseImageAsset
+  image?: ShowcaseImageAsset
 }

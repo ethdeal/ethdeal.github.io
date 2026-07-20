@@ -21,7 +21,7 @@
   --font-size-label: 0.7rem;
   --font-size-tag: 0.79rem;
   --font-size-hero-display: clamp(7rem, 13vw, 13.6rem);
-  --font-size-hero-eyebrow: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  /* --font-size-hero-eyebrow: clamp(1rem, 1.26rem + 0.2vw, 2.12rem); */
   --font-size-sidebar-display: clamp(3.15rem, 4.4vw, 5.35rem);
   --font-size-section-title: clamp(2.65rem, 3.8vw, 3.95rem);
   --font-size-card-title: clamp(1.2rem, 1.45vw, 1.46rem);
@@ -48,24 +48,23 @@
   --page-gutter-mobile: clamp(0.9rem, 3.6vw, 1.2rem);
   --sidebar-padding-block: clamp(2.1rem, 2.8vw, 3.25rem);
   --sidebar-padding-inline: clamp(2rem, 2.7vw, 3rem);
-  --sidebar-text-inset: clamp(0.45rem, 0.7vw, 0.75rem);
+  --sidebar-text-inset: clamp(0.45rem, 0.5vw, 0.75rem); /* clamp(0.45rem, 0.7vw, 0.75rem); */
   --sidebar-width: clamp(20rem, 31vw, 34rem);
   --sidebar-content-gap: clamp(3.25rem, 4.8vw, 6rem);
-  --sidebar-name-gap: clamp(1.1rem, 3.8vw, 5rem);
+  --sidebar-name-gap: clamp(1.1rem, 2.6vw, 5rem); /* 1.1rem, 3.8vw, 5rem */
   --sidebar-stack-gap: clamp(2.4rem, 3.8vw, 4rem);
-  --hero-stage-height: 132svh; /* 182 original */
+  /* 132svh * (0.30 / 0.34) preserves the old scrub speed without its 0.04 lead-in. */
+  --hero-stage-height: 116.470588svh;
   --hero-content-overlap: clamp(-12rem, -20svh, 44rem); /* modify to change content offset */
   --section-space: clamp(6.5rem, 10vh, 8.75rem);
   --section-heading-space: clamp(2.75rem, 4vw, 3.75rem);
   --entry-gap: clamp(1.75rem, 2.2vw, 2.5rem);
-  --card-padding: clamp(1.85rem, 2.2vw, 2.45rem);
-  --card-padding-mobile: 1.35rem;
+  --card-padding: clamp(1.45rem, 1.9vw, 1.9rem);
+  --card-padding-mobile: 1.1rem;
   --showcase-media-max-width: 14.5rem;
   --showcase-media-min-height-desktop: 11rem;
   --showcase-media-max-height-stacked: clamp(12rem, 32vw, 16rem);
   --content-max-width: 47rem; /* 43rem */
-  --summary-measure: 34rem; /* 34 rem */
-
   --z-sidebar: 10;
   --z-nav: 20;
   --z-hero: 30;

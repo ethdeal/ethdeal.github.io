@@ -2,39 +2,46 @@ import { useLayoutEffect } from 'react'
 import type { RefObject } from 'react'
 import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsap'
 
-const HERO_TITLE_START = 0.04
-const HERO_TITLE_DURATION = 0.3
-const HERO_TITLE_END = HERO_TITLE_START + HERO_TITLE_DURATION
-const SIDEBAR_BODY_MOVE_START = 0.07
+const HERO_TITLE_START = 0.00
+const HERO_TITLE_DURATION = 0.30
+const HERO_TITLE_END = HERO_TITLE_START + HERO_TITLE_DURATION // Literally only used for sidebar body movement timing
+const SIDEBAR_BODY_MOVE_START = 0.03
 // Keep the sidebar body locked to the title handoff end so both settle together.
 const SIDEBAR_BODY_MOVE_DURATION = HERO_TITLE_END - SIDEBAR_BODY_MOVE_START
 
 const HERO_EXIT_TWEENS = {
   topNav: {
-    start: 0.15,
+    start: 0.11,
     autoAlpha: 0,
     y: -18,
     duration: 0.05,
   },
-  // Tune these values to change how quickly the hero eyebrow/socials clear out.
-  heroMeta: {
-    start: 0.04, // 0.02
+  heroSocialsFade: {
+    start: 0.00, // 0.04
     autoAlpha: 0,
-    y: -156, // -40
+    duration: 0.14,
+  },
+  // Keep the fade above unchanged while the greater travel speeds up the icons.
+  heroSocialsMove: {
+    start: 0.00,
+    y: -216,
     duration: 0.14,
   },
   // Tune these values to change how quickly the intro/body copy gets out of the way.
   heroCopy: {
-    start: 0.04, // 0.05
+    start: 0.00, // 0.04
     autoAlpha: 0,
     y: -156, // -56
     duration: 0.16,
   },
-  backdrop: {
-    start: 0.1,
-    autoAlpha: 0,
-    duration: 0.12,
-  },
+} as const
+
+// Inverse of the former backdrop fade so incoming content keeps the same reveal curve.
+const CONTENT_REVEAL_TWEEN = {
+  start: 0.06,
+  opacity: 1,
+  duration: 0.12,
+  ease: 'none',
 } as const
 
 interface UseHeroScrollTimelineOptions {
@@ -43,11 +50,12 @@ interface UseHeroScrollTimelineOptions {
   overlayRef: RefObject<HTMLDivElement | null>
   backdropRef: RefObject<HTMLDivElement | null>
   topNavRef: RefObject<HTMLElement | null>
-  heroMetaRef: RefObject<HTMLDivElement | null>
+  heroSocialsRef: RefObject<HTMLDivElement | null>
   heroCopyRef: RefObject<HTMLDivElement | null>
   heroTitleRef: RefObject<HTMLHeadingElement | null>
   sidebarTitleAnchorRef: RefObject<HTMLParagraphElement | null>
   sidebarBodyRef: RefObject<HTMLDivElement | null>
+  desktopContentRef: RefObject<HTMLDivElement | null>
 }
 
 export function useHeroScrollTimeline({
@@ -56,33 +64,36 @@ export function useHeroScrollTimeline({
   overlayRef,
   backdropRef,
   topNavRef,
-  heroMetaRef,
+  heroSocialsRef,
   heroCopyRef,
   heroTitleRef,
   sidebarTitleAnchorRef,
   sidebarBodyRef,
+  desktopContentRef,
 }: UseHeroScrollTimelineOptions) {
   useLayoutEffect(() => {
     const stage = stageRef.current
     const overlay = overlayRef.current
     const backdrop = backdropRef.current
     const topNav = topNavRef.current
-    const heroMeta = heroMetaRef.current
+    const heroSocials = heroSocialsRef.current
     const heroCopy = heroCopyRef.current
     const heroTitle = heroTitleRef.current
     const sidebarTitleAnchor = sidebarTitleAnchorRef.current
     const sidebarBody = sidebarBodyRef.current
+    const desktopContent = desktopContentRef.current
 
     if (
       !stage ||
       !overlay ||
       !backdrop ||
       !topNav ||
-      !heroMeta ||
+      !heroSocials ||
       !heroCopy ||
       !heroTitle ||
       !sidebarTitleAnchor ||
-      !sidebarBody
+      !sidebarBody ||
+      !desktopContent
     ) {
       return undefined
     }
@@ -90,7 +101,8 @@ export function useHeroScrollTimeline({
     if (!enabled) {
       gsap.set(overlay, { autoAlpha: 0 })
       gsap.set(backdrop, { autoAlpha: 0 })
-      gsap.set(sidebarBody, { y: 0 })
+      gsap.set(sidebarBody, { opacity: 1, y: 0 })
+      gsap.set(desktopContent, { opacity: 1 })
       return undefined
     }
 
@@ -113,7 +125,7 @@ export function useHeroScrollTimeline({
         gsap.set(overlay, { autoAlpha: 1 })
         gsap.set(backdrop, { autoAlpha: 1 })
         gsap.set(topNav, { autoAlpha: 1, y: 0 })
-        gsap.set(heroMeta, { autoAlpha: 1, y: 0 })
+        gsap.set(heroSocials, { autoAlpha: 1, y: 0 })
         gsap.set(heroCopy, { autoAlpha: 1, y: 0 })
         gsap.set(heroTitle, {
           x: 0,
@@ -123,9 +135,11 @@ export function useHeroScrollTimeline({
           force3D: true,
         })
         gsap.set(sidebarBody, {
+          opacity: 0,
           y: 0,
           force3D: true,
         })
+        gsap.set(desktopContent, { opacity: 0 })
       }
 
       const scheduleRefresh = () => {
@@ -187,9 +201,15 @@ export function useHeroScrollTimeline({
         }
 
         addExitTween(topNav, HERO_EXIT_TWEENS.topNav)
-        addExitTween(heroMeta, HERO_EXIT_TWEENS.heroMeta)
+        addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsFade)
+        addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsMove)
         addExitTween(heroCopy, HERO_EXIT_TWEENS.heroCopy)
-        addExitTween(backdrop, HERO_EXIT_TWEENS.backdrop)
+
+        const { start: contentRevealStart, ...contentRevealVars } =
+          CONTENT_REVEAL_TWEEN
+
+        timeline.to(sidebarBody, contentRevealVars, contentRevealStart)
+        timeline.to(desktopContent, contentRevealVars, contentRevealStart)
 
         timeline
           .fromTo(
@@ -251,10 +271,11 @@ export function useHeroScrollTimeline({
     overlayRef,
     backdropRef,
     topNavRef,
-    heroMetaRef,
+    heroSocialsRef,
     heroCopyRef,
     heroTitleRef,
     sidebarTitleAnchorRef,
     sidebarBodyRef,
+    desktopContentRef,
   ])
 }

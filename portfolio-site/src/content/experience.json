@@ -1,9 +1,32 @@
 [
   {
-    "company": "BRIYA",
-    "role": "Fullstack Developer / IT Specialist",
+    "company": "AllEmber Systems",
+    "role": "Founding Full Stack Engineer",
+    "date": "Feb 2026 - Present",
+    "summary": "Co-founded a platform that connects AI assistants to fragmented company data and workflows through custom tools and secure integrations. Piloted across multiple organizations, supporting 50+ users.",
+    "tags": [
+      "Python",
+      "TypeScript",
+      "FastAPI",
+      "Next.js",
+      "MCP",
+      "RAG",
+      "PostgreSQL",
+      "Supabase",
+      "Qdrant",
+      "Cohere",
+      "Nango",
+      "Google Cloud",
+      "LangGraph",
+      "Docker"
+    ],
+    "link": "https://www.unlockember.com/"
+  },
+  {
+    "company": "Briya",
+    "role": "Full Stack Engineer / IT Specialist",
     "date": "July - Aug 2025, May - Aug 2024",
-    "summary": "Built and deployed a classroom booking system serving five campuses and 100+ faculty. Configured secure backend infrastructure maintaining zero downtime since launch. Also configured and restored 1,000+ Chromebooks for student device distribution.",
+    "summary": "Built and deployed a classroom booking system serving five campuses and 100+ faculty. Configured secure backend infrastructure maintaining zero downtime since launch. Previously configured and restored 1,000+ Chromebooks for student device distribution.",
     "tags": [
       "MongoDB",
       "Express.js",
@@ -16,7 +39,7 @@
     "link": "https://www.briya.org/"
   },
   {
-    "company": "DUKE UNIVERSITY",
+    "company": "Duke University",
     "role": "Data Automation Engineer",
     "date": "May - July 2025",
     "summary": "Engineered a data processing pipeline to automate mail-list segmentation for 10,000+ users.  Developed a desktop application to consolidate Qualtrics survey data.",
@@ -29,8 +52,8 @@
     "link": "https://arts.duke.edu/"
   },
   {
-    "company": "VINTORY",
-    "role": "Graphic Designer and Prompt Engineer",
+    "company": "Vintory",
+    "role": "Generative AI Design Specialist",
     "date": "May - Sep 2023",
     "summary": "Assembled a Midjourney prompt library and spearheaded the adoption of AI-assisted design workflows. Created 30+ custom postcards and branded 100+ templates and landing pages.",
     "tags": [

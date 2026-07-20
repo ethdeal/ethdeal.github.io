@@ -1,7 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, render, screen } from '@testing-library/react'
 import App from '../App'
-import { siteContent } from '../content/data'
+import {
+  designCards,
+  experienceItems,
+  projectCards,
+  siteContent,
+} from '../content/data'
 
 const mockState = {
   positions: {
@@ -135,33 +140,58 @@ describe('App', () => {
     render(<App />)
 
     expect(
-      screen.getByRole('heading', { name: 'ETHAN DEAL', level: 1 }),
+      screen.getByRole('heading', { name: siteContent.name, level: 1 }),
     ).toBeInTheDocument()
-    expect(screen.getByText('BRIYA')).toBeInTheDocument()
-    expect(screen.getByText('RAG Fact-Checking Extension')).toBeInTheDocument()
-    expect(screen.getByText('TEDx DKU')).toBeInTheDocument()
-    expect(
-      screen.getByRole('link', { name: 'Visit BRIYA' }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('link', { name: 'View RAG Fact-Checking Extension' }),
-    ).toBeInTheDocument()
+    expect(screen.queryByText("Hi, I'm")).not.toBeInTheDocument()
+
+    for (const item of experienceItems) {
+      expect(screen.getByText(item.company)).toBeInTheDocument()
+      expect(
+        screen.getByRole('link', { name: `Visit ${item.company}` }),
+      ).toHaveAttribute('href', item.link)
+    }
+
+    for (const item of [...projectCards, ...designCards]) {
+      expect(
+        screen.getByRole('heading', { name: item.title, level: 3 }),
+      ).toBeInTheDocument()
+
+      if (item.link) {
+        expect(
+          screen.getByRole('link', { name: `View ${item.title}` }),
+        ).toHaveAttribute('href', item.link)
+      }
+    }
+
     expect(
       screen.getByRole('navigation', { name: 'Primary navigation' }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Design' })).toBeInTheDocument()
+
+    for (const item of siteContent.navItems) {
+      expect(screen.getByRole('link', { name: item.label })).toHaveAttribute(
+        'href',
+        item.href,
+      )
+    }
+
     expect(
-      screen.getByRole('link', { name: 'Brittany Chiang' }),
-    ).toHaveAttribute('href', 'https://brittanychiang.com/')
-    expect(
-      screen.getByRole('link', { name: 'View TEDx DKU' }),
-    ).toHaveAttribute('href', 'https://www.tedxdku.com/')
-    expect(
-      screen.getByRole('link', { name: 'View DKU Ultimate Instagram' }),
-    ).toHaveAttribute('href', 'https://www.instagram.com/dku_ultimate/')
+      screen.getByRole('contentinfo', { name: 'Site footnote' }),
+    ).toBeInTheDocument()
     expect(
       screen.queryByRole('button', { name: 'Scroll to experience' }),
     ).not.toBeInTheDocument()
+  })
+
+  it('keeps portfolio content above a decorative water canvas', () => {
+    const { container } = render(<App />)
+
+    expect(container.querySelector('canvas')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    )
+    expect(
+      screen.getByRole('link', { name: 'View Full Resume' }),
+    ).toBeInTheDocument()
   })
 
   it('marks the about link as the current section by default', () => {
@@ -182,7 +212,9 @@ describe('App', () => {
       screen.queryByRole('navigation', { name: 'Hero navigation' }),
     ).not.toBeInTheDocument()
     expect(screen.getByText(siteContent.sidebarSubtitle)).toBeInTheDocument()
-    expect(screen.queryByText("Hi, I'm Ethan")).not.toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: siteContent.name, level: 1 }),
+    ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute(
       'aria-current',
       'page',

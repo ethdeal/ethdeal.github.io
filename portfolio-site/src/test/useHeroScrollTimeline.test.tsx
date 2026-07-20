@@ -56,6 +56,10 @@ function applyGsapVars(target: unknown, vars: Record<string, unknown>) {
     target.style.visibility = vars.autoAlpha === 0 ? 'hidden' : 'visible'
   }
 
+  if (typeof vars.opacity === 'number') {
+    target.style.opacity = String(vars.opacity)
+  }
+
   if (typeof vars.x === 'number') {
     state.x = vars.x
   }
@@ -220,11 +224,12 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
   const overlayRef = useRef<HTMLDivElement>(null)
   const backdropRef = useRef<HTMLDivElement>(null)
   const topNavRef = useRef<HTMLElement>(null)
-  const heroMetaRef = useRef<HTMLDivElement>(null)
+  const heroSocialsRef = useRef<HTMLDivElement>(null)
   const heroCopyRef = useRef<HTMLDivElement>(null)
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
   const sidebarTitleAnchorRef = useRef<HTMLParagraphElement>(null)
   const sidebarBodyRef = useRef<HTMLDivElement>(null)
+  const desktopContentRef = useRef<HTMLDivElement>(null)
 
   useHeroScrollTimeline({
     enabled,
@@ -232,11 +237,12 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
     overlayRef,
     backdropRef,
     topNavRef,
-    heroMetaRef,
+    heroSocialsRef,
     heroCopyRef,
     heroTitleRef,
     sidebarTitleAnchorRef,
     sidebarBodyRef,
+    desktopContentRef,
   })
 
   return (
@@ -245,7 +251,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
       <div data-testid="overlay" ref={overlayRef} />
       <div data-testid="backdrop" ref={backdropRef} />
       <header data-testid="top-nav" ref={topNavRef} />
-      <div data-testid="hero-meta" ref={heroMetaRef} />
+      <div data-testid="hero-socials" ref={heroSocialsRef} />
       <div data-testid="hero-copy" ref={heroCopyRef} />
       <h1
         data-testid="hero-title"
@@ -282,6 +288,9 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
         }}
       >
         Sidebar body
+      </div>
+      <div data-testid="desktop-content" ref={desktopContentRef}>
+        Desktop content
       </div>
       <div data-testid="content-reveal">Unrelated content</div>
     </>
@@ -329,6 +338,10 @@ describe('useHeroScrollTimeline', () => {
     ).toBeCloseTo(
       sidebarMoveTween.position + Number(sidebarMoveTween.toVars.duration),
     )
+    expect(heroTitleTween.position).toBe(0)
+    expect(heroTitleTween.vars.duration).toBe(0.3)
+    expect(sidebarMoveTween.position).toBe(0.03)
+    expect(sidebarMoveTween.toVars.duration).toBe(0.27)
     expect(
       mockState.setCalls.some((call) => call.target === unrelatedContent),
     ).toBe(false)
@@ -348,5 +361,83 @@ describe('useHeroScrollTimeline', () => {
     expect(screen.getByTestId('sidebar-body').style.transform).not.toBe(
       'translate3d(0px, 940px, 0px) scale(1)',
     )
+  })
+
+  it('uses the former backdrop curve to reveal the sidebar and desktop content', () => {
+    render(<HeroTimelineHarness />)
+
+    const revealTargets = [
+      screen.getByTestId('sidebar-body'),
+      screen.getByTestId('desktop-content'),
+    ]
+
+    for (const target of revealTargets) {
+      expect(
+        mockState.setCalls.some(
+          (call) => call.target === target && call.vars.opacity === 0,
+        ),
+      ).toBe(true)
+
+      const revealTween = mockState.timelineCalls.find(
+        (call) =>
+          call.method === 'to' &&
+          call.target === target &&
+          call.vars.opacity === 1,
+      )
+
+      expect(revealTween).toBeDefined()
+
+      if (revealTween?.method !== 'to') {
+        continue
+      }
+
+      expect(revealTween.position).toBe(0.06)
+      expect(revealTween.vars.duration).toBe(0.12)
+      expect(revealTween.vars.ease).toBe('none')
+    }
+  })
+
+  it('starts the hero exits immediately without changing their durations', () => {
+    render(<HeroTimelineHarness />)
+
+    const heroSocials = screen.getByTestId('hero-socials')
+    const heroCopy = screen.getByTestId('hero-copy')
+    const socialFadeTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroSocials &&
+        call.vars.autoAlpha === 0,
+    )
+    const socialMoveTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroSocials &&
+        typeof call.vars.y === 'number',
+    )
+    const heroCopyTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroCopy &&
+        typeof call.vars.y === 'number',
+    )
+
+    expect(socialFadeTween).toEqual({
+      method: 'to',
+      target: heroSocials,
+      position: 0,
+      vars: { autoAlpha: 0, duration: 0.14 },
+    })
+    expect(socialMoveTween).toEqual({
+      method: 'to',
+      target: heroSocials,
+      position: 0,
+      vars: { y: -216, duration: 0.14 },
+    })
+    expect(heroCopyTween).toEqual({
+      method: 'to',
+      target: heroCopy,
+      position: 0,
+      vars: { autoAlpha: 0, y: -156, duration: 0.16 },
+    })
   })
 })

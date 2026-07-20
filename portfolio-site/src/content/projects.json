@@ -1,28 +1,17 @@
 [
   {
-    "project": "Ember Intelligence",
-    "date": "Feb 2026 - Present",
-    "summary": "Built a B2B knowledge platform that connects AI assistants to fragmented company data through an MCP server. Developed provider-agnostic ingestion pipelines and incremental sync architecture to improve document retrieval.",
+    "project": "RippleFlow",
+    "date": "July 2026",
+    "summary": "Published an npm package for adding water distortion to React interfaces. Built a WebGL heightfield simulation that models continuous pointer wakes instead of stamping circular ripples at intervals.",
     "tags": [
-      "Python",
+      "React",
       "TypeScript",
-      "FastAPI",
-      "Next.js",
-      "MCP",
-      "RAG",
-      "Qdrant",
-      "Cohere",
-      "Unstructured",
-      "Nango",
-      "LiteLLM",
-      "Google Cloud",
-      "Entra ID",
-      "LangGraph",
-      "Docker"
+      "WebGL",
+      "npm"
     ],
-    "link": "https://www.unlockember.com/",
-    "imageKey": "ember-intelligence",
-    "imageAlt": "Screenshot of the Ember Intelligence website."
+    "link": "https://github.com/ethdeal/ripple-flow",
+    "imageKey": "rippleflow-water-distortion",
+    "imageAlt": "Preview of the RippleFlow water distortion effect."
   },
   {
     "project": "RAG Fact-Checking Extension",

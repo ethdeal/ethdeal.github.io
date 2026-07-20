@@ -3,6 +3,7 @@ import dkuUltimatePreview from '../assets/design/DKU_Cup.webp'
 import emberPreview from '../assets/projects/unlockember.webp'
 import flightOpsPreview from '../assets/projects/Relational_Diagram.webp'
 import ragPreview from '../assets/projects/AI-Fact-Checker.webp'
+import rippleFlowPreview from '../assets/projects/RippleFlow.webp'
 import type { ShowcaseImageAsset } from '../content/types'
 
 export const showcaseImageRegistry: Record<string, ShowcaseImageAsset> = {
@@ -24,6 +25,12 @@ export const showcaseImageRegistry: Record<string, ShowcaseImageAsset> = {
     height: 1005,
     alt: 'RAG Fact-Checking Extension UI.',
   },
+  'rippleflow-water-distortion': {
+    src: rippleFlowPreview,
+    width: 2852,
+    height: 1566,
+    alt: 'RippleFlow water distortion preview.',
+  },
   'tedx-dku': {
     src: tedxPreview,
     width: 386,
@@ -33,8 +40,8 @@ export const showcaseImageRegistry: Record<string, ShowcaseImageAsset> = {
   },
   'dku-ultimate-instagram': {
     src: dkuUltimatePreview,
-    width: 3000,
-    height: 4000,
+    width: 900,
+    height: 1200,
     alt: 'DKU Ultimate gameday poster.',
   },
 }

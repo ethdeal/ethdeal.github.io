@@ -20,6 +20,10 @@ const designItems = rawDesign as DesignItem[]
 
 function resolveShowcaseCards(items: ShowcaseContentItem[]): ShowcaseCard[] {
   return items.map((item) => {
+    if (!item.imageKey) {
+      return item
+    }
+
     const image = showcaseImageRegistry[item.imageKey]
 
     if (!image) {

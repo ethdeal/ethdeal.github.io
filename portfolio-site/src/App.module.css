@@ -1,0 +1,19 @@
+.water {
+  min-height: 100svh;
+  overflow: visible !important;
+}
+
+.water > div:first-child,
+.water > canvas {
+  position: fixed !important;
+}
+
+.water > div:first-child {
+  transform: none !important;
+}
+
+.underlay {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}

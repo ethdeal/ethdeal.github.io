@@ -6,7 +6,6 @@ import styles from './hero.module.css'
 interface HeroStaticProps {
   sectionId: string
   className?: string
-  eyebrow: string
   intro: string
   name: string
   paragraphs: string[]
@@ -16,7 +15,6 @@ interface HeroStaticProps {
 export function HeroStatic({
   sectionId,
   className = '',
-  eyebrow,
   intro,
   name,
   paragraphs,
