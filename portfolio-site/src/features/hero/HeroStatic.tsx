@@ -38,7 +38,6 @@ export function HeroStatic({
           />
           <SocialLinks links={socialLinks} variant="static" />
         </div>
-        <p className={styles.heroEyebrow}>{eyebrow}</p>
       </div>
 
       <div className={styles.staticBody}>
