@@ -1,20 +1,29 @@
 import { WaterDistortion } from '@rippleflow/water-distortion'
+import starBackground from './assets/star-background.svg'
 import waterBackground from './assets/water-background.svg'
 import { PortfolioPage } from './features/layout/PortfolioPage'
+import { SITE_THEME, type SiteTheme } from './lib/theme'
 import styles from './App.module.css'
 
+const backgroundTextures: Record<SiteTheme, string> = {
+  light: waterBackground,
+  dark: starBackground,
+}
+
 function App() {
+  const backgroundTexture = backgroundTextures[SITE_THEME]
+
   return (
     <WaterDistortion
       className={styles.water}
       mode="texture"
-      texture={waterBackground}
+      texture={backgroundTexture}
       underlay={
         <img
           aria-hidden="true"
           alt=""
           className={styles.underlay}
-          src={waterBackground}
+          src={backgroundTexture}
         />
       }
       interactionMode={"both"}
@@ -23,7 +32,7 @@ function App() {
       ridgeStrength={.6}
       crestIntensity={0.01}
       specularIntensity={0.1}
-      causticIntensity={0.5}
+      causticIntensity={0}
     >
       <PortfolioPage />
     </WaterDistortion>

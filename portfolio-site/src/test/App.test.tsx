@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, render, screen } from '@testing-library/react'
 import App from '../App'
+import starBackground from '../assets/star-background.svg'
 import {
   designCards,
   experienceItems,
@@ -200,9 +201,13 @@ describe('App', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('keeps portfolio content above a decorative water canvas', () => {
+  it('uses the dark star texture behind portfolio content', () => {
     const { container } = render(<App />)
 
+    expect(container.querySelector('img[aria-hidden="true"]')).toHaveAttribute(
+      'src',
+      starBackground,
+    )
     expect(container.querySelector('canvas')).toHaveAttribute(
       'aria-hidden',
       'true',

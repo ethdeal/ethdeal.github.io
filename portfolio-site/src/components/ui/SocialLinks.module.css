@@ -33,7 +33,7 @@
 .link:hover,
 .link:focus-visible {
   color: var(--color-accent-strong);
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--color-surface-strong);
   transform: translateY(-0.125rem);
 }
 
