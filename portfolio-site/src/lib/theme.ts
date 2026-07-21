@@ -1,7 +1,7 @@
 export type SiteTheme = 'light' | 'dark'
 
-const LIGHT_START_HOUR = 6
-const DARK_START_HOUR = 21
+const LIGHT_START_HOUR = Number(document.documentElement.dataset.lightStart)
+const DARK_START_HOUR = Number(document.documentElement.dataset.darkStart)
 
 export const THEME_COLORS: Record<SiteTheme, string> = {
   light: '#f8f8f8',

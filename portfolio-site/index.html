@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-light-start="6" data-dark-start="21">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=ethan-e-accent" />
@@ -8,7 +8,11 @@
     <script>
       {
         const hour = new Date().getHours()
-        const theme = hour >= 21 || hour < 6 ? 'dark' : 'light'
+        const { lightStart, darkStart } = document.documentElement.dataset
+        const theme =
+          hour >= Number(darkStart) || hour < Number(lightStart)
+            ? 'dark'
+            : 'light'
 
         document.documentElement.dataset.theme = theme
         document.querySelector('meta[name="theme-color"]').content =

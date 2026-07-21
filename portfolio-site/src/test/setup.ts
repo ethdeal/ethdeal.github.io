@@ -1,6 +1,9 @@
 import { vi } from 'vitest'
 import '@testing-library/jest-dom/vitest'
 
+document.documentElement.dataset.lightStart = '6'
+document.documentElement.dataset.darkStart = '21'
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation((query: string) => ({
