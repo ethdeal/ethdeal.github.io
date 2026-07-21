@@ -1,5 +1,6 @@
 import type { SocialLink } from '../../content/types'
 import { SocialLinks } from '../../components/ui/SocialLinks'
+import { profileImage } from '../../lib/profileImage'
 import styles from './hero.module.css'
 
 interface HeroStaticProps {
@@ -26,7 +27,19 @@ export function HeroStatic({
       className={[styles.staticHero, className].join(' ')}
     >
       <div className={styles.staticMeta}>
-        <SocialLinks links={socialLinks} variant="static" />
+        <div className={styles.staticProfileCluster}>
+          {profileImage ? (
+            <img
+              className={[
+                styles.heroProfileImage,
+                styles.heroProfileImageStatic,
+              ].join(' ')}
+              src={profileImage}
+              alt={`Portrait of ${name}`}
+            />
+          ) : null}
+          <SocialLinks links={socialLinks} variant="static" />
+        </div>
       </div>
 
       <div className={styles.staticBody}>
