@@ -42,7 +42,7 @@
     0 10px 20px rgba(22, 25, 31, 0.05),
     0 8px 18px rgba(22, 25, 31, 0.02);
 
-  --glass-blur: 8px;
+  --glass-blur: 12px;
   --motion-fast: 180ms;
   --motion-medium: 280ms;
 
@@ -80,15 +80,15 @@
   --color-text-muted: #b4bcc9;
   --color-text-subtle: #8c96a8;
   --color-line: rgba(243, 240, 232, 0.14);
-  --color-surface: rgba(255, 255, 255, 0.055);
+  --color-surface: rgba(255, 255, 255, 0.015);
   --color-surface-strong: rgba(255, 255, 255, 0.1);
   --color-surface-border: rgba(255, 255, 255, 0.12);
   --color-accent-strong: var(--color-accent);
 
   --shadow-soft:
-    0 16px 36px rgba(0, 0, 0, 0.28),
-    0 5px 10px rgba(0, 0, 0, 0.18);
+    0 16px 36px rgba(0, 0, 0, 0.02),
+    0 5px 10px rgba(0, 0, 0, 0.00);
   --shadow-glass:
-    0 10px 20px rgba(0, 0, 0, 0.24),
-    0 8px 18px rgba(0, 0, 0, 0.14);
+    0 10px 20px rgba(0, 0, 0, 0.10),
+    0 8px 18px rgba(0, 0, 0, 0.08);
 }

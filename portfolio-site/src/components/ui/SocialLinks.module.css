@@ -18,8 +18,8 @@
   width: 2.8rem;
   height: 2.8rem;
   border-radius: var(--radius-pill);
-  background: transparent;
-  border: none;
+  background: var(--color-surface);
+  border: 0.5px solid var(--color-surface-border);
   color: var(--color-text);
   box-shadow: var(--shadow-soft);
   text-decoration: none;
