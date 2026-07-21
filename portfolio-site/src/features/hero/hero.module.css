@@ -112,7 +112,7 @@
 .heroProfileImageDesktop {
   width: var(--hero-profile-desktop-size, min(66%, 14.5rem));
   margin-bottom: var(--hero-profile-desktop-gap, 4vh);
-  justify-self: center;
+  justify-self: left;
 }
 
 .heroIntro {

@@ -2,7 +2,7 @@ import type { RefObject } from 'react'
 import type { NavItem, SocialLink } from '../../content/types'
 import { SectionNav } from '../../components/navigation/SectionNav'
 import { SocialLinks } from '../../components/ui/SocialLinks'
-import profileImage from '../../assets/pfp_placeholder.jpeg'
+import { profileImage } from '../../lib/profileImage'
 import { HeroScrollCue } from './HeroScrollCue'
 import styles from './hero.module.css'
 
@@ -68,14 +68,16 @@ export function HeroDesktop({
             </div>
 
             <div ref={heroCopyRef} className={styles.heroCopy}>
-              <img
-                className={[
-                  styles.heroProfileImage,
-                  styles.heroProfileImageDesktop,
-                ].join(' ')}
-                src={profileImage}
-                alt={`Portrait of ${name}`}
-              />
+              {profileImage ? (
+                <img
+                  className={[
+                    styles.heroProfileImage,
+                    styles.heroProfileImageDesktop,
+                  ].join(' ')}
+                  src={profileImage}
+                  alt={`Portrait of ${name}`}
+                />
+              ) : null}
               <p className={styles.heroIntro}>{intro}</p>
               {paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
