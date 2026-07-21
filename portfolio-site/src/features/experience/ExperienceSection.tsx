@@ -34,6 +34,7 @@ export function ExperienceSection({ items, resumeHref }: ExperienceSectionProps)
           return (
             <article
               key={`${item.company}-${item.role}`}
+              data-hover-dim-card
               className={[
                 styles.entry,
                 isActive ? styles.active : '',

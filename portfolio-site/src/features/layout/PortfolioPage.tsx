@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { ContentFootnote } from '../../components/ui/ContentFootnote'
 import {
   designCards,
@@ -40,6 +40,34 @@ export function PortfolioPage() {
   const activeSection = useActiveSection(sectionIds)
   const resumeHref =
     siteContent.socialLinks.find(({ icon }) => icon === 'resume')?.href ?? ''
+
+  useEffect(() => {
+    if (!resumeHref) {
+      return
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const isResumeShortcut =
+        event.key.toLowerCase() === 'p' &&
+        event.ctrlKey !== event.metaKey &&
+        !event.shiftKey &&
+        !event.altKey
+
+      if (!isResumeShortcut) {
+        return
+      }
+
+      event.preventDefault()
+
+      if (!event.repeat) {
+        window.open(resumeHref, '_blank', 'noopener,noreferrer')
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [resumeHref])
 
   useHeroScrollTimeline({
     enabled: shouldAnimateHero,

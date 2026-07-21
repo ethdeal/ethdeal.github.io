@@ -212,6 +212,7 @@ function ShowcaseCardItem({
 
   return (
     <article
+      data-hover-dim-card
       className={[
         styles.entry,
         image ? '' : styles.withoutMedia,
