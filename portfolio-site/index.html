@@ -1,14 +1,46 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-light-start="6" data-dark-start="21">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=ethan-e-accent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f8f8" />
+    <script>
+      {
+        const hour = new Date().getHours()
+        const { lightStart, darkStart } = document.documentElement.dataset
+        const theme =
+          hour >= Number(darkStart) || hour < Number(lightStart)
+            ? 'dark'
+            : 'light'
+
+        document.documentElement.dataset.theme = theme
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === 'dark' ? '#040711' : '#f8f8f8'
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light;
+        background-color: #f8f8f8;
+      }
+
+      :root[data-theme='dark'] {
+        color-scheme: dark;
+        background-color: #040711;
+      }
+    </style>
+    <link
+      rel="preload"
+      href="/src/assets/star-background.svg"
+      as="image"
+      type="image/svg+xml"
+      crossorigin
+    />
     <meta
       name="description"
-      content="Ethan Deal is a senior at DKU pursuing a degree in Computation and Design."
+      content="Ethan Deal is a DKU graduate with a degree in Computation and Design."
     />
-    <meta name="theme-color" content="#F8F8F8" />
     <link
       rel="preload"
       href="/src/assets/fonts/AvaleighBold.woff2"
@@ -33,7 +65,7 @@
     <meta property="og:title" content="Ethan Deal" />
     <meta
       property="og:description"
-      content="Ethan Deal is a senior at DKU pursuing a degree in Computation and Design."
+      content="Ethan Deal is a DKU graduate with a degree in Computation and Design."
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/social-preview-placeholder.png" />
@@ -41,7 +73,7 @@
     <meta name="twitter:title" content="Ethan Deal" />
     <meta
       name="twitter:description"
-      content="Ethan Deal is a senior at DKU pursuing a degree in Computation and Design."
+      content="Ethan Deal is a DKU graduate with a degree in Computation and Design."
     />
     <meta name="twitter:image" content="/social-preview-placeholder.png" />
     <title>Ethan Deal</title>
