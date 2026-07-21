@@ -2,7 +2,8 @@ import { WaterDistortion } from '@rippleflow/water-distortion'
 import starBackground from './assets/star-background.svg'
 import waterBackground from './assets/water-background.svg'
 import { PortfolioPage } from './features/layout/PortfolioPage'
-import { SITE_THEME, type SiteTheme } from './lib/theme'
+import { useTimeBasedTheme } from './hooks/useTimeBasedTheme'
+import type { SiteTheme } from './lib/theme'
 import styles from './App.module.css'
 
 const backgroundTextures: Record<SiteTheme, string> = {
@@ -11,7 +12,8 @@ const backgroundTextures: Record<SiteTheme, string> = {
 }
 
 function App() {
-  const backgroundTexture = backgroundTextures[SITE_THEME]
+  const theme = useTimeBasedTheme()
+  const backgroundTexture = backgroundTextures[theme]
 
   return (
     <WaterDistortion

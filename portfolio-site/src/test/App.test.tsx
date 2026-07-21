@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, render, screen } from '@testing-library/react'
 import App from '../App'
 import starBackground from '../assets/star-background.svg'
+import waterBackground from '../assets/water-background.svg'
+import { getThemeForDate } from '../lib/theme'
 import {
   designCards,
   experienceItems,
@@ -145,6 +147,8 @@ describe('App', () => {
   })
 
   afterEach(() => {
+    delete document.documentElement.dataset.theme
+    vi.useRealTimers()
     vi.restoreAllMocks()
   })
 
@@ -202,6 +206,9 @@ describe('App', () => {
   })
 
   it('uses the dark star texture behind portfolio content', () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date(2026, 0, 1, 22, 0))
+    document.documentElement.dataset.theme = 'dark'
     const { container } = render(<App />)
 
     expect(container.querySelector('img[aria-hidden="true"]')).toHaveAttribute(
@@ -216,6 +223,38 @@ describe('App', () => {
       screen.getByRole('link', { name: 'View Full Resume' }),
     ).toBeInTheDocument()
   })
+
+  it.each([
+    [
+      'dark at 9 p.m.',
+      new Date(2026, 0, 1, 20, 59, 59),
+      waterBackground,
+      starBackground,
+    ],
+    [
+      'light at 6 a.m.',
+      new Date(2026, 0, 2, 5, 59, 59),
+      starBackground,
+      waterBackground,
+    ],
+  ])(
+    'switches the background texture to %s',
+    (_label, startTime, initialTexture, expectedTexture) => {
+      vi.useFakeTimers()
+      vi.setSystemTime(startTime)
+      document.documentElement.dataset.theme = getThemeForDate(startTime)
+      const { container } = render(<App />)
+      const underlay = container.querySelector('img[aria-hidden="true"]')
+
+      expect(underlay).toHaveAttribute('src', initialTexture)
+
+      act(() => {
+        vi.advanceTimersByTime(1000)
+      })
+
+      expect(underlay).toHaveAttribute('src', expectedTexture)
+    },
+  )
 
   it('marks the about link as the current section by default', () => {
     render(<App />)
