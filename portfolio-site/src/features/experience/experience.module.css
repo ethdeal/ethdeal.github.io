@@ -58,7 +58,7 @@
   );
 }
 
-.axis::before {
+/* .axis::before {
   content: '';
   position: absolute;
   top: 0.25rem;
@@ -69,7 +69,7 @@
   border-radius: 50%;
   background: var(--color-bg);
   transform: translateX(-50%);
-}
+} */
 
 .content {
   display: grid;

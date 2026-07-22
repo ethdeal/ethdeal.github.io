@@ -16,6 +16,16 @@ const HERO_EXIT_TWEENS = {
     y: -18,
     duration: 0.05,
   },
+  heroListeningFade: {
+    start: 0.06,
+    autoAlpha: 0,
+    duration: 0.05,
+  },
+  heroListeningMove: {
+    start: 0.06,
+    y: -18,
+    duration: 0.05,
+  },
   heroSocialsFade: {
     start: 0.00, // 0.04
     autoAlpha: 0,
@@ -50,6 +60,7 @@ interface UseHeroScrollTimelineOptions {
   overlayRef: RefObject<HTMLDivElement | null>
   backdropRef: RefObject<HTMLDivElement | null>
   topNavRef: RefObject<HTMLElement | null>
+  heroListeningRef: RefObject<HTMLDivElement | null>
   heroSocialsRef: RefObject<HTMLDivElement | null>
   heroCopyRef: RefObject<HTMLDivElement | null>
   heroTitleRef: RefObject<HTMLHeadingElement | null>
@@ -64,6 +75,7 @@ export function useHeroScrollTimeline({
   overlayRef,
   backdropRef,
   topNavRef,
+  heroListeningRef,
   heroSocialsRef,
   heroCopyRef,
   heroTitleRef,
@@ -76,6 +88,7 @@ export function useHeroScrollTimeline({
     const overlay = overlayRef.current
     const backdrop = backdropRef.current
     const topNav = topNavRef.current
+    const heroListening = heroListeningRef.current
     const heroSocials = heroSocialsRef.current
     const heroCopy = heroCopyRef.current
     const heroTitle = heroTitleRef.current
@@ -125,6 +138,9 @@ export function useHeroScrollTimeline({
         gsap.set(overlay, { autoAlpha: 1 })
         gsap.set(backdrop, { autoAlpha: 1 })
         gsap.set(topNav, { autoAlpha: 1, y: 0 })
+        if (heroListening) {
+          gsap.set(heroListening, { autoAlpha: 1, y: 0 })
+        }
         gsap.set(heroSocials, { autoAlpha: 1, y: 0 })
         gsap.set(heroCopy, { autoAlpha: 1, y: 0 })
         gsap.set(heroTitle, {
@@ -201,6 +217,10 @@ export function useHeroScrollTimeline({
         }
 
         addExitTween(topNav, HERO_EXIT_TWEENS.topNav)
+        if (heroListening) {
+          addExitTween(heroListening, HERO_EXIT_TWEENS.heroListeningFade)
+          addExitTween(heroListening, HERO_EXIT_TWEENS.heroListeningMove)
+        }
         addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsFade)
         addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsMove)
         addExitTween(heroCopy, HERO_EXIT_TWEENS.heroCopy)
@@ -271,6 +291,7 @@ export function useHeroScrollTimeline({
     overlayRef,
     backdropRef,
     topNavRef,
+    heroListeningRef,
     heroSocialsRef,
     heroCopyRef,
     heroTitleRef,

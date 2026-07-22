@@ -224,6 +224,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
   const overlayRef = useRef<HTMLDivElement>(null)
   const backdropRef = useRef<HTMLDivElement>(null)
   const topNavRef = useRef<HTMLElement>(null)
+  const heroListeningRef = useRef<HTMLDivElement>(null)
   const heroSocialsRef = useRef<HTMLDivElement>(null)
   const heroCopyRef = useRef<HTMLDivElement>(null)
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
@@ -237,6 +238,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
     overlayRef,
     backdropRef,
     topNavRef,
+    heroListeningRef,
     heroSocialsRef,
     heroCopyRef,
     heroTitleRef,
@@ -251,6 +253,7 @@ function HeroTimelineHarness({ enabled = true }: { enabled?: boolean }) {
       <div data-testid="overlay" ref={overlayRef} />
       <div data-testid="backdrop" ref={backdropRef} />
       <header data-testid="top-nav" ref={topNavRef} />
+      <div data-testid="hero-listening" ref={heroListeningRef} />
       <div data-testid="hero-socials" ref={heroSocialsRef} />
       <div data-testid="hero-copy" ref={heroCopyRef} />
       <h1
@@ -397,10 +400,11 @@ describe('useHeroScrollTimeline', () => {
     }
   })
 
-  it('starts the hero exits immediately without changing their durations', () => {
+  it('uses the independently configured listening exit timing', () => {
     render(<HeroTimelineHarness />)
 
     const heroSocials = screen.getByTestId('hero-socials')
+    const heroListening = screen.getByTestId('hero-listening')
     const heroCopy = screen.getByTestId('hero-copy')
     const socialFadeTween = mockState.timelineCalls.find(
       (call) =>
@@ -418,6 +422,18 @@ describe('useHeroScrollTimeline', () => {
       (call) =>
         call.method === 'to' &&
         call.target === heroCopy &&
+        typeof call.vars.y === 'number',
+    )
+    const listeningFadeTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroListening &&
+        call.vars.autoAlpha === 0,
+    )
+    const listeningMoveTween = mockState.timelineCalls.find(
+      (call) =>
+        call.method === 'to' &&
+        call.target === heroListening &&
         typeof call.vars.y === 'number',
     )
 
@@ -438,6 +454,18 @@ describe('useHeroScrollTimeline', () => {
       target: heroCopy,
       position: 0,
       vars: { autoAlpha: 0, y: -156, duration: 0.16 },
+    })
+    expect(listeningFadeTween).toEqual({
+      method: 'to',
+      target: heroListening,
+      position: 0.06,
+      vars: { autoAlpha: 0, duration: 0.05 },
+    })
+    expect(listeningMoveTween).toEqual({
+      method: 'to',
+      target: heroListening,
+      position: 0.06,
+      vars: { y: -18, duration: 0.05 },
     })
   })
 })

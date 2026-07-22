@@ -32,7 +32,7 @@ function App() {
       wakeStrength={0.3}
       waveSpeed={.6}
       ridgeStrength={.6}
-      refractionStrength={.3}
+      refractionStrength={.1}
       specularIntensity={0.1}
       crestIntensity={0.01}
       causticIntensity={0}

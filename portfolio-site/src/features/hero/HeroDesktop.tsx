@@ -1,6 +1,11 @@
 import type { RefObject } from 'react'
-import type { NavItem, SocialLink } from '../../content/types'
+import type {
+  CurrentlyListeningTrack,
+  NavItem,
+  SocialLink,
+} from '../../content/types'
 import { SectionNav } from '../../components/navigation/SectionNav'
+import { CurrentlyListening } from '../../components/ui/CurrentlyListening'
 import { SocialLinks } from '../../components/ui/SocialLinks'
 import { profileImage } from '../../lib/profileImage'
 import { HeroScrollCue } from './HeroScrollCue'
@@ -15,9 +20,11 @@ interface HeroDesktopProps {
   navItems: NavItem[]
   paragraphs: string[]
   socialLinks: SocialLink[]
+  currentlyListening: CurrentlyListeningTrack | null
   overlayRef: RefObject<HTMLDivElement | null>
   backdropRef: RefObject<HTMLDivElement | null>
   topNavRef: RefObject<HTMLElement | null>
+  heroListeningRef: RefObject<HTMLDivElement | null>
   heroSocialsRef: RefObject<HTMLDivElement | null>
   heroCopyRef: RefObject<HTMLDivElement | null>
   heroTitleRef: RefObject<HTMLHeadingElement | null>
@@ -31,9 +38,11 @@ export function HeroDesktop({
   navItems,
   paragraphs,
   socialLinks,
+  currentlyListening,
   overlayRef,
   backdropRef,
   topNavRef,
+  heroListeningRef,
   heroSocialsRef,
   heroCopyRef,
   heroTitleRef,
@@ -54,6 +63,11 @@ export function HeroDesktop({
 
       <div className={styles.desktopGrid}>
         <div className={styles.heroStack}>
+          <CurrentlyListening
+            ref={heroListeningRef}
+            track={currentlyListening}
+          />
+
           <div className={styles.heroBody}>
             <div className={styles.titleColumn}>
               <div ref={heroSocialsRef} className={styles.heroMeta}>
