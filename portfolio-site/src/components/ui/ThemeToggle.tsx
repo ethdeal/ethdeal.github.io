@@ -48,12 +48,15 @@ export function ThemeToggle({
   const holdTimeoutRef = useRef<number | undefined>(undefined)
   const suppressClickRef = useRef(false)
   const keyboardHoldRef = useRef(false)
+  const controlRef = useRef<HTMLButtonElement>(null)
   const [announcement, setAnnouncement] = useState('')
   const isAutomatic = preference === 'auto'
   const nextTheme = theme === 'light' ? 'night' : 'day'
   const title = isAutomatic ? 'Theme (automatic) ' : 'Theme (hold for automatic)'
 
   const clearHold = () => {
+    controlRef.current?.removeAttribute('data-holding')
+
     if (holdTimeoutRef.current !== undefined) {
       window.clearTimeout(holdTimeoutRef.current)
       holdTimeoutRef.current = undefined
@@ -63,9 +66,11 @@ export function ThemeToggle({
   const beginHold = () => {
     clearHold()
     suppressClickRef.current = false
+    controlRef.current?.setAttribute('data-holding', 'true')
     holdTimeoutRef.current = window.setTimeout(() => {
       holdTimeoutRef.current = undefined
       suppressClickRef.current = true
+      controlRef.current?.removeAttribute('data-holding')
       onUseAutomaticTheme()
       setAnnouncement('Automatic theme schedule restored.')
     }, HOLD_DURATION)
@@ -130,6 +135,7 @@ export function ThemeToggle({
       aria-hidden={hidden || undefined}
     >
       <button
+        ref={controlRef}
         className={styles.control}
         type="button"
         tabIndex={hidden ? -1 : 0}

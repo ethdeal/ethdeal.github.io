@@ -53,9 +53,13 @@ describe('ThemeToggle', () => {
       fireEvent.keyDown(button, { key: ' ' })
     }
 
+    expect(button).toHaveAttribute('data-holding', 'true')
+
     act(() => {
       vi.runOnlyPendingTimers()
     })
+
+    expect(button).not.toHaveAttribute('data-holding')
 
     if (up === 'pointerup') {
       fireEvent.pointerUp(button, { button: 0, pointerId: 1 })

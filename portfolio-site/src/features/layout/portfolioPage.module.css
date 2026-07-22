@@ -62,3 +62,9 @@
     padding-inline: var(--page-gutter-mobile);
   }
 }
+
+@media (min-width: 960px) and (prefers-reduced-motion: reduce) {
+  .desktopContentTrigger {
+    margin-top: 0;
+  }
+}

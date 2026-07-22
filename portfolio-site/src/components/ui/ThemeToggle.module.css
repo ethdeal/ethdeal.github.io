@@ -28,7 +28,19 @@
   backdrop-filter: blur(var(--glass-blur));
   transition:
     background-color var(--motion-fast) ease,
-    color var(--motion-fast) ease;
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+}
+
+.control[data-holding='true'] {
+  border-color: var(--color-accent-strong);
+  transform: scale(0.96);
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    border-color 700ms ease,
+    transform 700ms ease;
 }
 
 .control:hover,
@@ -65,7 +77,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .control,
   .icon {
     transition: none;
+  }
+
+  .control[data-holding='true'] {
+    transform: none;
   }
 }
