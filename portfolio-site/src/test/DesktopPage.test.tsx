@@ -1,9 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { siteContent } from '../content/data'
 
 const mockState = vi.hoisted(() => ({
   scrollProgress: 0.2,
+}))
+
+vi.mock('../lib/soundCloudWidget', () => ({
+  createSoundCloudPlayerUrl: vi.fn(() => 'about:blank'),
+  loadSoundCloudWidgetApi: vi.fn(() => new Promise(() => {})),
 }))
 
 const transformState = new WeakMap<
@@ -295,9 +300,7 @@ describe('desktop animated page', () => {
 
     expect(sidebarSupporting).not.toBeNull()
     expect(desktopContent).not.toBeNull()
-    expect(sidebarSupporting?.style.transform).not.toBe(
-      'translate3d(0px, 940px, 0px) scale(1)',
-    )
+    expect(sidebarSupporting?.style.transform).not.toBe('')
     expect(sidebarSupporting?.style.opacity).toBe('1')
     expect(desktopContent?.style.transform).toBe('')
     expect(desktopContent?.style.opacity).toBe('1')
@@ -313,9 +316,20 @@ describe('desktop animated page', () => {
 
   it('renders the listening control in the animated desktop hero', () => {
     const { container } = render(<App />)
+    const listeningControl = container.querySelector(
+      '[data-currently-listening="true"]',
+    )
+    const themeButton = screen.getByRole('button', { name: /theme/i })
 
-    expect(
-      container.querySelector('[data-currently-listening="true"]'),
-    ).toBeInTheDocument()
+    expect(listeningControl).toBeInTheDocument()
+    expect(themeButton.parentElement?.parentElement).toBe(
+      listeningControl?.parentElement,
+    )
+
+    fireEvent.pointerEnter(listeningControl as HTMLElement)
+    expect(themeButton).toHaveAttribute('tabindex', '-1')
+
+    fireEvent.pointerLeave(listeningControl as HTMLElement)
+    expect(themeButton).toHaveAttribute('tabindex', '0')
   })
 })

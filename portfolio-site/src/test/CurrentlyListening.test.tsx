@@ -120,7 +120,7 @@ describe('CurrentlyListening', () => {
       name: 'Play current SoundCloud track',
     })
     const root = container.querySelector('[data-currently-listening="true"]')
-    const details = screen.getByText('Currently listening').parentElement
+    const details = document.getElementById(button.getAttribute('aria-controls')!)
 
     expect(details).toHaveAttribute('data-visible', 'false')
     expect(soundCloudMock.loadSoundCloudWidgetApi).not.toHaveBeenCalled()
@@ -146,7 +146,7 @@ describe('CurrentlyListening', () => {
     expect(details).toHaveAttribute('data-visible', 'true')
   })
 
-  it('queues initial playback and stays visible while SoundCloud is playing', async () => {
+  it('queues initial playback and hides details after leaving while SoundCloud is playing', async () => {
     const user = userEvent.setup()
     const { container } = render(<CurrentlyListening track={TRACK} />)
     const button = screen.getByRole('button', {
@@ -163,12 +163,14 @@ describe('CurrentlyListening', () => {
     expect(soundCloudMock.play).toHaveBeenCalledOnce()
 
     emit(EVENTS.PLAY)
+    expect(details).toHaveAttribute('data-visible', 'true')
+
     fireEvent.blur(button, { relatedTarget: null })
     fireEvent.pointerLeave(root as HTMLElement)
 
     expect(button).toHaveAccessibleName('Pause current SoundCloud track')
     expect(button).toHaveAttribute('aria-pressed', 'true')
-    expect(details).toHaveAttribute('data-visible', 'true')
+    expect(details).toHaveAttribute('data-visible', 'false')
     expect(container.querySelector('[data-state="playing"]')).toBeInTheDocument()
 
     await user.click(button)

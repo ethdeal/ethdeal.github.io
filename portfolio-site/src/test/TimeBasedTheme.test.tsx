@@ -1,21 +1,45 @@
-import { act, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useTimeBasedTheme } from '../hooks/useTimeBasedTheme'
 import {
   getMillisecondsUntilNextThemeChange,
+  getStoredThemePreference,
   getThemeForDate,
+  THEME_COLORS,
+  THEME_STORAGE_KEY,
 } from '../lib/theme'
 
-function ThemeProbe() {
-  const theme = useTimeBasedTheme()
+const LIGHT_START = Number(document.documentElement.dataset.lightStart)
+const DARK_START = Number(document.documentElement.dataset.darkStart)
 
-  return <output>{theme}</output>
+function dateAt(hour: number, minute = 0, second = 0) {
+  return new Date(2026, 0, 1, hour, minute, second)
+}
+
+function ThemeProbe() {
+  const { theme, preference, toggleTheme, useAutomaticTheme } =
+    useTimeBasedTheme()
+
+  return (
+    <>
+      <output data-testid="theme">{theme}</output>
+      <output data-testid="preference">{preference}</output>
+      <button type="button" onClick={toggleTheme}>
+        Toggle theme
+      </button>
+      <button type="button" onClick={useAutomaticTheme}>
+        Use automatic theme
+      </button>
+    </>
+  )
 }
 
 describe('time-based theme', () => {
   beforeEach(() => {
     vi.useFakeTimers()
+    localStorage.clear()
     document.documentElement.dataset.theme = 'light'
+    document.documentElement.dataset.themePreference = 'auto'
 
     const themeColor = document.createElement('meta')
     themeColor.name = 'theme-color'
@@ -25,72 +49,134 @@ describe('time-based theme', () => {
   afterEach(() => {
     document.querySelector('meta[name="theme-color"]')?.remove()
     delete document.documentElement.dataset.theme
+    delete document.documentElement.dataset.themePreference
+    delete document.documentElement.dataset.themeTransitioning
+    localStorage.clear()
     vi.useRealTimers()
+    vi.restoreAllMocks()
   })
 
-  it.each([
-    [new Date(2026, 0, 1, 5, 59), 'dark'],
-    [new Date(2026, 0, 1, 6, 0), 'light'],
-    [new Date(2026, 0, 1, 20, 59), 'light'],
-    [new Date(2026, 0, 1, 21, 0), 'dark'],
-  ])('resolves %s as %s', (date, expectedTheme) => {
-    expect(getThemeForDate(date)).toBe(expectedTheme)
+  it('resolves the configured schedule boundaries', () => {
+    expect(getThemeForDate(dateAt(LIGHT_START, 0))).toBe('light')
+    expect(getThemeForDate(dateAt(DARK_START, 0))).toBe('dark')
+    expect(getThemeForDate(dateAt(LIGHT_START - 1, 59))).toBe('dark')
+    expect(getThemeForDate(dateAt(DARK_START - 1, 59))).toBe('light')
   })
 
-  it.each([
-    [new Date(2026, 0, 1, 5, 59, 59), 6],
-    [new Date(2026, 0, 1, 6, 0), 21],
-    [new Date(2026, 0, 1, 20, 59, 59), 21],
-    [new Date(2026, 0, 1, 21, 0), 6],
-  ])('schedules the next change after %s for %i:00', (date, nextHour) => {
-    const nextChange = new Date(
-      date.getTime() + getMillisecondsUntilNextThemeChange(date),
-    )
+  it('schedules each automatic change for the next configured boundary', () => {
+    for (const now of [
+      dateAt(LIGHT_START - 1, 59, 59),
+      dateAt(LIGHT_START),
+      dateAt(DARK_START - 1, 59, 59),
+      dateAt(DARK_START),
+    ]) {
+      const nextChange = new Date(
+        now.getTime() + getMillisecondsUntilNextThemeChange(now),
+      )
 
-    expect(nextChange.getHours()).toBe(nextHour)
-    expect(nextChange.getMinutes()).toBe(0)
-    expect(nextChange.getSeconds()).toBe(0)
-    expect(nextChange.getTime()).toBeGreaterThan(date.getTime())
+      expect(nextChange.getTime()).toBeGreaterThan(now.getTime())
+      expect([LIGHT_START, DARK_START]).toContain(nextChange.getHours())
+      expect(nextChange.getMinutes()).toBe(0)
+      expect(nextChange.getSeconds()).toBe(0)
+    }
   })
 
   it('switches at the next threshold and updates the browser theme color', () => {
-    vi.setSystemTime(new Date(2026, 0, 1, 20, 59, 59))
+    vi.setSystemTime(dateAt(DARK_START - 1, 59, 59))
     render(<ThemeProbe />)
-
-    expect(screen.getByText('light')).toBeInTheDocument()
 
     act(() => {
       vi.advanceTimersByTime(1000)
     })
 
-    expect(screen.getByText('dark')).toBeInTheDocument()
+    expect(screen.getByTestId('theme')).toHaveTextContent('dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
     expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute(
       'content',
-      '#040711',
+      THEME_COLORS.dark,
+    )
+  })
+
+  it('starts from a stored override without scheduling an automatic change', () => {
+    localStorage.setItem(THEME_STORAGE_KEY, 'dark')
+    delete document.documentElement.dataset.theme
+    delete document.documentElement.dataset.themePreference
+    vi.setSystemTime(dateAt(LIGHT_START + 1))
+
+    render(<ThemeProbe />)
+
+    expect(screen.getByTestId('theme')).toHaveTextContent('dark')
+    expect(screen.getByTestId('preference')).toHaveTextContent('dark')
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('falls back to automatic mode for invalid or unavailable storage', () => {
+    localStorage.setItem(THEME_STORAGE_KEY, 'invalid')
+    expect(getStoredThemePreference()).toBe('auto')
+
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new Error('blocked')
+    })
+    expect(getStoredThemePreference()).toBe('auto')
+  })
+
+  it('persists toggles and keeps the override fixed across schedule changes', () => {
+    vi.setSystemTime(dateAt(LIGHT_START + 1))
+    render(<ThemeProbe />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle theme' }))
+
+    expect(screen.getByTestId('theme')).toHaveTextContent('dark')
+    expect(screen.getByTestId('preference')).toHaveTextContent('dark')
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe('dark')
+
+    act(() => {
+      vi.setSystemTime(dateAt(LIGHT_START + 2))
+      vi.advanceTimersByTime(24 * 60 * 60 * 1000)
+    })
+
+    expect(screen.getByTestId('theme')).toHaveTextContent('dark')
+  })
+
+  it('clears an override and immediately resumes automatic scheduling', () => {
+    localStorage.setItem(THEME_STORAGE_KEY, 'dark')
+    document.documentElement.dataset.theme = 'dark'
+    document.documentElement.dataset.themePreference = 'dark'
+    vi.setSystemTime(dateAt(LIGHT_START + 1))
+    render(<ThemeProbe />)
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Use automatic theme' }),
+    )
+
+    expect(screen.getByTestId('theme')).toHaveTextContent('light')
+    expect(screen.getByTestId('preference')).toHaveTextContent('auto')
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBeNull()
+    expect(document.documentElement).toHaveAttribute(
+      'data-theme-preference',
+      'auto',
     )
   })
 
   it.each(['focus', 'visibilitychange'])(
-    'corrects a missed threshold on %s',
+    'corrects a missed automatic threshold on %s',
     (eventName) => {
-      vi.setSystemTime(new Date(2026, 0, 1, 20, 0))
+      vi.setSystemTime(dateAt(DARK_START - 1))
       render(<ThemeProbe />)
 
-      vi.setSystemTime(new Date(2026, 0, 1, 22, 0))
+      vi.setSystemTime(dateAt(DARK_START + 1))
 
       act(() => {
         const target = eventName === 'focus' ? window : document
         target.dispatchEvent(new Event(eventName))
       })
 
-      expect(screen.getByText('dark')).toBeInTheDocument()
-      expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
+      expect(screen.getByTestId('theme')).toHaveTextContent('dark')
     },
   )
 
   it('clears its scheduled change when unmounted', () => {
-    vi.setSystemTime(new Date(2026, 0, 1, 12, 0))
+    vi.setSystemTime(dateAt(LIGHT_START + 1))
     const { unmount } = render(<ThemeProbe />)
 
     expect(vi.getTimerCount()).toBe(1)

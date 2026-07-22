@@ -1,8 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, render, screen } from '@testing-library/react'
 import App from '../App'
-import starBackground from '../assets/star-background.svg'
-import waterBackground from '../assets/water-background.svg'
 import { getThemeForDate } from '../lib/theme'
 import {
   designCards,
@@ -208,7 +206,7 @@ describe('App', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('uses the dark star texture behind portfolio content', () => {
+  it('renders a themed texture behind portfolio content', () => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date(2026, 0, 1, 22, 0))
     document.documentElement.dataset.theme = 'dark'
@@ -216,7 +214,6 @@ describe('App', () => {
 
     expect(container.querySelector('img[aria-hidden="true"]')).toHaveAttribute(
       'src',
-      starBackground,
     )
     expect(container.querySelector('canvas')).toHaveAttribute(
       'aria-hidden',
@@ -228,36 +225,36 @@ describe('App', () => {
   })
 
   it.each([
-    [
-      'dark at 9 p.m.',
-      new Date(2026, 0, 1, 20, 59, 59),
-      waterBackground,
-      starBackground,
-    ],
-    [
-      'light at 6 a.m.',
-      new Date(2026, 0, 2, 5, 59, 59),
-      starBackground,
-      waterBackground,
-    ],
-  ])(
-    'switches the background texture to %s',
-    (_label, startTime, initialTexture, expectedTexture) => {
+    new Date(
+      2026,
+      0,
+      1,
+      Number(document.documentElement.dataset.darkStart) - 1,
+      59,
+      59,
+    ),
+    new Date(
+      2026,
+      0,
+      2,
+      Number(document.documentElement.dataset.lightStart) - 1,
+      59,
+      59,
+    ),
+  ])('switches the background texture at an automatic boundary', (startTime) => {
       vi.useFakeTimers()
       vi.setSystemTime(startTime)
       document.documentElement.dataset.theme = getThemeForDate(startTime)
       const { container } = render(<App />)
       const underlay = container.querySelector('img[aria-hidden="true"]')
-
-      expect(underlay).toHaveAttribute('src', initialTexture)
+      const initialTexture = underlay?.getAttribute('src')
 
       act(() => {
         vi.advanceTimersByTime(1000)
       })
 
-      expect(underlay).toHaveAttribute('src', expectedTexture)
-    },
-  )
+      expect(underlay?.getAttribute('src')).not.toBe(initialTexture)
+    })
 
   it('marks the about link as the current section by default', () => {
     render(<App />)

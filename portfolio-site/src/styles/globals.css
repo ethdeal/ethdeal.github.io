@@ -24,6 +24,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html[data-theme-transitioning='true'],
+html[data-theme-transitioning='true'] body,
+html[data-theme-transitioning='true'] body * {
+  transition-property: background-color, border-color, box-shadow, color, fill,
+    stroke;
+  transition-duration: var(--motion-medium);
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme-transitioning='true'],
+  html[data-theme-transitioning='true'] body,
+  html[data-theme-transitioning='true'] body * {
+    transition: none;
+  }
+}
+
 *,
 *::before,
 *::after {

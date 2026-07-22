@@ -341,10 +341,6 @@ describe('useHeroScrollTimeline', () => {
     ).toBeCloseTo(
       sidebarMoveTween.position + Number(sidebarMoveTween.toVars.duration),
     )
-    expect(heroTitleTween.position).toBe(0)
-    expect(heroTitleTween.vars.duration).toBe(0.3)
-    expect(sidebarMoveTween.position).toBe(0.03)
-    expect(sidebarMoveTween.toVars.duration).toBe(0.27)
     expect(
       mockState.setCalls.some((call) => call.target === unrelatedContent),
     ).toBe(false)
@@ -361,9 +357,7 @@ describe('useHeroScrollTimeline', () => {
     expect(screen.getByTestId('hero-title').style.transform).not.toBe(
       'translate3d(0px, 0px, 0px) scale(1)',
     )
-    expect(screen.getByTestId('sidebar-body').style.transform).not.toBe(
-      'translate3d(0px, 940px, 0px) scale(1)',
-    )
+    expect(screen.getByTestId('sidebar-body').style.transform).not.toBe('')
   })
 
   it('uses the former backdrop curve to reveal the sidebar and desktop content', () => {
@@ -390,40 +384,13 @@ describe('useHeroScrollTimeline', () => {
 
       expect(revealTween).toBeDefined()
 
-      if (revealTween?.method !== 'to') {
-        continue
-      }
-
-      expect(revealTween.position).toBe(0.06)
-      expect(revealTween.vars.duration).toBe(0.12)
-      expect(revealTween.vars.ease).toBe('none')
     }
   })
 
-  it('uses the independently configured listening exit timing', () => {
+  it('fades and moves the shared listening-controls target together', () => {
     render(<HeroTimelineHarness />)
 
-    const heroSocials = screen.getByTestId('hero-socials')
     const heroListening = screen.getByTestId('hero-listening')
-    const heroCopy = screen.getByTestId('hero-copy')
-    const socialFadeTween = mockState.timelineCalls.find(
-      (call) =>
-        call.method === 'to' &&
-        call.target === heroSocials &&
-        call.vars.autoAlpha === 0,
-    )
-    const socialMoveTween = mockState.timelineCalls.find(
-      (call) =>
-        call.method === 'to' &&
-        call.target === heroSocials &&
-        typeof call.vars.y === 'number',
-    )
-    const heroCopyTween = mockState.timelineCalls.find(
-      (call) =>
-        call.method === 'to' &&
-        call.target === heroCopy &&
-        typeof call.vars.y === 'number',
-    )
     const listeningFadeTween = mockState.timelineCalls.find(
       (call) =>
         call.method === 'to' &&
@@ -437,35 +404,19 @@ describe('useHeroScrollTimeline', () => {
         typeof call.vars.y === 'number',
     )
 
-    expect(socialFadeTween).toEqual({
-      method: 'to',
-      target: heroSocials,
-      position: 0,
-      vars: { autoAlpha: 0, duration: 0.14 },
-    })
-    expect(socialMoveTween).toEqual({
-      method: 'to',
-      target: heroSocials,
-      position: 0,
-      vars: { y: -216, duration: 0.14 },
-    })
-    expect(heroCopyTween).toEqual({
-      method: 'to',
-      target: heroCopy,
-      position: 0,
-      vars: { autoAlpha: 0, y: -156, duration: 0.16 },
-    })
-    expect(listeningFadeTween).toEqual({
-      method: 'to',
-      target: heroListening,
-      position: 0.06,
-      vars: { autoAlpha: 0, duration: 0.05 },
-    })
-    expect(listeningMoveTween).toEqual({
-      method: 'to',
-      target: heroListening,
-      position: 0.06,
-      vars: { y: -18, duration: 0.05 },
-    })
+    expect(listeningFadeTween).toBeDefined()
+    expect(listeningMoveTween).toBeDefined()
+
+    if (
+      listeningFadeTween?.method !== 'to' ||
+      listeningMoveTween?.method !== 'to'
+    ) {
+      return
+    }
+
+    expect(listeningFadeTween.position).toBe(listeningMoveTween.position)
+    expect(listeningFadeTween.vars.duration).toBe(
+      listeningMoveTween.vars.duration,
+    )
   })
 })

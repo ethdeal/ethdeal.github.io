@@ -12,7 +12,11 @@ import { useActiveSection } from '../../hooks/useActiveSection'
 import { useHeroScrollTimeline } from '../../hooks/useHeroScrollTimeline'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
-import { DESKTOP_BREAKPOINT } from '../../lib/theme'
+import {
+  DESKTOP_BREAKPOINT,
+  type SiteTheme,
+  type ThemePreference,
+} from '../../lib/theme'
 import { DesignSection } from '../design/DesignSection'
 import { ExperienceSection } from '../experience/ExperienceSection'
 import { HeroDesktop } from '../hero/HeroDesktop'
@@ -21,7 +25,19 @@ import { ProjectsSection } from '../projects/ProjectsSection'
 import { Sidebar } from '../sidebar/Sidebar'
 import styles from './portfolioPage.module.css'
 
-export function PortfolioPage() {
+interface PortfolioPageProps {
+  theme: SiteTheme
+  themePreference: ThemePreference
+  onToggleTheme: () => void
+  onUseAutomaticTheme: () => void
+}
+
+export function PortfolioPage({
+  theme,
+  themePreference,
+  onToggleTheme,
+  onUseAutomaticTheme,
+}: PortfolioPageProps) {
   const isDesktop = useMediaQuery(`(min-width: ${DESKTOP_BREAKPOINT}px)`)
   const prefersReducedMotion = usePrefersReducedMotion()
   const shouldAnimateHero = isDesktop && !prefersReducedMotion
@@ -167,6 +183,10 @@ export function PortfolioPage() {
           paragraphs={siteContent.heroParagraphs}
           socialLinks={siteContent.socialLinks}
           currentlyListening={siteContent.currentlyListening}
+          theme={theme}
+          themePreference={themePreference}
+          onToggleTheme={onToggleTheme}
+          onUseAutomaticTheme={onUseAutomaticTheme}
           overlayRef={heroOverlayRef}
           backdropRef={heroBackdropRef}
           topNavRef={heroTopNavRef}

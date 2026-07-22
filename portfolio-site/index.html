@@ -7,14 +7,29 @@
     <meta name="theme-color" content="#f8f8f8" />
     <script>
       {
+        const preferenceKey = 'portfolio-theme'
         const hour = new Date().getHours()
         const { lightStart, darkStart } = document.documentElement.dataset
-        const theme =
+        let preference = 'auto'
+
+        try {
+          const storedPreference = localStorage.getItem(preferenceKey)
+
+          if (storedPreference === 'light' || storedPreference === 'dark') {
+            preference = storedPreference
+          }
+        } catch {
+          // Storage can be unavailable; the time-based theme remains the fallback.
+        }
+
+        const scheduledTheme =
           hour >= Number(darkStart) || hour < Number(lightStart)
             ? 'dark'
             : 'light'
+        const theme = preference === 'auto' ? scheduledTheme : preference
 
         document.documentElement.dataset.theme = theme
+        document.documentElement.dataset.themePreference = preference
         document.querySelector('meta[name="theme-color"]').content =
           theme === 'dark' ? '#040711' : '#f8f8f8'
       }
@@ -28,6 +43,19 @@
       :root[data-theme='dark'] {
         color-scheme: dark;
         background-color: #040711;
+      }
+
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 280ms;
+        animation-timing-function: ease;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+          animation-duration: 0s;
+        }
       }
     </style>
     <link

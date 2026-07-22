@@ -12,7 +12,8 @@ const backgroundTextures: Record<SiteTheme, string> = {
 }
 
 function App() {
-  const theme = useTimeBasedTheme()
+  const { theme, preference, toggleTheme, useAutomaticTheme } =
+    useTimeBasedTheme()
   const backgroundTexture = backgroundTextures[theme]
 
   return (
@@ -37,7 +38,12 @@ function App() {
       crestIntensity={0.01}
       causticIntensity={0}
     >
-      <PortfolioPage />
+      <PortfolioPage
+        theme={theme}
+        themePreference={preference}
+        onToggleTheme={toggleTheme}
+        onUseAutomaticTheme={useAutomaticTheme}
+      />
     </WaterDistortion>
   )
 }

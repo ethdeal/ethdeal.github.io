@@ -1,4 +1,4 @@
-import type { RefObject } from 'react'
+import { useState, type RefObject } from 'react'
 import type {
   CurrentlyListeningTrack,
   NavItem,
@@ -7,7 +7,9 @@ import type {
 import { SectionNav } from '../../components/navigation/SectionNav'
 import { CurrentlyListening } from '../../components/ui/CurrentlyListening'
 import { SocialLinks } from '../../components/ui/SocialLinks'
+import { ThemeToggle } from '../../components/ui/ThemeToggle'
 import { profileImage } from '../../lib/profileImage'
+import type { SiteTheme, ThemePreference } from '../../lib/theme'
 import { HeroScrollCue } from './HeroScrollCue'
 import styles from './hero.module.css'
 
@@ -21,6 +23,10 @@ interface HeroDesktopProps {
   paragraphs: string[]
   socialLinks: SocialLink[]
   currentlyListening: CurrentlyListeningTrack | null
+  theme: SiteTheme
+  themePreference: ThemePreference
+  onToggleTheme: () => void
+  onUseAutomaticTheme: () => void
   overlayRef: RefObject<HTMLDivElement | null>
   backdropRef: RefObject<HTMLDivElement | null>
   topNavRef: RefObject<HTMLElement | null>
@@ -39,6 +45,10 @@ export function HeroDesktop({
   paragraphs,
   socialLinks,
   currentlyListening,
+  theme,
+  themePreference,
+  onToggleTheme,
+  onUseAutomaticTheme,
   overlayRef,
   backdropRef,
   topNavRef,
@@ -48,6 +58,8 @@ export function HeroDesktop({
   heroTitleRef,
   stageRef,
 }: HeroDesktopProps) {
+  const [isListeningExpanded, setIsListeningExpanded] = useState(false)
+
   return (
     <div ref={overlayRef} className={styles.overlay}>
       <div ref={backdropRef} className={styles.backdrop} />
@@ -63,10 +75,19 @@ export function HeroDesktop({
 
       <div className={styles.desktopGrid}>
         <div className={styles.heroStack}>
-          <CurrentlyListening
-            ref={heroListeningRef}
-            track={currentlyListening}
-          />
+          <div ref={heroListeningRef} className={styles.heroControls}>
+            <CurrentlyListening
+              track={currentlyListening}
+              onDetailsVisibilityChange={setIsListeningExpanded}
+            />
+            <ThemeToggle
+              theme={theme}
+              preference={themePreference}
+              hidden={isListeningExpanded}
+              onToggle={onToggleTheme}
+              onUseAutomaticTheme={onUseAutomaticTheme}
+            />
+          </div>
 
           <div className={styles.heroBody}>
             <div className={styles.titleColumn}>

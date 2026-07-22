@@ -18,6 +18,7 @@ import styles from './CurrentlyListening.module.css'
 
 interface CurrentlyListeningProps {
   track: CurrentlyListeningTrack | null
+  onDetailsVisibilityChange?: (isVisible: boolean) => void
 }
 
 function PlayIcon() {
@@ -72,8 +73,11 @@ function formatTime(milliseconds: number) {
 
 const CurrentlyListeningControl = forwardRef<
   HTMLDivElement,
-  { track: CurrentlyListeningTrack }
->(function CurrentlyListeningControl({ track }, forwardedRef) {
+  CurrentlyListeningProps & { track: CurrentlyListeningTrack }
+>(function CurrentlyListeningControl(
+  { track, onDetailsVisibilityChange },
+  forwardedRef,
+) {
   const detailsId = useId()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const controllerRef = useRef<SoundCloudWidgetController | null>(null)
@@ -89,12 +93,16 @@ const CurrentlyListeningControl = forwardRef<
   const [duration, setDuration] = useState(0)
   const [position, setPosition] = useState(0)
 
-  const isDetailsVisible = isHovered || hasFocus || isPlaying
+  const isDetailsVisible = isHovered || hasFocus
   const title = sound?.title
   const titleUrl = sound?.permalink_url || track.soundCloudUrl
   const uploader = sound?.user?.username
   const uploaderUrl = sound?.user?.permalink_url
   const progressPercent = duration > 0 ? (position / duration) * 100 : 0
+
+  useEffect(() => {
+    onDetailsVisibilityChange?.(isDetailsVisible)
+  }, [isDetailsVisible, onDetailsVisibilityChange])
 
   useEffect(() => {
     if (!shouldLoad) {
@@ -364,10 +372,19 @@ const CurrentlyListeningControl = forwardRef<
 export const CurrentlyListening = forwardRef<
   HTMLDivElement,
   CurrentlyListeningProps
->(function CurrentlyListening({ track }, forwardedRef) {
+>(function CurrentlyListening(
+  { track, onDetailsVisibilityChange },
+  forwardedRef,
+) {
   if (!track?.soundCloudUrl.trim()) {
     return null
   }
 
-  return <CurrentlyListeningControl ref={forwardedRef} track={track} />
+  return (
+    <CurrentlyListeningControl
+      ref={forwardedRef}
+      track={track}
+      onDetailsVisibilityChange={onDetailsVisibilityChange}
+    />
+  )
 })
