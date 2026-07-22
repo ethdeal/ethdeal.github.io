@@ -6,7 +6,7 @@
   --color-text-muted: #5c6470;
   --color-text-subtle: #848c97;
   --color-line: rgba(22, 25, 31, 0.1);
-  --color-surface: rgba(255, 255, 255, 0.52);
+  --color-surface: rgba(255, 255, 255, 0.42);
   --color-surface-strong: rgba(255, 255, 255, 0.72);
   --color-surface-border: rgba(22, 25, 31, 0.08);
   --color-accent: #e85d5d;
@@ -29,7 +29,7 @@
   --font-size-card-title: clamp(1.2rem, 1.45vw, 1.46rem);
   --font-size-hero-intro: clamp(0.98rem, 1vw, 1.08rem);
   --line-height-body-sm: 1.5;
-  --line-height-hero-eyebrow: 1.35;
+  /* --line-height-hero-eyebrow: 1.35; */
 
   --radius-lg: 1.3rem;
   --radius-xl: 1.75rem;

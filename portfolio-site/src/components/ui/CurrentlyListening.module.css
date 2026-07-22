@@ -38,9 +38,9 @@
 
 .control:hover,
 .control:focus-visible {
-  color: var(--color-accent-strong);
+  /* color: var(--color-accent-strong); */
   background: var(--color-surface-strong);
-  transform: translateY(-0.125rem);
+  /* transform: translateY(-0.125rem); */
 }
 
 .waveform,
@@ -117,7 +117,7 @@
 }
 
 .details {
-  width: min(18rem, calc(50vw - 5rem));
+  width: min(16rem, calc(50vw - 5rem));
   min-width: 0;
   opacity: 0;
   visibility: hidden;
@@ -144,9 +144,9 @@
   margin: 0 0 0.16rem;
   color: var(--color-text-subtle);
   font-size: var(--font-size-label);
-  font-weight: 500;
+  /* font-weight: 500; */
   line-height: 1.2;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -154,7 +154,7 @@
   overflow: hidden;
   margin: 0;
   color: var(--color-text);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-label);
   line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;

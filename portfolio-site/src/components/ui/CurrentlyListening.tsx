@@ -273,7 +273,7 @@ const CurrentlyListeningControl = forwardRef<
         aria-hidden={!isDetailsVisible}
         data-visible={isDetailsVisible ? 'true' : 'false'}
       >
-        <p className={styles.label}>Currently listening</p>
+        <p className={styles.label}>Currently vibing to</p>
 
         <p className={styles.metadata}>
           <a href={titleUrl} target="_blank" rel="noreferrer">
@@ -336,7 +336,7 @@ const CurrentlyListeningControl = forwardRef<
             aria-label="Listen on SoundCloud"
           >
             <SoundCloudMark />
-            <span>SoundCloud</span>
+            {/* <span>SoundCloud</span> */}
           </a>
         </div>
 
