@@ -6,7 +6,7 @@
   --color-text-muted: #5c6470;
   --color-text-subtle: #848c97;
   --color-line: rgba(22, 25, 31, 0.1);
-  --color-surface: rgba(255, 255, 255, 0.42);
+  --color-surface: rgba(255, 255, 255, 0.32);
   --color-surface-strong: rgba(255, 255, 255, 0.72);
   --color-surface-border: rgba(22, 25, 31, 0.08);
   --color-accent: #e85d5d;
@@ -43,7 +43,7 @@
     0 8px 18px rgba(22, 25, 31, 0.02);
 
   --glass-blur: 12px;
-  --motion-fast: 180ms;
+  --motion-fast: 120ms;
   --motion-medium: 280ms;
 
   --page-gutter-desktop: clamp(2.1rem, 3vw, 4.2rem);
