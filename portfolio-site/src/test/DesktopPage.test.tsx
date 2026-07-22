@@ -235,7 +235,12 @@ function rect({
 }
 
 describe('desktop animated page', () => {
+  const originalCurrentlyListening = siteContent.currentlyListening
+
   beforeEach(() => {
+    siteContent.currentlyListening = {
+      soundCloudUrl: 'https://soundcloud.com/artist/test-track',
+    }
     mockMatchMedia({ desktop: true })
     Object.defineProperty(window, 'innerHeight', {
       configurable: true,
@@ -277,6 +282,7 @@ describe('desktop animated page', () => {
   })
 
   afterEach(() => {
+    siteContent.currentlyListening = originalCurrentlyListening
     vi.restoreAllMocks()
   })
 
@@ -303,5 +309,13 @@ describe('desktop animated page', () => {
     expect(
       screen.queryByRole('button', { name: 'Scroll to experience' }),
     ).not.toBeInTheDocument()
+  })
+
+  it('renders the listening control in the animated desktop hero', () => {
+    const { container } = render(<App />)
+
+    expect(
+      container.querySelector('[data-currently-listening="true"]'),
+    ).toBeInTheDocument()
   })
 })

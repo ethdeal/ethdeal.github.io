@@ -55,6 +55,8 @@ function dispatchKeyDown(init: KeyboardEventInit) {
 }
 
 describe('App', () => {
+  const originalCurrentlyListening = siteContent.currentlyListening
+
   beforeEach(() => {
     mockMatchMedia()
     mockState.positions.about = 0
@@ -147,6 +149,7 @@ describe('App', () => {
   })
 
   afterEach(() => {
+    siteContent.currentlyListening = originalCurrentlyListening
     delete document.documentElement.dataset.theme
     vi.useRealTimers()
     vi.restoreAllMocks()
@@ -267,6 +270,9 @@ describe('App', () => {
 
   it('skips the animated hero on desktop when reduced motion is preferred', () => {
     mockMatchMedia({ desktop: true, reducedMotion: true })
+    siteContent.currentlyListening = {
+      soundCloudUrl: 'https://soundcloud.com/artist/test-track',
+    }
 
     render(<App />)
 
@@ -284,6 +290,23 @@ describe('App', () => {
     expect(
       screen.queryByRole('button', { name: 'Scroll to experience' }),
     ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('button', { name: 'Play current SoundCloud track' }),
+    ).not.toBeInTheDocument()
+
+  })
+
+  it('keeps the listening control out of the mobile static hero', () => {
+    siteContent.currentlyListening = {
+      soundCloudUrl: 'https://soundcloud.com/artist/test-track',
+    }
+
+    render(<App />)
+
+    expect(
+      screen.queryByRole('button', { name: 'Play current SoundCloud track' }),
+    ).not.toBeInTheDocument()
+
   })
 
   it('clears the primary nav active state once scrolling passes the final section', () => {

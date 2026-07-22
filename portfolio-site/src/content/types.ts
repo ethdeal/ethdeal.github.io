@@ -16,12 +16,17 @@ export interface SocialLink {
   icon: SocialIconName
 }
 
+export interface CurrentlyListeningTrack {
+  soundCloudUrl: string
+}
+
 export interface SiteContent {
   name: string
   heroIntro: string
   heroParagraphs: string[]
   sidebarSubtitle: string
   sidebarDescription: string
+  currentlyListening: CurrentlyListeningTrack | null
   navItems: NavItem[]
   socialLinks: SocialLink[]
 }

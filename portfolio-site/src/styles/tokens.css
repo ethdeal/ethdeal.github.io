@@ -82,7 +82,7 @@
   --color-line: rgba(243, 240, 232, 0.14);
   --color-surface: rgba(255, 255, 255, 0.015);
   --color-surface-strong: rgba(255, 255, 255, 0.1);
-  --color-surface-border: rgba(255, 255, 255, 0.12);
+  --color-surface-border: rgba(255, 255, 255, 0.06);
   --color-accent-strong: var(--color-accent);
 
   --shadow-soft:

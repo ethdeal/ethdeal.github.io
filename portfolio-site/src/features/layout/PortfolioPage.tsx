@@ -30,6 +30,7 @@ export function PortfolioPage() {
   const heroOverlayRef = useRef<HTMLDivElement>(null)
   const heroBackdropRef = useRef<HTMLDivElement>(null)
   const heroTopNavRef = useRef<HTMLElement>(null)
+  const heroListeningRef = useRef<HTMLDivElement>(null)
   const heroSocialsRef = useRef<HTMLDivElement>(null)
   const heroCopyRef = useRef<HTMLDivElement>(null)
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
@@ -75,6 +76,7 @@ export function PortfolioPage() {
     overlayRef: heroOverlayRef,
     backdropRef: heroBackdropRef,
     topNavRef: heroTopNavRef,
+    heroListeningRef,
     heroSocialsRef,
     heroCopyRef,
     heroTitleRef,
@@ -164,9 +166,11 @@ export function PortfolioPage() {
           navItems={siteContent.navItems}
           paragraphs={siteContent.heroParagraphs}
           socialLinks={siteContent.socialLinks}
+          currentlyListening={siteContent.currentlyListening}
           overlayRef={heroOverlayRef}
           backdropRef={heroBackdropRef}
           topNavRef={heroTopNavRef}
+          heroListeningRef={heroListeningRef}
           heroSocialsRef={heroSocialsRef}
           heroCopyRef={heroCopyRef}
           heroTitleRef={heroTitleRef}

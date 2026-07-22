@@ -17,6 +17,12 @@ describe('content data', () => {
     ])
     expect(siteContent.sidebarSubtitle).toMatch(/\S/)
     expect(siteContent.socialLinks.length).toBeGreaterThan(0)
+    expect(
+      siteContent.currentlyListening === null ||
+        siteContent.currentlyListening.soundCloudUrl.startsWith(
+          'https://soundcloud.com/',
+        ),
+    ).toBe(true)
 
     for (const link of siteContent.socialLinks) {
       expect(link.label).toMatch(/\S/)
