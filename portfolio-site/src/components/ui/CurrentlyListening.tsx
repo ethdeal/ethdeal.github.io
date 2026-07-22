@@ -346,6 +346,7 @@ const CurrentlyListeningControl = forwardRef<
             className={styles.embed}
             src={createSoundCloudPlayerUrl(track.soundCloudUrl)}
             title="SoundCloud audio player"
+            allow="autoplay; encrypted-media"
             tabIndex={-1}
             aria-hidden="true"
             data-soundcloud-embed="true"

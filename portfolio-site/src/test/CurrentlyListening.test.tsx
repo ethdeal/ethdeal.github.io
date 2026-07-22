@@ -133,6 +133,10 @@ describe('CurrentlyListening', () => {
         screen.getByTitle('SoundCloud audio player'),
       )
     })
+    expect(screen.getByTitle('SoundCloud audio player')).toHaveAttribute(
+      'allow',
+      'autoplay; encrypted-media',
+    )
     expect(details).toHaveAttribute('data-visible', 'true')
 
     fireEvent.pointerLeave(root as HTMLElement)
