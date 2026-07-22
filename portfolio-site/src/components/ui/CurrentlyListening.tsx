@@ -236,7 +236,11 @@ const CurrentlyListeningControl = forwardRef<
         setIsHovered(true)
         beginInteraction()
       }}
-      onPointerLeave={() => setIsHovered(false)}
+      onPointerLeave={(event) => {
+        setIsHovered(false)
+        setHasFocus(false)
+        event.currentTarget.querySelector<HTMLElement>(':focus')?.blur()
+      }}
       onFocusCapture={() => {
         setHasFocus(true)
         beginInteraction()

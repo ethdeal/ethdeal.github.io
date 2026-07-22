@@ -171,7 +171,7 @@
 .metadata a:hover,
 .metadata a:focus-visible {
   color: var(--color-accent-strong);
-  text-decoration-color: currentColor;
+  /* text-decoration-color: currentColor; */
 }
 
 .progressRow {

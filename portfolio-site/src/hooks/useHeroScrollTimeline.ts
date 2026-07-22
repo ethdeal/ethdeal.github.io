@@ -16,6 +16,16 @@ const HERO_EXIT_TWEENS = {
     y: -18,
     duration: 0.05,
   },
+  heroListeningFade: {
+    start: 0.06,
+    autoAlpha: 0,
+    duration: 0.05,
+  },
+  heroListeningMove: {
+    start: 0.06,
+    y: -18,
+    duration: 0.05,
+  },
   heroSocialsFade: {
     start: 0.00, // 0.04
     autoAlpha: 0,
@@ -33,20 +43,6 @@ const HERO_EXIT_TWEENS = {
     autoAlpha: 0,
     y: -156, // -56
     duration: 0.16,
-  },
-} as const
-
-// Kept separate from the social timings so this widget can be tuned independently.
-const HERO_LISTENING_EXIT_TWEENS = {
-  fade: {
-    start: 0.00,
-    autoAlpha: 0,
-    duration: 0.14,
-  },
-  move: {
-    start: 0.00,
-    y: -216,
-    duration: 0.14,
   },
 } as const
 
@@ -222,8 +218,8 @@ export function useHeroScrollTimeline({
 
         addExitTween(topNav, HERO_EXIT_TWEENS.topNav)
         if (heroListening) {
-          addExitTween(heroListening, HERO_LISTENING_EXIT_TWEENS.fade)
-          addExitTween(heroListening, HERO_LISTENING_EXIT_TWEENS.move)
+          addExitTween(heroListening, HERO_EXIT_TWEENS.heroListeningFade)
+          addExitTween(heroListening, HERO_EXIT_TWEENS.heroListeningMove)
         }
         addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsFade)
         addExitTween(heroSocials, HERO_EXIT_TWEENS.heroSocialsMove)

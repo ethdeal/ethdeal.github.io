@@ -153,7 +153,7 @@ describe('CurrentlyListening', () => {
       name: 'Play current SoundCloud track',
     })
     const root = container.querySelector('[data-currently-listening="true"]')
-    const details = screen.getByText('Currently listening').parentElement
+    const details = document.getElementById(button.getAttribute('aria-controls')!)
 
     await user.click(button)
     await waitFor(() => expect(soundCloudMock.bind).toHaveBeenCalled())
@@ -174,8 +174,8 @@ describe('CurrentlyListening', () => {
     await user.click(button)
     expect(soundCloudMock.pause).toHaveBeenCalledOnce()
     emit(EVENTS.PAUSE)
-    fireEvent.blur(button, { relatedTarget: null })
     fireEvent.pointerLeave(root as HTMLElement)
+    expect(button).not.toHaveFocus()
     expect(details).toHaveAttribute('data-visible', 'false')
   })
 

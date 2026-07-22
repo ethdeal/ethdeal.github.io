@@ -400,7 +400,7 @@ describe('useHeroScrollTimeline', () => {
     }
   })
 
-  it('starts the hero exits immediately without changing their durations', () => {
+  it('uses the independently configured listening exit timing', () => {
     render(<HeroTimelineHarness />)
 
     const heroSocials = screen.getByTestId('hero-socials')
@@ -458,14 +458,14 @@ describe('useHeroScrollTimeline', () => {
     expect(listeningFadeTween).toEqual({
       method: 'to',
       target: heroListening,
-      position: 0,
-      vars: { autoAlpha: 0, duration: 0.14 },
+      position: 0.06,
+      vars: { autoAlpha: 0, duration: 0.05 },
     })
     expect(listeningMoveTween).toEqual({
       method: 'to',
       target: heroListening,
-      position: 0,
-      vars: { y: -216, duration: 0.14 },
+      position: 0.06,
+      vars: { y: -18, duration: 0.05 },
     })
   })
 })
