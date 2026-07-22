@@ -39,7 +39,7 @@
   z-index: var(--z-nav);
   display: flex;
   justify-content: center;
-  padding: 0.55rem var(--page-gutter-mobile);
+  padding: 0 var(--page-gutter-mobile);
   border-bottom: 1px solid var(--color-surface-border);
   background: var(--color-surface);
   backdrop-filter: blur(10px);

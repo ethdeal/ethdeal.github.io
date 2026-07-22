@@ -101,6 +101,7 @@
 .mobile .list {
   justify-content: center;
   gap: 0.1rem;
+  padding-block: 0.55rem;
 }
 
 .mobile .link {
