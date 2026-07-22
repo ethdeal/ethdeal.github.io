@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent, PointerEvent } from 'react'
 import type { SiteTheme, ThemePreference } from '../../lib/theme'
 import styles from './ThemeToggle.module.css'
@@ -45,16 +45,13 @@ export function ThemeToggle({
   onToggle,
   onUseAutomaticTheme,
 }: ThemeToggleProps) {
-  const tooltipId = useId()
   const holdTimeoutRef = useRef<number | undefined>(undefined)
   const suppressClickRef = useRef(false)
   const keyboardHoldRef = useRef(false)
   const [announcement, setAnnouncement] = useState('')
   const isAutomatic = preference === 'auto'
   const nextTheme = theme === 'light' ? 'night' : 'day'
-  const tooltip = isAutomatic
-    ? `Automatic schedule · switch to ${nextTheme}`
-    : `${theme === 'light' ? 'Day' : 'Night'} override · hold for automatic`
+  const title = isAutomatic ? 'Theme (automatic) ' : 'Theme (hold for automatic)'
 
   const clearHold = () => {
     if (holdTimeoutRef.current !== undefined) {
@@ -137,7 +134,7 @@ export function ThemeToggle({
         type="button"
         tabIndex={hidden ? -1 : 0}
         aria-label={`Switch to ${nextTheme} theme`}
-        aria-describedby={tooltipId}
+        title={title}
         onClick={handleClick}
         onPointerDown={handlePointerDown}
         onPointerUp={clearHold}
@@ -156,9 +153,6 @@ export function ThemeToggle({
         </span>
       </button>
 
-      <span id={tooltipId} className={styles.tooltip} role="tooltip">
-        {tooltip}
-      </span>
       <span className="visually-hidden" aria-live="polite">
         {announcement}
       </span>

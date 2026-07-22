@@ -52,6 +52,17 @@
   pointer-events: none;
 }
 
+.heroControls
+  [data-currently-listening='true']:has([data-visible='true'])::after {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 0.8rem;
+  height: 2.8rem;
+  content: '';
+  pointer-events: auto;
+}
+
 .heroMeta {
   display: grid;
   gap: 1.15rem;

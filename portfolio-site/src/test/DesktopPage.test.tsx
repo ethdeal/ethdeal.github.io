@@ -243,6 +243,7 @@ describe('desktop animated page', () => {
   const originalCurrentlyListening = siteContent.currentlyListening
 
   beforeEach(() => {
+    mockState.scrollProgress = 0.2
     siteContent.currentlyListening = {
       soundCloudUrl: 'https://soundcloud.com/artist/test-track',
     }
@@ -315,6 +316,7 @@ describe('desktop animated page', () => {
   })
 
   it('renders the listening control in the animated desktop hero', () => {
+    mockState.scrollProgress = 0
     const { container } = render(<App />)
     const listeningControl = container.querySelector(
       '[data-currently-listening="true"]',
@@ -328,8 +330,10 @@ describe('desktop animated page', () => {
 
     fireEvent.pointerEnter(listeningControl as HTMLElement)
     expect(themeButton).toHaveAttribute('tabindex', '-1')
+    expect(themeButton).not.toBeVisible()
 
     fireEvent.pointerLeave(listeningControl as HTMLElement)
     expect(themeButton).toHaveAttribute('tabindex', '0')
+    expect(themeButton).toBeVisible()
   })
 })
