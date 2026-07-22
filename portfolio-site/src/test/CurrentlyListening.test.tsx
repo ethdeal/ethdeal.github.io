@@ -113,7 +113,7 @@ describe('CurrentlyListening', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('loads lazily and reveals details on hover or focus', async () => {
+  it('loads on mount and reveals details on hover or focus', async () => {
     const user = userEvent.setup()
     const { container } = render(<CurrentlyListening track={TRACK} />)
     const button = screen.getByRole('button', {
@@ -123,20 +123,19 @@ describe('CurrentlyListening', () => {
     const details = document.getElementById(button.getAttribute('aria-controls')!)
 
     expect(details).toHaveAttribute('data-visible', 'false')
-    expect(soundCloudMock.loadSoundCloudWidgetApi).not.toHaveBeenCalled()
-    expect(screen.queryByTitle('SoundCloud audio player')).not.toBeInTheDocument()
-
-    await user.hover(button)
+    expect(screen.getByTitle('SoundCloud audio player')).toHaveAttribute(
+      'allow',
+      'autoplay; encrypted-media',
+    )
 
     await waitFor(() => {
       expect(soundCloudMock.widgetFactory).toHaveBeenCalledWith(
         screen.getByTitle('SoundCloud audio player'),
       )
     })
-    expect(screen.getByTitle('SoundCloud audio player')).toHaveAttribute(
-      'allow',
-      'autoplay; encrypted-media',
-    )
+    expect(soundCloudMock.loadSoundCloudWidgetApi).toHaveBeenCalledOnce()
+
+    await user.hover(button)
     expect(details).toHaveAttribute('data-visible', 'true')
 
     fireEvent.pointerLeave(root as HTMLElement)
