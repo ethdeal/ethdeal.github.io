@@ -83,7 +83,9 @@
   --color-surface: rgba(255, 255, 255, 0.015);
   --color-surface-strong: rgba(255, 255, 255, 0.1);
   --color-surface-border: rgba(255, 255, 255, 0.06);
-  --color-accent-strong: var(--color-accent);
+  --color-accent: #f2a605;
+  --color-accent-strong: #ffc43d;
+  --color-accent-soft: rgba(242, 166, 5, 0.14);
 
   --shadow-soft:
     0 16px 36px rgba(0, 0, 0, 0.02),

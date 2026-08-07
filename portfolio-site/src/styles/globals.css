@@ -81,7 +81,13 @@ p {
 }
 
 ::selection {
-  background: rgba(232, 93, 93, 0.2);
+  /* background: rgba(232, 93, 93, 0.2); */
+  background: var(--color-accent-soft);
+}
+
+:root[data-theme='dark'] ::selection {
+  /* background: rgba(242, 166, 5, 0.2); */
+  background: var(--color-accent-soft);
 }
 
 .visually-hidden {
